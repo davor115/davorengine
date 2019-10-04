@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\s5008226\davorengine\build\CMakeFiles\59162d8e9c0b7139dd2fffa61d28d600\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F8645108-032C-3345-ABDD-52A8DDA95768}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
