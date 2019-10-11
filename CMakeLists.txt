@@ -4,6 +4,8 @@ project(DAVORENGINE)
 
 add_library(davorengine
 src/davorengine/dummy.cpp
+src/davorengine/davorengine.h
+src/davorengine/davorengine.cpp
 )
 
 target_link_libraries(davorengine SDL2 opengl32 glew32)

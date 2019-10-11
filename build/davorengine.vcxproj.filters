@@ -1,16 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\s5008226\davorengine\src\davorengine\dummy.cpp">
+    <ClCompile Include="D:\asd\davorengine\src\davorengine\dummy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\asd\davorengine\src\davorengine\davorengine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\s5008226\davorengine\CMakeLists.txt" />
+    <ClInclude Include="D:\asd\davorengine\src\davorengine\davorengine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="D:\asd\davorengine\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2AD1AE59-7FE5-3BC8-B7A0-2DD1EB12D5D7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{642758C1-7628-3174-9A5E-1B4EE3408CBA}</UniqueIdentifier>
+      <UniqueIdentifier>{5EB37E10-0C1A-37E1-8D94-A3D48E3F805B}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
