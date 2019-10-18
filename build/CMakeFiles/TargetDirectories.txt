@@ -1,4 +1,4 @@
-D:/asd/davorengine/build/CMakeFiles/davorengine.dir
-D:/asd/davorengine/build/CMakeFiles/game.dir
-D:/asd/davorengine/build/CMakeFiles/ALL_BUILD.dir
-D:/asd/davorengine/build/CMakeFiles/ZERO_CHECK.dir
+D:/Github/davorengine/build/CMakeFiles/davorengine.dir
+D:/Github/davorengine/build/CMakeFiles/game.dir
+D:/Github/davorengine/build/CMakeFiles/ALL_BUILD.dir
+D:/Github/davorengine/build/CMakeFiles/ZERO_CHECK.dir

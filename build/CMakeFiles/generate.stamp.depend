@@ -1,9 +1,9 @@
 # CMake generation dependency list for this directory.
-D:/asd/davorengine/CMakeLists.txt
-D:/asd/davorengine/build/CMakeFiles/3.15.1/CMakeCCompiler.cmake
-D:/asd/davorengine/build/CMakeFiles/3.15.1/CMakeCXXCompiler.cmake
-D:/asd/davorengine/build/CMakeFiles/3.15.1/CMakeRCCompiler.cmake
-D:/asd/davorengine/build/CMakeFiles/3.15.1/CMakeSystem.cmake
+D:/Github/davorengine/CMakeLists.txt
+D:/Github/davorengine/build/CMakeFiles/3.15.1/CMakeCCompiler.cmake
+D:/Github/davorengine/build/CMakeFiles/3.15.1/CMakeCXXCompiler.cmake
+D:/Github/davorengine/build/CMakeFiles/3.15.1/CMakeRCCompiler.cmake
+D:/Github/davorengine/build/CMakeFiles/3.15.1/CMakeSystem.cmake
 D:/gep_sdk/opt/cmake-3.15.1/share/cmake-3.15/Modules/CMakeCInformation.cmake
 D:/gep_sdk/opt/cmake-3.15.1/share/cmake-3.15/Modules/CMakeCXXInformation.cmake
 D:/gep_sdk/opt/cmake-3.15.1/share/cmake-3.15/Modules/CMakeCommonLanguageInclude.cmake

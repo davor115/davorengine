@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="D:\asd\davorengine\build\CMakeFiles\121488be40a8152f32b790f8fdb690aa\generate.stamp.rule">
+    <CustomBuild Include="D:\Github\davorengine\build\CMakeFiles\19057180b7e0022beb648017a8c586f5\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{1BFBA647-76DC-3125-BC05-7F2492447A69}</UniqueIdentifier>
+      <UniqueIdentifier>{19F72603-723C-30B5-8C69-E6942006A357}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

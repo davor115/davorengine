@@ -2,10 +2,15 @@ cmake_minimum_required(VERSION 2.6)
 
 project(DAVORENGINE)
 
+include_directories(src)
+
 add_library(davorengine
 src/davorengine/dummy.cpp
 src/davorengine/davorengine.h
 src/davorengine/davorengine.cpp
+src/davorengine/Component.h
+src/davorengine/Entity.h
+src/davorengine/Environment.cpp
 )
 
 target_link_libraries(davorengine SDL2 opengl32 glew32)

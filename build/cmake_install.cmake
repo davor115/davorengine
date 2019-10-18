@@ -1,4 +1,4 @@
-# Install script for directory: D:/asd/davorengine
+# Install script for directory: D:/Github/davorengine
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/asd/davorengine/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/Github/davorengine/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

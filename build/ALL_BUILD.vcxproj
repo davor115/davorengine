@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4662737C-52FB-355C-B5B8-2631DB8AE8A4}</ProjectGuid>
+    <ProjectGuid>{6B4CCFCB-F6D9-3496-B4B6-2B3ED6DF30E0}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
@@ -63,7 +63,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Github\davorengine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -73,7 +73,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Github\davorengine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -83,7 +83,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <Midl>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Github\davorengine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -93,7 +93,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <Midl>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Github\davorengine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -102,10 +102,10 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\asd\davorengine\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule D:/asd/davorengine/CMakeLists.txt</Message>
+    <CustomBuild Include="D:\Github\davorengine\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule D:/Github/davorengine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-D:\gep_sdk\opt\cmake-3.15.1\bin\cmake.exe -SD:/asd/davorengine -BD:/asd/davorengine/build --check-stamp-file D:/asd/davorengine/build/CMakeFiles/generate.stamp
+D:\gep_sdk\opt\cmake-3.15.1\bin\cmake.exe -SD:/Github/davorengine -BD:/Github/davorengine/build --check-stamp-file D:/Github/davorengine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -113,12 +113,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeCCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeCXXCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeRCCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeRCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\asd\davorengine\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeCCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeCXXCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeRCCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeRCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Github\davorengine\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule D:/asd/davorengine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule D:/Github/davorengine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-D:\gep_sdk\opt\cmake-3.15.1\bin\cmake.exe -SD:/asd/davorengine -BD:/asd/davorengine/build --check-stamp-file D:/asd/davorengine/build/CMakeFiles/generate.stamp
+D:\gep_sdk\opt\cmake-3.15.1\bin\cmake.exe -SD:/Github/davorengine -BD:/Github/davorengine/build --check-stamp-file D:/Github/davorengine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -126,12 +126,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeCCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeCXXCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeRCCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeRCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\asd\davorengine\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeCCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeCXXCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeRCCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeRCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Github\davorengine\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule D:/asd/davorengine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule D:/Github/davorengine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-D:\gep_sdk\opt\cmake-3.15.1\bin\cmake.exe -SD:/asd/davorengine -BD:/asd/davorengine/build --check-stamp-file D:/asd/davorengine/build/CMakeFiles/generate.stamp
+D:\gep_sdk\opt\cmake-3.15.1\bin\cmake.exe -SD:/Github/davorengine -BD:/Github/davorengine/build --check-stamp-file D:/Github/davorengine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -139,12 +139,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeCCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeCXXCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeRCCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeRCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\asd\davorengine\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeCCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeCXXCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeRCCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeRCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\Github\davorengine\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule D:/asd/davorengine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule D:/Github/davorengine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-D:\gep_sdk\opt\cmake-3.15.1\bin\cmake.exe -SD:/asd/davorengine -BD:/asd/davorengine/build --check-stamp-file D:/asd/davorengine/build/CMakeFiles/generate.stamp
+D:\gep_sdk\opt\cmake-3.15.1\bin\cmake.exe -SD:/Github/davorengine -BD:/Github/davorengine/build --check-stamp-file D:/Github/davorengine/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -152,28 +152,28 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeCCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeCXXCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeRCCompiler.cmake;D:\asd\davorengine\build\CMakeFiles\3.15.1\CMakeSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeRCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\asd\davorengine\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeCCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeCXXCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeRCCompiler.cmake;D:\Github\davorengine\build\CMakeFiles\3.15.1\CMakeSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeRCInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\Windows.cmake;D:\gep_sdk\opt\cmake-3.15.1\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\Github\davorengine\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\asd\davorengine\build\ZERO_CHECK.vcxproj">
-      <Project>{A8A3E6AB-84B1-36F2-8754-9E64C2B8EB17}</Project>
+    <ProjectReference Include="D:\Github\davorengine\build\ZERO_CHECK.vcxproj">
+      <Project>{B59AD9B3-D84C-38A5-AB0B-9B100F276A6F}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\asd\davorengine\build\davorengine.vcxproj">
-      <Project>{8CA23D31-6413-3D4B-9BFA-3050C9EB0EAF}</Project>
+    <ProjectReference Include="D:\Github\davorengine\build\davorengine.vcxproj">
+      <Project>{34C25351-F6DC-3809-A57F-D73B3B48FDC4}</Project>
       <Name>davorengine</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\asd\davorengine\build\game.vcxproj">
-      <Project>{8F6D7697-08ED-3D21-BE6F-6A3B5F46FBEF}</Project>
+    <ProjectReference Include="D:\Github\davorengine\build\game.vcxproj">
+      <Project>{F841DD24-07B1-33BA-8856-44F4E1E9DC5A}</Project>
       <Name>game</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
