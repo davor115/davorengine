@@ -11,6 +11,8 @@ src/davorengine/davorengine.cpp
 src/davorengine/Component.h
 src/davorengine/Entity.h
 src/davorengine/Environment.cpp
+src/davorengine/Keyboard.h
+src/davorengine/Keyboard.cpp
 )
 
 target_link_libraries(davorengine SDL2 opengl32 glew32)
