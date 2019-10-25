@@ -11,6 +11,9 @@ src/davorengine/davorengine.cpp
 src/davorengine/Component.h
 src/davorengine/Entity.h
 src/davorengine/Environment.cpp
+src/davorengine/Exception.cpp
+src/davorengine/Exception.h
+src/davorengine/triangle.cpp
 src/davorengine/Keyboard.h
 src/davorengine/Keyboard.cpp
 )

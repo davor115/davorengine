@@ -5,7 +5,7 @@
 class Component
 {
 private:
-
+	std::weak_ptr<Entity> entity;
 
 public:
 	
