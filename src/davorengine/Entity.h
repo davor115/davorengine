@@ -14,7 +14,7 @@ private:
 
 public:
 	std::shared_ptr<Core> getCore();	
-
+	void Update();
 	template<typename T>
 	std::shared_ptr<T> addComponent()
 	{
