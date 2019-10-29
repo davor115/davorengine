@@ -26,7 +26,12 @@ void Core::Start()
 	for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
 	{
 		std::cout << "Run number: " << *i << std::endl;
-		//i->Update(); can't find update.
-		
+		(*i)->Update();
+	}
+
+	for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
+	{
+		std::cout << "Run number: " << *i << std::endl;
+		(*i)->Display();
 	}
 }

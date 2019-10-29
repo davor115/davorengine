@@ -19,10 +19,10 @@ public:
 	std::shared_ptr<Core> getCore();
 	std::shared_ptr<Keyboard> getKeyboard();
 	std::shared_ptr<Environment> getEnvironment();
-	void onInit();
-	void OnBegin();
-	void OnTick();
-	void OnDisplay();
+	virtual void onInit();
+	virtual void OnBegin();
+	virtual void OnTick();
+	virtual void OnDisplay();
 
 
 };

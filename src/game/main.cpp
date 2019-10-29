@@ -13,6 +13,9 @@ int main()
 	std::shared_ptr<Entity> gameObject2 = core->addEntity();
 
 	core->Start();
+	// Wrong
+	//std::shared_ptr<Component> tr = gameObject->addComponent<Component>();
+
 	//std::shared_ptr<TriangleRenderer> tr = gameObject->addComponent<TriangleRenderer>();
 
 
