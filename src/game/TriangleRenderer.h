@@ -1,21 +1,33 @@
-/// Use this.
-#include <davorengine/davorengine.h>
+#pragma once
+#ifndef  _TRIANGLE_RENDERER_
+#define  _TRIANGLE_RENDERER_
 
-class TriangleRenderer : public Component
+#define WINDOW_WIDTH 640  // Change these to actual variables later...
+#define WINDOW_HEIGHT 480
+
+#include <GL/glew.h>
+#include <SDL2/SDL.h>
+
+#include <exception>
+
+class TriangleRenderer
 {
-  TriangleRenderer(); // Init SDL, VBOs, Shader
-  void onDisplay(); // bind vao, shader, glDrawArrays
+
+private:
+	GLuint programId;
+	GLuint vboId;
+	GLuint vaoId;
+
+
+public:
+	SDL_Window *window;
+	TriangleRenderer();
+	void OnInit();
+	void onDisplay();
+
+	
+
+
 };
 
-////
-
-
-
-void Player::onUpdate()
-{
-  //if(getEntity()->getCore()->getKeyboard()->isKeyDown('w'))
-  if(getKeyboard()->isKeyDown('w'))
-  {
-    // move forwards
-  }
-}
+#endif // ! _TRIANGLE_RENDERER_

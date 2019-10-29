@@ -7,7 +7,8 @@
 #include "Entity.h"
 #include "Keyboard.h"
 #include "Component.h"
-#include "TriangleRenderer.h"
+#include <../src/game/TriangleRenderer.h>
+
 class Core
 {
 private:

@@ -1,8 +1,13 @@
 #pragma once
 #ifndef _ENTITY_
 #define _ENTITY_
-class Component;
+
+#include <iostream> // How to get rid of these includes 
+#include <list>
+#include "Component.h"
+
 class Core;
+
 
 class Entity
 {

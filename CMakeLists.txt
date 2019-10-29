@@ -11,6 +11,7 @@ src/davorengine/Core.cpp
 src/davorengine/Component.h
 src/davorengine/Component.cpp
 src/davorengine/Entity.h
+src/davorengine/Entity.cpp
 src/davorengine/Environment.cpp
 src/davorengine/Environment.h
 src/davorengine/Exception.cpp
@@ -18,14 +19,15 @@ src/davorengine/Exception.h
 src/davorengine/triangle.cpp
 src/davorengine/Keyboard.h
 src/davorengine/Keyboard.cpp
-src/davorengine/TriangleRenderer.h
-src/davorengine/TriangleRenderer.cpp
 )
 
 target_link_libraries(davorengine SDL2 opengl32 glew32)
 
 add_executable(game
  src/game/main.cpp
+ src/game/TriangleRenderer2.cpp
+ src/game/TriangleRenderer.h
+ src/game/TriangleRenderer.cpp
 )
 
 target_link_libraries(game davorengine)
