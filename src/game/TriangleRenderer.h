@@ -15,6 +15,8 @@ class TriangleRenderer
 
 private:
 	GLuint programId;
+	GLuint positionsVboId;
+	GLuint colorsVboId;
 	GLuint vboId;
 	GLuint vaoId;
 

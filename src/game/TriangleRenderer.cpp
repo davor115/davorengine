@@ -84,7 +84,7 @@ TriangleRenderer::TriangleRenderer()
 void TriangleRenderer::onDisplay()
 {
 
-	GLuint positionsVboId = 0;
+	positionsVboId = 0;
 
 	// Create a new VBO on the GPU and bind it
 	glGenBuffers(1, &positionsVboId);
@@ -102,7 +102,7 @@ void TriangleRenderer::onDisplay()
 	// Reset the state
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	GLuint colorsVboId = 0;
+	colorsVboId = 0;
 
 	// Create a colors VBO on the GPU and bind it
 	glGenBuffers(1, &colorsVboId);
