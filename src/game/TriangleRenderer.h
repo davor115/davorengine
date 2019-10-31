@@ -11,6 +11,9 @@
 #include <exception>
 #include <davorengine/Component.h>
 
+#include "davorengine/Entity.h"
+#include "davorengine/Transform.h"
+
 class TriangleRenderer : public Component
 {
 
@@ -20,12 +23,14 @@ private:
 	GLuint colorsVboId;
 	GLuint vboId;
 	GLuint vaoId;
+	
 
 
 public:
 	SDL_Window *window;
 	~TriangleRenderer();
-	void OnInit();
+	TriangleRenderer();
+	//void OnInit();
 	void OnDisplay();
 
 	

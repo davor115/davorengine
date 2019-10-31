@@ -67,7 +67,7 @@ TriangleRenderer::~TriangleRenderer()
 }
 
 
-void TriangleRenderer::OnInit()
+TriangleRenderer::TriangleRenderer()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -135,6 +135,10 @@ void TriangleRenderer::OnInit()
 	}
 
 	glBindVertexArray(vaoId);
+
+	// Make the following:
+	// in_Model = 
+	std::shared_ptr<Transform> trans = getEntity()->getComponent<Transform>();
 
 	// Bind the position VBO, assign it to position 0 on the bound VAO and flag it to be used
 	glBindBuffer(GL_ARRAY_BUFFER, positionsVboId);

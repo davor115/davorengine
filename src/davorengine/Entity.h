@@ -5,7 +5,7 @@
 #include <iostream> // How to get rid of these includes 
 #include <list>
 #include "Component.h"
-
+#include <exception>
 class Core;
 
 
@@ -18,21 +18,25 @@ private:
 
 
 public:
-	std::shared_ptr<Core> getCore();	
+	std::shared_ptr<Core> getCore();
 	void Update();
 	void Display();
 
 	template<typename T>
 	std::shared_ptr<T> getComponent()
 	{
-		for (auto it = components.begin; it != components.end; it++)
+		for (auto it = components.begin(); it != components.end(); it++)
 		{
 			std::shared_ptr<T> rtn = std::dynamic_pointer_cast<T>();
 		}
 		
-		if (rtn)
+		if (rtn != null)
 		{
 			return rtn;
+		}
+		else
+		{
+			throw std::exception("Couldn't find the component");
 		}
 	}
 

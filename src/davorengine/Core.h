@@ -14,6 +14,7 @@
 class Entity;
 class Environment;
 class Keyboard;
+class Transform;
 
 class Core
 {
@@ -30,8 +31,6 @@ public:
 	void Start();
 	void Stop();
 	std::shared_ptr<Entity> addEntity();
-	// I'm going to create a function that allows me to get all entities in my engine.
-	std::list<std::shared_ptr<Entity>> getWorldEntities();
 
 };
 

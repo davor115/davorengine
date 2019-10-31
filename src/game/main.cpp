@@ -16,11 +16,14 @@ int main()
 	// Wrong
 	//std::shared_ptr<Component> tr = gameObject->addComponent<Component>();
 
-	std::shared_ptr<TriangleRenderer> tr = gameObject->addComponent<TriangleRenderer>();
 	
-	tr->OnInit();
-	tr->OnDisplay();
+	std::weak_ptr<TriangleRenderer> tr = gameObject->addComponent<TriangleRenderer>();
+	std::weak_ptr<Transform> trans = gameObject->addComponent<Transform>();
+	// We don't need to call these two because by doing core start we are going through Init and Display of each element.
+	//tr->OnInit();
+	//tr->OnDisplay();
 
+	core->Start(); // Run updates loops, etc.
 
 	return 0;
 }
