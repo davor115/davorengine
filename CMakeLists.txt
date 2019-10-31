@@ -19,6 +19,8 @@ src/davorengine/Exception.h
 src/davorengine/triangle.cpp
 src/davorengine/Keyboard.h
 src/davorengine/Keyboard.cpp
+src/davorengine/Transform.h
+src/davorengine/Transform.cpp
 )
 
 target_link_libraries(davorengine SDL2 opengl32 glew32)

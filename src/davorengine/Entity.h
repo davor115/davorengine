@@ -4,7 +4,6 @@
 
 #include <iostream> // How to get rid of these includes 
 #include <list>
-
 #include "Component.h"
 
 class Core;
@@ -22,6 +21,21 @@ public:
 	std::shared_ptr<Core> getCore();	
 	void Update();
 	void Display();
+
+	template<typename T>
+	std::shared_ptr<T> getComponent()
+	{
+		for (auto it = components.begin; it != components.end; it++)
+		{
+			std::shared_ptr<T> rtn = std::dynamic_pointer_cast<T>();
+		}
+		
+		if (rtn)
+		{
+			return rtn;
+		}
+	}
+
 
 	template<typename T>
 	std::shared_ptr<T> addComponent()

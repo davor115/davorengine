@@ -3,11 +3,17 @@
 #include <iostream>
 #include <list>
 #include <vector>
+
 #include "Environment.h"
 #include "Entity.h"
+#include "Transform.h"
 #include "Keyboard.h"
 #include "Component.h"
 #include <../src/game/TriangleRenderer.h>
+
+class Entity;
+class Environment;
+class Keyboard;
 
 class Core
 {

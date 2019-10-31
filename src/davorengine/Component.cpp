@@ -1,11 +1,27 @@
 #include "Component.h"
 
 
+std::shared_ptr<Entity> Component::getEntity()
+{
+	return entity;
+}
 
-//std::shared_ptr<Core> Component::getCore()
-//{
-//	std::shared_ptr<Core> c = std::make_shared<Core>();
-//	return c;
-//
-//
-//}
+void Component::OnInit()
+{
+
+}
+
+void Component::OnTick()
+{
+
+}
+
+void Component::OnBegin()
+{
+
+}
+
+void Component::OnDisplay()
+{
+
+}

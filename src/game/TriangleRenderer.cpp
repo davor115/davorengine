@@ -41,11 +41,13 @@ const GLchar *vertexShaderSrc =
 "attribute vec3 in_Position;" \
 "attribute vec4 in_Color;" \
 "" \
+"uniform mat4 in_Model" \
+"" \
 "varying vec4 ex_Color;" \
 "" \
 "void main()" \
 "{" \
-"  gl_Position = vec4(in_Position, 1.0);" \
+"  gl_Position = in_Model * vec4(in_Position, 1.0);" \
 "  ex_Color = in_Color;" \
 "}" \
 "";
@@ -58,14 +60,21 @@ const GLchar *fragmentShaderSrc =
 "}" \
 "";
 
-TriangleRenderer::TriangleRenderer()
+TriangleRenderer::~TriangleRenderer()
+{
+	SDL_DestroyWindow(window);
+	SDL_Quit();
+}
+
+
+void TriangleRenderer::OnInit()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		throw std::exception();
 	}
 
-	    window = SDL_CreateWindow("Lab 4 - Architecture",
+	window = SDL_CreateWindow("Lab 4 - Architecture",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
@@ -78,11 +87,6 @@ TriangleRenderer::TriangleRenderer()
 	{
 		throw std::exception();
 	}
-}
-
-
-void TriangleRenderer::onDisplay()
-{
 
 	positionsVboId = 0;
 
@@ -120,7 +124,7 @@ void TriangleRenderer::onDisplay()
 	// Reset the state
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	GLuint vaoId = 0;
+	vaoId = 0;
 
 	// Create a new VAO on the GPU and bind it
 	glGenVertexArrays(1, &vaoId);
@@ -167,7 +171,8 @@ void TriangleRenderer::onDisplay()
 		throw std::exception();
 	}
 
-	GLuint programId = glCreateProgram();
+	programId = glCreateProgram();
+
 	glAttachShader(programId, vertexShaderId);
 	glAttachShader(programId, fragmentShaderId);
 	glBindAttribLocation(programId, 0, "in_Position");
@@ -190,6 +195,13 @@ void TriangleRenderer::onDisplay()
 	glDeleteShader(vertexShaderId);
 	glDetachShader(programId, fragmentShaderId);
 	glDeleteShader(fragmentShaderId);
+
+
+	
+}
+
+void TriangleRenderer::OnDisplay()
+{
 
 	bool quit = false;
 
@@ -218,9 +230,5 @@ void TriangleRenderer::onDisplay()
 
 		SDL_GL_SwapWindow(window);
 	}
-
-	SDL_DestroyWindow(window);
-	SDL_Quit();
 }
-
 

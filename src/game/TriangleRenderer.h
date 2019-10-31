@@ -9,8 +9,9 @@
 #include <SDL2/SDL.h>
 
 #include <exception>
+#include <davorengine/Component.h>
 
-class TriangleRenderer
+class TriangleRenderer : public Component
 {
 
 private:
@@ -23,9 +24,9 @@ private:
 
 public:
 	SDL_Window *window;
-	TriangleRenderer();
+	~TriangleRenderer();
 	void OnInit();
-	void onDisplay();
+	void OnDisplay();
 
 	
 

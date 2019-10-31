@@ -16,9 +16,10 @@ int main()
 	// Wrong
 	//std::shared_ptr<Component> tr = gameObject->addComponent<Component>();
 
-	std::shared_ptr<TriangleRenderer> tr = std::make_shared<TriangleRenderer>();
+	std::shared_ptr<TriangleRenderer> tr = gameObject->addComponent<TriangleRenderer>();
 	
-	tr->onDisplay();
+	tr->OnInit();
+	tr->OnDisplay();
 
 
 	return 0;
