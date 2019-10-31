@@ -41,7 +41,7 @@ const GLchar *vertexShaderSrc =
 "attribute vec3 in_Position;" \
 "attribute vec4 in_Color;" \
 "" \
-"uniform mat4 in_Model" \
+"uniform mat4 in_Model;" \
 "" \
 "varying vec4 ex_Color;" \
 "" \
