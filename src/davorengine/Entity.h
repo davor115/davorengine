@@ -4,10 +4,10 @@
 
 #include <iostream> // How to get rid of these includes 
 #include <list>
-#include "Component.h"
-#include <exception>
-class Core;
 
+#include "Exception.h"
+class Core;
+class Component;
 
 class Entity
 {
@@ -27,17 +27,14 @@ public:
 	{
 		for (auto it = components.begin(); it != components.end(); it++)
 		{
-			std::shared_ptr<T> rtn = std::dynamic_pointer_cast<T>();
-		}
-		
-		if (rtn != null)
-		{
-			return rtn;
-		}
-		else
-		{
-			throw std::exception("Couldn't find the component");
-		}
+			std::shared_ptr<T> rtn = std::dynamic_pointer_cast<T>(*it);
+			if (rtn)
+			{
+				return rtn;
+			}
+		}		
+
+		throw rend::Exception("Couldn't find the component");
 	}
 
 

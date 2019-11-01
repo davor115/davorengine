@@ -21,9 +21,24 @@ src/davorengine/Keyboard.h
 src/davorengine/Keyboard.cpp
 src/davorengine/Transform.h
 src/davorengine/Transform.cpp
+src/davorengine/Engineincludes.h
 )
 
-target_link_libraries(davorengine SDL2 opengl32 glew32)
+target_link_libraries(davorengine SDL2 rend)
+
+add_library(rend
+  src/rend/Exception.cpp
+  src/rend/Context.cpp
+  src/rend/Texture.cpp
+  src/rend/RenderTexture.cpp
+  src/rend/Shader.cpp
+  src/rend/Buffer.cpp
+)
+if(MSVC)
+  target_link_libraries(rend glew32 opengl32)
+else()
+  target_link_libraries(rend GLEW GL)
+endif()
 
 add_executable(game
  src/game/main.cpp

@@ -1,4 +1,5 @@
-#include <davorengine/Core.h>
+#include "Core.h"
+#include "Entity.h"
 
 std::shared_ptr<Core> Core::initialize()
 {

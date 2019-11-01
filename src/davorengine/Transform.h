@@ -3,13 +3,18 @@
 #define _TRANSFORM_H_
 
 #include "Component.h"
-
+#include <glm/glm.hpp>
 class Transform : public Component
 {
 private:
-	int pos; // Just for testing
+	glm::vec3 position;
+	glm::vec3 rotation;
+	glm::vec3 scale;
 
+	
 
+public:
+	glm::mat4 getMat();
 
 };
 
