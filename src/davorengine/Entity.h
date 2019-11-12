@@ -1,7 +1,3 @@
-#pragma once
-#ifndef _ENTITY_
-#define _ENTITY_
-
 #include <iostream> // How to get rid of these includes 
 #include <list>
 
@@ -72,7 +68,3 @@ public:
 
 
 };
-
-
-
-#endif

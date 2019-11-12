@@ -5,6 +5,8 @@ project(DAVORENGINE)
 include_directories(src)
 
 add_library(davorengine
+src/davorengine/Camera.cpp
+src/davorengine/Camera.h
 src/davorengine/dummy.cpp
 src/davorengine/Core.h
 src/davorengine/Core.cpp
@@ -43,7 +45,7 @@ endif()
 add_executable(game
  src/game/main.cpp
  src/game/TriangleRenderer2.cpp
- src/game/TriangleRenderer.h
+ src/game/Renderer.h
  src/game/TriangleRenderer.cpp
 )
 

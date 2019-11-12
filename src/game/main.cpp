@@ -17,8 +17,10 @@ int main()
 	//std::shared_ptr<Component> tr = gameObject->addComponent<Component>();
 
 	
-	std::weak_ptr<TriangleRenderer> tr = gameObject->addComponent<TriangleRenderer>();
+	std::weak_ptr<Renderer> tr = gameObject->addComponent<Renderer>();
 	std::weak_ptr<Transform> trans = gameObject->addComponent<Transform>();
+	gameObject->getComponent<Transform>()->setPosition(glm::vec3(1,1,1));
+    
 	// We don't need to call these two because by doing core start we are going through Init and Display of each element.
 	//tr->OnInit();
 	//tr->OnDisplay();

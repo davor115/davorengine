@@ -1,5 +1,3 @@
-#ifndef _KEYBOARD_
-#define _KEYBOARD_
 
 class Keyboard
 {
@@ -10,4 +8,3 @@ class Keyboard
 
 
 
-#endif

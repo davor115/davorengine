@@ -1,6 +1,4 @@
-#pragma once
-#ifndef _ENVIRONMENT_
-#define _ENVIRONMENT_
+
 class Environment
 {
 private:
@@ -12,4 +10,3 @@ public:
 	void setDeltaTime(float _num);
 
 };
-#endif

@@ -4,7 +4,7 @@
 
 
 #include "Core.h"
-#include "game/TriangleRenderer.h"
+#include "game/Renderer.h"
 
 
 

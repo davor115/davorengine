@@ -1,6 +1,3 @@
-#pragma once
-#ifndef  _TRIANGLE_RENDERER_
-#define  _TRIANGLE_RENDERER_
 
 #define WINDOW_WIDTH 640  // Change these to actual variables later...
 #define WINDOW_HEIGHT 480
@@ -14,7 +11,7 @@
 #include "davorengine/Entity.h"
 #include "davorengine/Transform.h"
 
-class TriangleRenderer : public Component
+class Renderer : public Component
 {
 
 private:
@@ -28,8 +25,8 @@ private:
 
 public:
 	SDL_Window *window;
-	~TriangleRenderer();
-	TriangleRenderer();
+	~Renderer();
+	Renderer();
 	//void OnInit();
 	void OnDisplay();
 
@@ -37,5 +34,3 @@ public:
 
 
 };
-
-#endif // ! _TRIANGLE_RENDERER_

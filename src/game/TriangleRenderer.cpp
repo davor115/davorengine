@@ -1,4 +1,4 @@
-#include "TriangleRenderer.h"
+#include "Renderer.h"
 /// Use this.
 /*
 #include <davorengine/davorengine.h>
@@ -60,14 +60,14 @@ const GLchar *fragmentShaderSrc =
 "}" \
 "";
 
-TriangleRenderer::~TriangleRenderer()
+Renderer::~Renderer()
 {
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
 
 
-TriangleRenderer::TriangleRenderer()
+Renderer::Renderer()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -187,7 +187,7 @@ TriangleRenderer::TriangleRenderer()
 	glAttachShader(programId, fragmentShaderId);
 	glBindAttribLocation(programId, 0, "in_Position");
 	glBindAttribLocation(programId, 1, "in_Color");
-	glGetUniformLocation()
+	
 
 	if (glGetError() != GL_NO_ERROR)
 	{
@@ -211,7 +211,7 @@ TriangleRenderer::TriangleRenderer()
 	
 }
 
-void TriangleRenderer::OnDisplay()
+void Renderer::OnDisplay()
 {
 
 	bool quit = false;
@@ -230,6 +230,12 @@ void TriangleRenderer::OnDisplay()
 
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		// VAO -> Comes from Mesh
+		// Projection -> Camera
+		// View -> Camera transform inverse
+		// Model -> this. transform
+
 
 		glUseProgram(programId);
 		glBindVertexArray(vaoId);

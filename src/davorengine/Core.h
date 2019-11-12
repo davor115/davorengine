@@ -1,5 +1,3 @@
-#ifndef _DAVOR_ENGINE_
-#define _DAVOR_ENGINE_
 #include <iostream>
 #include <list>
 #include <vector>
@@ -27,8 +25,3 @@ public:
 	std::shared_ptr<Entity> addEntity();
 
 };
-
-
-
-
-#endif

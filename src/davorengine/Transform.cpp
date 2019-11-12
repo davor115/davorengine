@@ -14,3 +14,18 @@ glm::mat4 Transform::getMat()
 
 	return mat;
 }
+
+void Transform::setPosition(glm::vec3 _pos)
+{
+	position = _pos;
+}
+
+void Transform::setRotation(glm::vec3 _rot)
+{
+	rotation = _rot;
+}
+
+void Transform::setScale(glm::vec3 _s)
+{
+	scale = _s;
+}

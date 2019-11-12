@@ -1,6 +1,3 @@
-#pragma once
-#ifndef _TRANSFORM_H_
-#define _TRANSFORM_H_
 
 #include "Component.h"
 #include <glm/glm.hpp>
@@ -15,9 +12,7 @@ private:
 
 public:
 	glm::mat4 getMat();
-
+	void setPosition(glm::vec3 _pos);
+	void setRotation(glm::vec3 _rot);
+	void setScale(glm::vec3 _s);
 };
-
-
-
-#endif
