@@ -1,5 +1,5 @@
 #include "MeshRenderer.h"
-using namespace davorengine;
+
 /// Use this.
 /*
 #include <davorengine/davorengine.h>
@@ -144,9 +144,9 @@ MeshRenderer::MeshRenderer()
 	// in_Model = 
 	std::shared_ptr<Context> context = Context::initialize();
 	std::shared_ptr<Shader> shader = context->createShader();
-	shader->setSource("");
-	
-
+	shader->setSource(vertexShaderSrc);
+	shader->setSource(fragmentShaderSrc);
+	shader->setUniform("in_Model", this->getTransform()->getMat()); // Well, i thought this would work...
 
 
 	// Bind the position VBO, assign it to position 0 on the bound VAO and flag it to be used
@@ -162,6 +162,7 @@ MeshRenderer::MeshRenderer()
 	// Reset the state
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
 
 	GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShaderId, 1, &vertexShaderSrc, NULL);
@@ -214,7 +215,7 @@ MeshRenderer::MeshRenderer()
 	
 }
 
-void Renderer::OnDisplay()
+void MeshRenderer::OnDisplay()
 {
 
 	bool quit = false;

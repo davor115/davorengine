@@ -25,3 +25,9 @@ void Component::OnDisplay()
 {
 
 }
+
+std::shared_ptr<Transform> Component::getTransform()
+{
+	std::shared_ptr<Transform> rtn = std::make_shared<Transform>();
+	return rtn;
+}
