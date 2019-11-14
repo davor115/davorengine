@@ -9,9 +9,10 @@
 #include <davorengine/Component.h>
 
 #include "davorengine/Entity.h"
+#include "davorengine/Engineincludes.h"
 #include "davorengine/Transform.h"
 
-class Renderer : public Component
+class MeshRenderer : public Component
 {
 
 private:
@@ -25,8 +26,8 @@ private:
 
 public:
 	SDL_Window *window;
-	~Renderer();
-	Renderer();
+	~MeshRenderer();
+	MeshRenderer();
 	//void OnInit();
 	void OnDisplay();
 

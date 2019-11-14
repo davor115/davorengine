@@ -4,6 +4,7 @@
 #include "Exception.h"
 class Core;
 class Component;
+class Transform;
 
 class Entity
 {
@@ -15,6 +16,7 @@ private:
 
 public:
 	std::shared_ptr<Core> getCore();
+	std::shared_ptr<Transform> getTransform();
 	void Update();
 	void Display();
 

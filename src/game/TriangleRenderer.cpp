@@ -1,4 +1,5 @@
-#include "Renderer.h"
+#include "MeshRenderer.h"
+using namespace davorengine;
 /// Use this.
 /*
 #include <davorengine/davorengine.h>
@@ -60,21 +61,21 @@ const GLchar *fragmentShaderSrc =
 "}" \
 "";
 
-Renderer::~Renderer()
+MeshRenderer::~MeshRenderer()
 {
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
 
 
-Renderer::Renderer()
+MeshRenderer::MeshRenderer()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		throw std::exception();
 	}
 
-	window = SDL_CreateWindow("Lab 4 - Architecture",
+	window = SDL_CreateWindow("DavorEngine",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 
@@ -141,7 +142,9 @@ Renderer::Renderer()
 
 	// Make the following:
 	// in_Model = 
-
+	std::shared_ptr<Context> context = Context::initialize();
+	std::shared_ptr<Shader> shader = context->createShader();
+	shader->setSource("");
 	
 
 

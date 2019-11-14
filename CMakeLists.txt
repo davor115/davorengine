@@ -45,7 +45,7 @@ endif()
 add_executable(game
  src/game/main.cpp
  src/game/TriangleRenderer2.cpp
- src/game/Renderer.h
+ src/game/MeshRenderer.h
  src/game/TriangleRenderer.cpp
 )
 

@@ -4,8 +4,13 @@
 
 
 #include "Core.h"
-#include "game/Renderer.h"
+#include "game/MeshRenderer.h"
+#include <rend/Context.h>
 
+namespace davorengine
+{
+	using namespace rend;
+}
 
 
 #endif

@@ -12,12 +12,11 @@ int main()
 	std::shared_ptr<Entity> gameObject = core->addEntity();
 	std::shared_ptr<Entity> gameObject2 = core->addEntity();
 
-	core->Start();
 	// Wrong
 	//std::shared_ptr<Component> tr = gameObject->addComponent<Component>();
 
 	
-	std::weak_ptr<Renderer> tr = gameObject->addComponent<Renderer>();
+	std::weak_ptr<MeshRenderer> tr = gameObject->addComponent<MeshRenderer>();
 	std::weak_ptr<Transform> trans = gameObject->addComponent<Transform>();
 	gameObject->getComponent<Transform>()->setPosition(glm::vec3(1,1,1));
     
