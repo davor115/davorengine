@@ -4,15 +4,15 @@
 
 
 #include "Core.h"
-#include "game/MeshRenderer.h"
-#include <rend/Context.h>
-#include <rend/Shader.h>
-#include <rend/Buffer.h>
+#include "Entity.h"
+#include "MeshRenderer.h"
+#include <rend/rend.h>
+#include "Transform.h"
 
 namespace davorengine
 {
 	using namespace rend;
 }
-using namespace davorengine;
+
 
 #endif

@@ -1,10 +1,8 @@
 #include "Exception.h"
 
-#include <GL/glew.h>
-
 #include <iostream>
 
-namespace rend
+namespace davorengine
 {
 
 Exception::Exception(const std::string& message)

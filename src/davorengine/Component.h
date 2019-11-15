@@ -20,7 +20,7 @@ public:
 	std::shared_ptr<Core> getCore();
 	std::shared_ptr<Keyboard> getKeyboard();
 	std::shared_ptr<Environment> getEnvironment();
-	std::shared_ptr<Transform> getTransform(); // empty
+	std::shared_ptr<Transform> getTransform();
 	virtual void OnInit();
 	virtual void OnBegin();
 	virtual void OnTick();

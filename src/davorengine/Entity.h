@@ -1,7 +1,7 @@
+#include "Exception.h"
 #include <iostream> // How to get rid of these includes 
 #include <list>
 
-#include "Exception.h"
 class Core;
 class Component;
 class Transform;
@@ -12,9 +12,10 @@ private:
 	//std::vector<std::shared_ptr<Component>> components;
 	std::list<std::shared_ptr<Component>> components;
 	std::weak_ptr<Core> core;	
-
+	std::weak_ptr<Entity> self;
 
 public:
+	friend class Core;
 	std::shared_ptr<Core> getCore();
 	std::shared_ptr<Transform> getTransform();
 	void Update();
@@ -32,7 +33,7 @@ public:
 			}
 		}		
 
-		throw rend::Exception("Couldn't find the component");
+		throw davorengine::Exception("Couldn't find the component");
 	}
 
 
@@ -41,6 +42,7 @@ public:
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>();		
 		components.push_back(rtn);
+		rtn->entity = self;
 		return rtn;
 	}
 

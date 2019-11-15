@@ -1,5 +1,5 @@
-#include "MeshRenderer.h"
-
+#include <davorengine/Engineincludes.h>
+using namespace davorengine;
 /// Use this.
 /*
 #include <davorengine/davorengine.h>
@@ -38,7 +38,8 @@ const GLfloat colors[] = {
   0.0f, 0.0f, 1.0f, 1.0f
 };
 
-const GLchar *vertexShaderSrc =
+const GLchar *src =
+"\n#ifdef VERTEX\n" \
 "attribute vec3 in_Position;" \
 "attribute vec4 in_Color;" \
 "" \
@@ -51,14 +52,14 @@ const GLchar *vertexShaderSrc =
 "  gl_Position = in_Model * vec4(in_Position, 1.0);" \
 "  ex_Color = in_Color;" \
 "}" \
-"";
-
-const GLchar *fragmentShaderSrc =
+"\n#endif\n"
+"\n#ifdef FRAGMENT\n" \
 "varying vec4 ex_Color;" \
 "void main()" \
 "{" \
 "  gl_FragColor = ex_Color;" \
 "}" \
+"\n#endif\n"
 "";
 
 MeshRenderer::~MeshRenderer()
@@ -70,6 +71,7 @@ MeshRenderer::~MeshRenderer()
 
 MeshRenderer::MeshRenderer()
 {
+	
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		throw std::exception();
@@ -88,7 +90,8 @@ MeshRenderer::MeshRenderer()
 	{
 		throw std::exception();
 	}
-
+	
+	/*
 	positionsVboId = 0;
 
 	// Create a new VBO on the GPU and bind it
@@ -137,18 +140,17 @@ MeshRenderer::MeshRenderer()
 
 	glBindVertexArray(vaoId);
 
-
+	*/
 
 
 	// Make the following:
 	// in_Model = 
 	std::shared_ptr<Context> context = Context::initialize();
-	std::shared_ptr<Shader> shader = context->createShader();
-	shader->setSource(vertexShaderSrc);
-	shader->setSource(fragmentShaderSrc);
-	shader->setUniform("in_Model", this->getTransform()->getMat()); // Well, i thought this would work...
+	shader = context->createShader();
+	shader->setSource(src);
 
-
+	
+	/*
 	// Bind the position VBO, assign it to position 0 on the bound VAO and flag it to be used
 	glBindBuffer(GL_ARRAY_BUFFER, positionsVboId);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
@@ -210,9 +212,7 @@ MeshRenderer::MeshRenderer()
 	glDeleteShader(vertexShaderId);
 	glDetachShader(programId, fragmentShaderId);
 	glDeleteShader(fragmentShaderId);
-
-
-	
+	*/
 }
 
 void MeshRenderer::OnDisplay()
@@ -232,8 +232,8 @@ void MeshRenderer::OnDisplay()
 			}
 		}
 
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+	//	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+	//	glClear(GL_COLOR_BUFFER_BIT);
 
 		// VAO -> Comes from Mesh
 		// Projection -> Camera
@@ -241,15 +241,16 @@ void MeshRenderer::OnDisplay()
 		// Model -> this. transform
 
 
-		glUseProgram(programId);
-		glBindVertexArray(vaoId);
+	//	glUseProgram(programId);
+	//	glBindVertexArray(vaoId);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		shader->setUniform("in_Model", getTransform()->getMat()); // Well, it was worth trying...
+	//	glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		glBindVertexArray(0);
-		glUseProgram(0);
+	//	glBindVertexArray(0);
+	//	glUseProgram(0);
 
-		SDL_GL_SwapWindow(window);
+	//	SDL_GL_SwapWindow(window);
 	}
 }
 

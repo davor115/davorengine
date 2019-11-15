@@ -6,7 +6,7 @@
 class Entity;
 class Environment;
 class Keyboard;
-class Transform;
+
 
 class Core
 {

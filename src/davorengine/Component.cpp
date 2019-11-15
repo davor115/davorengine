@@ -1,5 +1,6 @@
 #include "Component.h"
-
+#include "Transform.h"
+#include "Entity.h"
 
 std::shared_ptr<Entity> Component::getEntity()
 {
@@ -28,6 +29,6 @@ void Component::OnDisplay()
 
 std::shared_ptr<Transform> Component::getTransform()
 {
-	std::shared_ptr<Transform> rtn = std::make_shared<Transform>();
+	std::shared_ptr<Transform> rtn = getEntity()->getComponent<Transform>();
 	return rtn;
 }

@@ -2,6 +2,8 @@
 #include <memory>
 #include "davorengine/Engineincludes.h"
 
+using namespace davorengine;
+
 int main()
 {
 

@@ -5,12 +5,9 @@
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 
-#include <exception>
-#include <davorengine/Component.h>
+#include "Component.h"
+#include <rend/rend.h>
 
-#include "davorengine/Entity.h"
-#include "davorengine/Engineincludes.h"
-#include "davorengine/Transform.h"
 
 class MeshRenderer : public Component
 {
@@ -21,7 +18,7 @@ private:
 	GLuint colorsVboId;
 	GLuint vboId;
 	GLuint vaoId;
-	
+	std::shared_ptr<rend::Shader> shader;
 
 
 public:

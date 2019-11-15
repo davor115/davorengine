@@ -14,6 +14,8 @@ std::shared_ptr<Entity> Core::addEntity()
 {
 	std::shared_ptr<Entity> entity = std::make_shared<Entity>();
 	entities.push_back(entity);
+	entity->self = entity;
+	entity->addComponent<Transform>(); // Because every entity should have a transform.
 	return entity;
 }
 

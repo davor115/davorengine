@@ -1,7 +1,7 @@
 #include <exception>
 #include <string>
 
-namespace rend
+namespace davorengine
 {
 
 struct Exception : public std::exception
