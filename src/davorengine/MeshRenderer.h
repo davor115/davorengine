@@ -19,6 +19,7 @@ private:
 	GLuint vboId;
 	GLuint vaoId;
 	std::shared_ptr<rend::Shader> shader;
+	std::shared_ptr<rend::Buffer> buffer;
 
 
 public:

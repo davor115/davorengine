@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "Entity.h"
+#include "Transform.h"
 
 std::shared_ptr<Core> Core::initialize()
 {

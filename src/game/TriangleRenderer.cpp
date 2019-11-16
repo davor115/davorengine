@@ -41,6 +41,9 @@ const GLfloat colors[] = {
 const GLchar *src =
 "\n#ifdef VERTEX\n" \
 "attribute vec3 in_Position;" \
+"" \
+"attribute vec3 Test;" \
+"" \
 "attribute vec4 in_Color;" \
 "" \
 "uniform mat4 in_Model;" \
@@ -49,10 +52,11 @@ const GLchar *src =
 "" \
 "void main()" \
 "{" \
-"  gl_Position = in_Model * vec4(in_Position, 1.0);" \
+"  gl_Position = in_Model * Test * vec4(in_Position, 1.0);" \
 "  ex_Color = in_Color;" \
 "}" \
-"\n#endif\n"
+"" \
+"\n#endif\n" \
 "\n#ifdef FRAGMENT\n" \
 "varying vec4 ex_Color;" \
 "void main()" \
@@ -147,8 +151,20 @@ MeshRenderer::MeshRenderer()
 	// in_Model = 
 	std::shared_ptr<Context> context = Context::initialize();
 	shader = context->createShader();
-	shader->setSource(src);
+	shader->parse(src);
 
+
+	buffer = context->createBuffer();
+	buffer->add(vec3(0.0f, 0.5f, 0.0f));
+	buffer->add(vec3(-0.5f, -0.5f, 0.0f));
+	buffer->add(vec3(0.5f, -0.5f, 0.0f));
+	shader->setAttribute("in_Position", buffer);
+
+	buffer = context->createBuffer();
+	buffer->add(vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	buffer->add(vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	buffer->add(vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	//shader->setAttribute("in_Color", buffer);
 	
 	/*
 	// Bind the position VBO, assign it to position 0 on the bound VAO and flag it to be used
@@ -245,12 +261,14 @@ void MeshRenderer::OnDisplay()
 	//	glBindVertexArray(vaoId);
 
 		shader->setUniform("in_Model", getTransform()->getMat()); // Well, it was worth trying...
+		shader->render();
+
 	//	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	//	glBindVertexArray(0);
 	//	glUseProgram(0);
 
-	//	SDL_GL_SwapWindow(window);
+	SDL_GL_SwapWindow(window);
 	}
 }
 
