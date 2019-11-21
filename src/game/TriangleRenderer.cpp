@@ -41,18 +41,16 @@ const GLfloat colors[] = {
 const GLchar *src =
 "\n#ifdef VERTEX\n" \
 "attribute vec3 in_Position;" \
-"" \
-"attribute vec3 Test;" \
-"" \
 "attribute vec4 in_Color;" \
 "" \
+"uniform mat4 in_Projection;" \
 "uniform mat4 in_Model;" \
 "" \
 "varying vec4 ex_Color;" \
 "" \
 "void main()" \
 "{" \
-"  gl_Position = in_Model * Test * vec4(in_Position, 1.0);" \
+"  gl_Position = in_Projection * in_Model * vec4(in_Position, 1.0);" \
 "  ex_Color = in_Color;" \
 "}" \
 "" \
@@ -164,7 +162,7 @@ MeshRenderer::MeshRenderer()
 	buffer->add(vec4(1.0f, 0.0f, 0.0f, 1.0f));
 	buffer->add(vec4(0.0f, 1.0f, 0.0f, 1.0f));
 	buffer->add(vec4(0.0f, 0.0f, 1.0f, 1.0f));
-	//shader->setAttribute("in_Color", buffer);
+	shader->setAttribute("in_Color", buffer);
 	
 	/*
 	// Bind the position VBO, assign it to position 0 on the bound VAO and flag it to be used
@@ -234,33 +232,41 @@ MeshRenderer::MeshRenderer()
 void MeshRenderer::OnDisplay()
 {
 
-	bool quit = false;
+	SDL_Event event = { 0 };
 
-	while (!quit)
+	while (SDL_PollEvent(&event))
 	{
-		SDL_Event event = { 0 };
-
-		while (SDL_PollEvent(&event))
+		if (event.type == SDL_QUIT)
 		{
-			if (event.type == SDL_QUIT)
-			{
-				quit = true;
-			}
+			throw std::exception();
 		}
+	}
 
-	//	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-	//	glClear(GL_COLOR_BUFFER_BIT);
+	// TODO: Move SDL_Window to Core::initialize
+	// TODO: Add Sound init to Core::initialize
+	// TODO: Move clear to core
+	// TODO: Move SDL_GL_SwapWindow to core
+	// TODO: Remove old raw gl stuff out of here
+	// TODO: View matrix
+	// TODO: Move this class (TriangleRender), -> MeshRenderer -> engine
+	//getEntity()->addComponent<SoundSource>(Resources::load<AudioClip>("sounds/bang"));
 
-		// VAO -> Comes from Mesh
-		// Projection -> Camera
-		// View -> Camera transform inverse
-		// Model -> this. transform
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// VAO -> Comes from Mesh
+	// Projection -> Camera
+	// View -> Camera transform inverse
+	// Model -> this. transform
 
 
 	//	glUseProgram(programId);
 	//	glBindVertexArray(vaoId);
 
-		shader->setUniform("in_Model", getTransform()->getMat()); // Well, it was worth trying...
+		shader->setUniform("in_Projection", glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f));
+		//shader->setUniform("in_View", getCore()->getCamera()->getTransform()->getView());
+		shader->setUniform("in_Model", getTransform()->getMat());
+
 		shader->render();
 
 	//	glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -269,6 +275,5 @@ void MeshRenderer::OnDisplay()
 	//	glUseProgram(0);
 
 	SDL_GL_SwapWindow(window);
-	}
 }
 

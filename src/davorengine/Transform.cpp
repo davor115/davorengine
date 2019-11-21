@@ -1,5 +1,11 @@
 #include "Transform.h"
 #include <glm/ext.hpp>
+
+void Transform::OnInit()
+{
+	scale = glm::vec3(1, 1, 1);
+}
+
 glm::mat4 Transform::getMat()
 {
 	glm::mat4 mat = glm::mat4(1.0f);

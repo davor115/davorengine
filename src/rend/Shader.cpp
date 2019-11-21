@@ -281,10 +281,10 @@ std::sr1::shared_ptr<VariableInfo> Shader::getVariableInfo(const std::string& na
     glGetActiveAttrib(id, rtn->loc, 0, &unusedA, &unusedB, &rtnType, NULL);
     pollForError();
 
-    if(rtnType != type)
-    {
-      throw Exception("The requested attribute had the wrong type");
-    }
+    //if(rtnType != type)
+    //{
+    //  throw Exception("The requested attribute had the wrong type");
+    //}
   }
 
   cache.push_back(rtn);

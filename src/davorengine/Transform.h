@@ -8,9 +8,9 @@ private:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
-	
-
 public:
+	void OnInit();
+
 	glm::mat4 getMat();
 	void setPosition(glm::vec3 _pos);
 	void setRotation(glm::vec3 _rot);

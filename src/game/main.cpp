@@ -20,7 +20,7 @@ int main()
 	
 	std::weak_ptr<MeshRenderer> tr = gameObject->addComponent<MeshRenderer>();
 	std::weak_ptr<Transform> trans = gameObject->addComponent<Transform>();
-	gameObject->getComponent<Transform>()->setPosition(glm::vec3(1,1,1));
+	gameObject->getComponent<Transform>()->setPosition(glm::vec3(0,0,-10));
     
 	// We don't need to call these two because by doing core start we are going through Init and Display of each element.
 	//tr->OnInit();
