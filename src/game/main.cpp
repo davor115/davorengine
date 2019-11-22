@@ -21,7 +21,7 @@ int main()
 	gameObject->getComponent<Transform>()->setPosition(glm::vec3(0,0,-5));
 	gameObject->getComponent<Transform>()->setRotation(glm::vec3(0, 45, 0));
 	
-	
+	MainCamera->getComponent<Transform>()->setPosition(glm::vec3(0, 0, 10));
 
 
 	core->Start(); // Run updates loops, etc.

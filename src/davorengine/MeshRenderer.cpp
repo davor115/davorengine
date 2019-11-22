@@ -52,7 +52,7 @@ const GLchar *src =
 "" \
 "void main()" \
 "{" \
-"  gl_Position = in_Projection * in_Model * vec4(in_Position, 1.0);" \
+"  gl_Position = in_Projection * in_View * in_Model * vec4(in_Position, 1.0);" \
 "  ex_Color = in_Color;" \
 "}" \
 "" \
@@ -66,35 +66,8 @@ const GLchar *src =
 "\n#endif\n"
 "";
 
-MeshRenderer::~MeshRenderer()
-{
-	SDL_DestroyWindow(window);
-	SDL_Quit();
-}
-
-
 MeshRenderer::MeshRenderer()
 {
-	
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		throw std::exception();
-	}
-
-	window = SDL_CreateWindow("DavorEngine",
-		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
-
-	if (!SDL_GL_CreateContext(window))
-	{
-		throw std::exception();
-	}
-
-	if (glewInit() != GLEW_OK)
-	{
-		throw std::exception();
-	}
-
 
 	// Make the following:
 	// in_Model = 
@@ -148,26 +121,23 @@ void MeshRenderer::OnDisplay()
 		}
 	}
 
-	// TODO: Move SDL_Window to Core::initialize -> Problem, since Core is static and Start is not, how do I use window variable in both?
+	// TODO: Move SDL_Window to Core::initialize -> Problem, since Core is static and Start is not, how do I use window variable in both? -> Fixed.
 	// TODO: Add Sound init to Core::initialize
-	// TODO: Move clear to core
-	// TODO: Move SDL_GL_SwapWindow to core
-	// TODO: Remove old raw gl stuff out of here
+	// TODO: Move clear to core -> Done 
+	// TODO: Move SDL_GL_SwapWindow to core -> Done
+	// TODO: Remove old raw gl stuff out of here -> Done
 	// TODO: View matrix
 	// TODO: Move this class (TriangleRender), -> MeshRenderer -> engine
 	//getEntity()->addComponent<SoundSource>(Resources::load<AudioClip>("sounds/bang"));
 
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	
 	// VAO -> Comes from Mesh
 	// Projection -> Camera
 	// View -> Camera transform inverse
 	// Model -> this. transform
 
-	shader->setUniform("in_Projection", glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f));
-	//shader->setUniform("in_Projection", getCamera()->getProjection()); // This is not working..
-	//shader->setUniform("in_View", getCamera()->getView()); // Figure out how to get the camera then uncomment this line.
+	shader->setUniform("in_Projection", getCore()->getCurrentCamera()->getProjection()); // This is not working..
+	shader->setUniform("in_View", getCore()->getCurrentCamera()->getView()); // Figure out how to get the camera then uncomment this line.
 	shader->setUniform("in_Model", getTransform()->getMat());
 	
 
@@ -175,6 +145,6 @@ void MeshRenderer::OnDisplay()
 
 	shader->render();
 
-	SDL_GL_SwapWindow(window);
+//	SDL_GL_SwapWindow(window);
 }
 

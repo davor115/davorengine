@@ -1,10 +1,11 @@
 #include "Camera.h"
 #include "Transform.h"
-
-
+#include "Core.h"
+#include "Entity.h"
 void Camera::OnInit()
 {
 	std::cout << "Camera on" << std::endl;
+	getCore()->currentCamera = getEntity()->getComponent<Camera>();
 	
 }
 

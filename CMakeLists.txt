@@ -25,10 +25,11 @@ src/davorengine/Transform.h
 src/davorengine/Transform.cpp
 src/davorengine/MeshRenderer.h
 src/davorengine/MeshRenderer.cpp
+src/davorengine/stb_vorbis.h
 src/davorengine/Engineincludes.h
 )
 
-target_link_libraries(davorengine SDL2 rend)
+target_link_libraries(davorengine SDL2 rend OpenAL32)
 
 add_library(rend
   src/rend/Exception.cpp
