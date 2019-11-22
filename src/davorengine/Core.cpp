@@ -1,7 +1,7 @@
 #include "Core.h"
 #include "Entity.h"
 #include "Transform.h"
-
+#include "Camera.h"
 std::shared_ptr<Core> Core::initialize()
 {
 	// Initialize the game engine.

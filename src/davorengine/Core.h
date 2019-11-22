@@ -6,12 +6,12 @@
 class Entity;
 class Environment;
 class Keyboard;
-
+class Camera;
 
 class Core
 {
 private:
-	std::weak_ptr<Core> self;
+	std::weak_ptr<Core> self;	
 	std::shared_ptr<Environment> environment;
 	//std::vector<std::shared_ptr<Entity>> entities;
 	std::list<std::shared_ptr<Entity>> entities;
@@ -23,5 +23,5 @@ public:
 	void Start();
 	void Stop();
 	std::shared_ptr<Entity> addEntity();
-
+	
 };

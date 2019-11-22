@@ -20,6 +20,7 @@ private:
 	GLuint vaoId;
 	std::shared_ptr<rend::Shader> shader;
 	std::shared_ptr<rend::Buffer> buffer;
+	std::shared_ptr<rend::Mesh> shape;
 
 
 public:

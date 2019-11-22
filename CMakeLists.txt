@@ -24,6 +24,7 @@ src/davorengine/Keyboard.cpp
 src/davorengine/Transform.h
 src/davorengine/Transform.cpp
 src/davorengine/MeshRenderer.h
+src/davorengine/MeshRenderer.cpp
 src/davorengine/Engineincludes.h
 )
 
@@ -46,7 +47,6 @@ endif()
 add_executable(game
  src/game/main.cpp
  src/game/TriangleRenderer2.cpp
- src/game/TriangleRenderer.cpp
 )
 
 target_link_libraries(game davorengine)

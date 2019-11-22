@@ -8,6 +8,7 @@
 #include "MeshRenderer.h"
 #include <rend/rend.h>
 #include "Transform.h"
+#include "Camera.h"
 
 namespace davorengine
 {

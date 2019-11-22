@@ -11,20 +11,18 @@ int main()
 
 	std::shared_ptr<Core> core = Core::initialize();
 	
-	std::shared_ptr<Entity> gameObject = core->addEntity();
-	std::shared_ptr<Entity> gameObject2 = core->addEntity();
-
-	// Wrong
-	//std::shared_ptr<Component> tr = gameObject->addComponent<Component>();
-
 	
+	std::shared_ptr<Entity> MainCamera = core->addEntity();	
+	std::shared_ptr<Entity> gameObject = core->addEntity();
+
+	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>();
 	std::weak_ptr<MeshRenderer> tr = gameObject->addComponent<MeshRenderer>();
 	std::weak_ptr<Transform> trans = gameObject->addComponent<Transform>();
-	gameObject->getComponent<Transform>()->setPosition(glm::vec3(0,0,-10));
-    
-	// We don't need to call these two because by doing core start we are going through Init and Display of each element.
-	//tr->OnInit();
-	//tr->OnDisplay();
+	gameObject->getComponent<Transform>()->setPosition(glm::vec3(0,0,-5));
+	gameObject->getComponent<Transform>()->setRotation(glm::vec3(0, 45, 0));
+	
+	
+
 
 	core->Start(); // Run updates loops, etc.
 

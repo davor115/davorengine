@@ -2,6 +2,7 @@
 #include <iostream> // How to get rid of these includes 
 #include <list>
 
+
 class Core;
 class Component;
 class Transform;
@@ -41,7 +42,7 @@ public:
 	std::shared_ptr<T> addComponent()
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>();		
-
+		std::cout << "Now adding component: " << typeid(T).name() << std::endl;
 		rtn->entity = self;
 		components.push_back(rtn);
 		rtn->OnInit();
