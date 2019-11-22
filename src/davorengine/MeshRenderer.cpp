@@ -90,7 +90,7 @@ MeshRenderer::MeshRenderer()
 		shape->parse(obj);
 
 	}
-
+	
 
 	buffer = context->createBuffer();
 	buffer->add(vec3(0.0f, 0.5f, 0.0f));
