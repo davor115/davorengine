@@ -1,5 +1,7 @@
+#define STB_IMAGE_IMPLEMENTATION
 #include "Engineincludes.h"
 #include <fstream>
+
 using namespace davorengine;
 /// Use this.
 /*
@@ -41,44 +43,82 @@ const GLfloat colors[] = {
 
 const GLchar *src =
 "\n#ifdef VERTEX\n" \
-"attribute vec3 in_Position;" \
-"attribute vec4 in_Color;" \
+"attribute vec3 a_Position;" \
+"attribute vec2 a_TexCoord;" \
+"attribute vec3 a_Normal;" \
 "" \
 "uniform mat4 in_Projection;" \
 "uniform mat4 in_Model;" \
 "uniform mat4 in_View;" \
 "" \
-"varying vec4 ex_Color;" \
+"varying vec2 v_TexCoord;" \
+"varying vec3 v_Normal;" \
 "" \
 "void main()" \
 "{" \
-"  gl_Position = in_Projection * in_View * in_Model * vec4(in_Position, 1.0);" \
-"  ex_Color = in_Color;" \
+"  gl_Position = in_Projection * in_View * in_Model * vec4(a_Position, 1.0);" \
+"  v_TexCoord = a_TexCoord;" \
+"  v_Normal = a_Normal;" \
 "}" \
 "" \
 "\n#endif\n" \
 "\n#ifdef FRAGMENT\n" \
-"varying vec4 ex_Color;" \
+"uniform sampler2D u_Texture;" \
+"varying vec2 v_TexCoord;" \
+"varying vec3 v_Normal;" \
 "void main()" \
 "{" \
-"  gl_FragColor = ex_Color;" \
+"  gl_FragColor = texture2D(u_Texture, v_TexCoord);" \
+"  if(gl_FragColor.x == 9) gl_FragColor.x = v_Normal.x;" \
 "}" \
 "\n#endif\n"
 "";
 
-MeshRenderer::MeshRenderer()
-{
+//  gl_FragColor = vec4(v_TexCoord, 0, 1);
 
-	// Make the following:
-	// in_Model = 
+//
+//const char* obj =
+//"v -1 1 0           \n" \
+//"v -1 -1 0          \n" \
+//"v 1 -1 0           \n" \
+//"v 1 1 0            \n" \
+//"                   \n" \
+//"vt 0 1             \n" \
+//"vt 0 0             \n" \
+//"vt 1 0             \n" \
+//"vt 1 1             \n" \
+//"                   \n" \
+//"f 1/1 2/2 3/3 4/4  \n" \
+//"                   \n";
+
+MeshRenderer::MeshRenderer()
+{	
+	// Since the .obj gives the info below, we don't need to set it ourselves.
+
+	//buffer = context->createBuffer();
+	//buffer->add(vec3(0.0f, 0.5f, 0.0f));
+	//buffer->add(vec3(-0.5f, -0.5f, 0.0f));
+	//buffer->add(vec3(0.5f, -0.5f, 0.0f));
+	//shader->setAttribute("in_Position", buffer);
+
+	//buffer = context->createBuffer();
+	//buffer->add(vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	//buffer->add(vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	//buffer->add(vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	//shader->setAttribute("in_Color", buffer);
+	
+}
+
+void MeshRenderer::LoadObject(const char* path)
+{ 
 	std::shared_ptr<Context> context = Context::initialize();
 	shader = context->createShader();
 	shader->parse(src);
 
 	shape = context->createMesh();
-
 	{
-		std::ifstream f("share/rend/samples/curuthers/curuthers.obj");
+		std::ifstream f;
+		f.open(path);
 		std::string obj;
 		std::string line;
 
@@ -87,25 +127,47 @@ MeshRenderer::MeshRenderer()
 			std::getline(f, line);
 			obj += line + "\n";
 		}
+
 		shape->parse(obj);
-
 	}
-	
+}
 
-	buffer = context->createBuffer();
-	buffer->add(vec3(0.0f, 0.5f, 0.0f));
-	buffer->add(vec3(-0.5f, -0.5f, 0.0f));
-	buffer->add(vec3(0.5f, -0.5f, 0.0f));
-	shader->setAttribute("in_Position", buffer);
+void MeshRenderer::LoadTexture(const char* path)
+{
+	std::shared_ptr<Context> context = Context::initialize();
+	texture = context->createTexture();
+	{
+		int w = 0;
+		int h = 0;
+		int bpp = 0;
 
-	buffer = context->createBuffer();
-	buffer->add(vec4(1.0f, 0.0f, 0.0f, 1.0f));
-	buffer->add(vec4(0.0f, 1.0f, 0.0f, 1.0f));
-	buffer->add(vec4(0.0f, 0.0f, 1.0f, 1.0f));
-	shader->setAttribute("in_Color", buffer);
+		unsigned char *data = stbi_load(path,
+			&w, &h, &bpp, 3);
 
+		if (!data)
+		{
+			throw rend::Exception("Failed to open image");
+		}
 
-	
+		texture->setSize(w, h);
+
+		for (int y = 0; y < h; y++)
+		{
+			for (int x = 0; x < w; x++)
+			{
+				int r = y * w * 3 + x * 3;
+
+				texture->setPixel(x, y, vec3(
+					data[r] / 255.0f,
+					data[r + 1] / 255.0f,
+					data[r + 2] / 255.0f));
+			}
+		}
+		stbi_image_free(data);
+	}
+
+	shape->setTexture("u_Texture", texture);
+
 }
 
 void MeshRenderer::OnDisplay()
@@ -126,8 +188,8 @@ void MeshRenderer::OnDisplay()
 	// TODO: Move clear to core -> Done 
 	// TODO: Move SDL_GL_SwapWindow to core -> Done
 	// TODO: Remove old raw gl stuff out of here -> Done
-	// TODO: View matrix
-	// TODO: Move this class (TriangleRender), -> MeshRenderer -> engine
+	// TODO: View matrix -> Done
+	// TODO: Move this class (TriangleRender), -> MeshRenderer -> engine -> Done
 	//getEntity()->addComponent<SoundSource>(Resources::load<AudioClip>("sounds/bang"));
 
 	

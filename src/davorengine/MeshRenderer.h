@@ -5,7 +5,7 @@
 
 #include "Component.h"
 #include <rend/rend.h>
-
+#include <rend/stb_image.h>
 
 class MeshRenderer : public Component
 {
@@ -19,6 +19,7 @@ private:
 	std::shared_ptr<rend::Shader> shader;
 	std::shared_ptr<rend::Buffer> buffer;
 	std::shared_ptr<rend::Mesh> shape;
+	std::shared_ptr<rend::Texture> texture;
 
 
 public:
@@ -26,8 +27,8 @@ public:
 	MeshRenderer();
 	//void OnInit();
 	void OnDisplay();
-
-	
+	void LoadObject(const char* path);
+	void LoadTexture(const char* path);
 
 
 };
