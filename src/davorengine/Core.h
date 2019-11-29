@@ -3,6 +3,8 @@
 #include <vector>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
+#include <rend/rend.h>
+
 #define WINDOW_WIDTH 640  // Change these to actual variables later...
 #define WINDOW_HEIGHT 480
 
@@ -17,7 +19,7 @@ class Core
 {
 private:
 	friend class Camera;
-
+	std::shared_ptr<rend::Context> context;
 	std::weak_ptr<Core> self;	
 	std::weak_ptr<Camera> currentCamera;
 	std::shared_ptr<Resources> resources;
@@ -34,6 +36,7 @@ public:
 	void Stop();
 	std::shared_ptr<Entity> addEntity();
 	std::shared_ptr<Camera> getCurrentCamera();
+	std::shared_ptr<rend::Context> getContext();
 	~Core();
 	
 };

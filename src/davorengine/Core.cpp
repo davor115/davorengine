@@ -29,6 +29,7 @@ std::shared_ptr<Core> Core::initialize()
 		throw std::exception();
 	}
 
+	rtn->context = rend::Context::initialize();
 
 	return rtn;
 }
@@ -79,4 +80,10 @@ void Core::Start()
 		// TODO: Move window to core
 		SDL_GL_SwapWindow(window);
 	}
+}
+
+
+std::shared_ptr<rend::Context> Core::getContext()
+{
+	return context;
 }

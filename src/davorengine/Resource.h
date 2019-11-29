@@ -1,11 +1,13 @@
-#include <string>
+#include "Resources.h"
 
-class Resource
+class Core;
+
+class Resource : public Resources
 {
 private:
-	std::string path;
+	std::weak_ptr<Core> core;
 
 public:
-
+	void onLoad(const std::string &_path);
 
 };

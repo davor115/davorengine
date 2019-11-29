@@ -4,8 +4,12 @@
 #include <SDL2/SDL.h>
 
 #include "Component.h"
-#include <rend/rend.h>
 #include <rend/stb_image.h>
+
+
+
+class ShapeMesh;
+
 
 class MeshRenderer : public Component
 {
@@ -30,5 +34,6 @@ public:
 	void LoadObject(const char* path);
 	void LoadTexture(const char* path);
 
+	void setMesh(std::shared_ptr<ShapeMesh> material);
 
 };

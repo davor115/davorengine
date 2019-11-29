@@ -1,7 +1,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Engineincludes.h"
 #include <fstream>
-
+#include "Mesh.h"
+#include "Material.h"
 using namespace davorengine;
 /// Use this.
 /*
@@ -182,6 +183,11 @@ void MeshRenderer::OnDisplay()
 			throw std::exception();
 		}
 	}
+	// Create one in core.
+	std::shared_ptr<Context> context = getCore()->getContext();
+	shader = context->createShader();
+	shader->parse(src);
+
 
 	// TODO: Move SDL_Window to Core::initialize -> Problem, since Core is static and Start is not, how do I use window variable in both? -> Fixed.
 	// TODO: Add Sound init to Core::initialize

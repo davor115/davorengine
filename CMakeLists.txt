@@ -31,6 +31,12 @@ src/davorengine/Resources.cpp
 src/davorengine/Resources.h
 src/davorengine/Resource.cpp
 src/davorengine/Resource.h
+src/davorengine/Mesh.h
+src/davorengine/Mesh.cpp
+src/davorengine/Texture.h
+src/davorengine/Texture.cpp
+src/davorengine/Material.h
+src/davorengine/Material.cpp
 )
 
 target_link_libraries(davorengine SDL2 rend OpenAL32)

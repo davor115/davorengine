@@ -50,6 +50,8 @@ std::shared_ptr<Camera> Component::getCamera()
 
 std::shared_ptr<Resources> Component::getResources()
 {
-	std::shared_ptr<Resources> rtn = entity.lock()->getComponent<Resources>();
+//	std::shared_ptr<Resources> rtn = getCore()->getResources(); <- Get this later.
+//	return rtn;
+	std::shared_ptr<Resources> rtn = std::make_shared<Resources>();
 	return rtn;
 }
