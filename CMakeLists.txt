@@ -27,6 +27,10 @@ src/davorengine/MeshRenderer.h
 src/davorengine/MeshRenderer.cpp
 src/davorengine/stb_vorbis.h
 src/davorengine/Engineincludes.h
+src/davorengine/Resources.cpp
+src/davorengine/Resources.h
+src/davorengine/Resource.cpp
+src/davorengine/Resource.h
 )
 
 target_link_libraries(davorengine SDL2 rend OpenAL32)

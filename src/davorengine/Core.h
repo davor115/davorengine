@@ -11,6 +11,7 @@ class Entity;
 class Environment;
 class Keyboard;
 class Camera;
+class Resources;
 
 class Core
 {
@@ -19,6 +20,7 @@ private:
 
 	std::weak_ptr<Core> self;	
 	std::weak_ptr<Camera> currentCamera;
+	std::shared_ptr<Resources> resources;
 	std::shared_ptr<Environment> environment;
 	//std::vector<std::shared_ptr<Entity>> entities;
 	std::list<std::shared_ptr<Entity>> entities;

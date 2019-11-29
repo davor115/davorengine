@@ -9,6 +9,7 @@ class Keyboard;
 class Environment;
 class Transform;
 class Camera;
+class Resources;
 
 class Component
 {
@@ -22,6 +23,7 @@ public:
 	std::shared_ptr<Environment> getEnvironment();
 	std::shared_ptr<Transform> getTransform();
 	std::shared_ptr<Camera> getCamera();
+	std::shared_ptr<Resources> getResources();
 	virtual void OnInit();
 	virtual void OnBegin();
 	virtual void OnTick();

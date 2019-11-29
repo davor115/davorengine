@@ -47,3 +47,9 @@ std::shared_ptr<Camera> Component::getCamera()
 	
 	return rtn;
 }
+
+std::shared_ptr<Resources> Component::getResources()
+{
+	std::shared_ptr<Resources> rtn = entity.lock()->getComponent<Resources>();
+	return rtn;
+}
