@@ -18,7 +18,7 @@ int main()
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>();
 	std::weak_ptr<MeshRenderer> tr = gameObject->addComponent<MeshRenderer>();
 	std::weak_ptr<Transform> trans = gameObject->addComponent<Transform>();
-	std::weak_ptr<ShapeMesh> mesh = gameObject->addComponent<ShapeMesh>();
+	//std::weak_ptr<Mesh> mesh = gameObject->addComponent<Mesh>();
 	gameObject->getComponent<Transform>()->setPosition(glm::vec3(0, 0,-5));
 	gameObject->getComponent<Transform>()->setRotation(glm::vec3(0, 45, 0));
 	
@@ -28,7 +28,7 @@ int main()
 //	gameObject->getComponent<MeshRenderer>()->LoadObject("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
 //	gameObject->getComponent<MeshRenderer>()->LoadTexture("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\Whiskers_diffuse.png");
 
-	gameObject->getComponent<ShapeMesh>()->onLoad("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
+	gameObject->getComponent<Mesh>()->onLoad("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
 
 	core->Start(); // Run updates loops, etc.
 

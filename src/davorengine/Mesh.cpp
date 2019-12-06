@@ -1,9 +1,10 @@
 #include "Mesh.h"
+#include "Core.h"
 #include <fstream>
 
-void ShapeMesh::onLoad(const std::string &path)
+void Mesh::onLoad(const std::string &path)
 {
-	std::shared_ptr<rend::Context> context = getContext();
+	std::shared_ptr<rend::Context> context = getCore()->getContext();
 //	shader = context->createShader();
 //	shader->parse(src);
 

@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "Entity.h"
 #include "Camera.h"
+#include "Core.h"
 
 std::shared_ptr<Entity> Component::getEntity()
 {
@@ -50,8 +51,8 @@ std::shared_ptr<Camera> Component::getCamera()
 
 std::shared_ptr<Resources> Component::getResources()
 {
-//	std::shared_ptr<Resources> rtn = getCore()->getResources(); <- Get this later.
+	std::shared_ptr<Resources> rtn = getEntity()->getCore()->getResources(); 
 //	return rtn;
-	std::shared_ptr<Resources> rtn = std::make_shared<Resources>();
+//	std::shared_ptr<Resources> rtn = 
 	return rtn;
 }

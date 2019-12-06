@@ -1,7 +1,9 @@
 
 #include "Resource.h"
 
-class ShapeMesh : public Resource
+#include <rend/rend.h>
+
+class Mesh : public Resource
 {
 private:
 	std::shared_ptr<rend::Mesh> mesh;

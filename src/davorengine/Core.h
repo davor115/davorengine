@@ -13,7 +13,7 @@ class Entity;
 class Environment;
 class Keyboard;
 class Camera;
-class Resources;
+class Resources; // error?
 
 class Core
 {

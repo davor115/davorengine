@@ -1,10 +1,8 @@
-
-
-#include "Core.h"
-
+#include <list>
+#include <memory>
 
 class Resource;
-class Resources : public Core
+class Resources
 {
 private:
 	std::list<std::shared_ptr<Resource>> resources;

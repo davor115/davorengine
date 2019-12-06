@@ -13,7 +13,8 @@
 #include "Material.h"
 namespace davorengine
 {
-	using namespace rend;
+	using rend::Context;
+	using rend::vec3;
 }
 
 
