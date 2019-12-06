@@ -1,6 +1,6 @@
 #include "Resources.h"
 
-class Core;
+
 
 class Resource : public Resources
 {

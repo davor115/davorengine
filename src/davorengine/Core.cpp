@@ -87,3 +87,8 @@ std::shared_ptr<rend::Context> Core::getContext()
 {
 	return context;
 }
+
+std::shared_ptr<Resources> Core::getResources()
+{
+	return resources;
+}

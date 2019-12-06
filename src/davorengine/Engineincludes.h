@@ -9,7 +9,8 @@
 #include <rend/rend.h>
 #include "Transform.h"
 #include "Camera.h"
-
+#include "Mesh.h"
+#include "Material.h"
 namespace davorengine
 {
 	using namespace rend;

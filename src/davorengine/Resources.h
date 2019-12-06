@@ -1,9 +1,9 @@
 
 
 #include "Core.h"
-#include <rend/rend.h>
-class Resource;
 
+
+class Resource;
 class Resources : public Core
 {
 private:

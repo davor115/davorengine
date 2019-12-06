@@ -37,6 +37,7 @@ public:
 	std::shared_ptr<Entity> addEntity();
 	std::shared_ptr<Camera> getCurrentCamera();
 	std::shared_ptr<rend::Context> getContext();
+	std::shared_ptr<Resources> getResources();
 	~Core();
 	
 };
