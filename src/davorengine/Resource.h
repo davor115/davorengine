@@ -7,10 +7,14 @@ class Core;
 class Resource
 {
 private:
+	friend class Resources;
 	std::weak_ptr<Core> core;
 
 public:
-	void onLoad(const std::string &_path);
+	virtual void onLoad(const std::string &_path)
+	{
+
+	}
 	std::shared_ptr<Core> getCore();
 
 };

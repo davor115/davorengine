@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "Mesh.h"
 #include "Material.h"
+#include "Resources.h"
 namespace davorengine
 {
 	using rend::Context;

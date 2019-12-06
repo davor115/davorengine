@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Resources.h"
 std::shared_ptr<Core> Core::initialize()
 {
 
@@ -15,6 +16,10 @@ std::shared_ptr<Core> Core::initialize()
 	std::cout << "Game engine initialized" << std::endl;
 	std::shared_ptr<Core> rtn = std::make_shared<Core>();
 	rtn->self = rtn;
+
+	rtn->resources = std::make_shared<Resources>();
+	rtn->resources->core = rtn->self;
+
 	rtn->window = SDL_CreateWindow("DavorEngine",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);

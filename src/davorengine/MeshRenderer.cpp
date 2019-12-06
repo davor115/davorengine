@@ -108,65 +108,70 @@ MeshRenderer::MeshRenderer()
 	
 }
 
-void MeshRenderer::LoadObject(const char* path)
-{ 
-	std::shared_ptr<Context> context = Context::initialize();
-	shader = context->createShader();
-	shader->parse(src);
+//void MeshRenderer::LoadObject(const char* path)
+//{ 
+//	std::shared_ptr<Context> context = Context::initialize();
+//	shader = context->createShader();
+//	shader->parse(src);
+//
+//	shape = context->createMesh();
+//	{
+//		std::ifstream f;
+//		f.open(path);
+//		std::string obj;
+//		std::string line;
+//
+//		while (!f.eof())
+//		{
+//			std::getline(f, line);
+//			obj += line + "\n";
+//		}
+//
+//		shape->parse(obj);
+//	}
+//}
 
-	shape = context->createMesh();
-	{
-		std::ifstream f;
-		f.open(path);
-		std::string obj;
-		std::string line;
+//void MeshRenderer::LoadTexture(const char* path)
+//{
+//	std::shared_ptr<Context> context = Context::initialize();
+//	texture = context->createTexture();
+//	{
+//		int w = 0;
+//		int h = 0;
+//		int bpp = 0;
+//
+//		unsigned char *data = stbi_load(path,
+//			&w, &h, &bpp, 3);
+//
+//		if (!data)
+//		{
+//			throw rend::Exception("Failed to open image");
+//		}
+//
+//		texture->setSize(w, h);
+//
+//		for (int y = 0; y < h; y++)
+//		{
+//			for (int x = 0; x < w; x++)
+//			{
+//				int r = y * w * 3 + x * 3;
+//
+//				texture->setPixel(x, y, vec3(
+//					data[r] / 255.0f,
+//					data[r + 1] / 255.0f,
+//					data[r + 2] / 255.0f));
+//			}
+//		}
+//		stbi_image_free(data);
+//	}
+//
+//	shape->setTexture("u_Texture", texture);
+//
+//}
 
-		while (!f.eof())
-		{
-			std::getline(f, line);
-			obj += line + "\n";
-		}
-
-		shape->parse(obj);
-	}
-}
-
-void MeshRenderer::LoadTexture(const char* path)
+void MeshRenderer::setMesh(std::shared_ptr<Mesh> shape)
 {
-	std::shared_ptr<Context> context = Context::initialize();
-	texture = context->createTexture();
-	{
-		int w = 0;
-		int h = 0;
-		int bpp = 0;
-
-		unsigned char *data = stbi_load(path,
-			&w, &h, &bpp, 3);
-
-		if (!data)
-		{
-			throw rend::Exception("Failed to open image");
-		}
-
-		texture->setSize(w, h);
-
-		for (int y = 0; y < h; y++)
-		{
-			for (int x = 0; x < w; x++)
-			{
-				int r = y * w * 3 + x * 3;
-
-				texture->setPixel(x, y, vec3(
-					data[r] / 255.0f,
-					data[r + 1] / 255.0f,
-					data[r + 2] / 255.0f));
-			}
-		}
-		stbi_image_free(data);
-	}
-
-	shape->setTexture("u_Texture", texture);
-
+	this->shape = shape;
 }
 
 void MeshRenderer::OnDisplay()
@@ -209,7 +214,7 @@ void MeshRenderer::OnDisplay()
 	shader->setUniform("in_Model", getTransform()->getMat());
 	
 
-	shader->setMesh(shape);
+	shader->setMesh(shape->mesh);
 
 	shader->render();
 
