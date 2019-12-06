@@ -34,6 +34,8 @@ int main()
 	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("D:\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
 	gameObject->getComponent<MeshRenderer>()->setMesh(m);
 
+	std::shared_ptr<Material> mat;
+
 	core->Start(); // Run updates loops, etc.
 
 	return 0;

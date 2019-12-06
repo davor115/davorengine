@@ -174,6 +174,11 @@ void MeshRenderer::setMesh(std::shared_ptr<Mesh> shape)
 	this->shape = shape;
 }
 
+void MeshRenderer::setMaterial(std::shared_ptr<Material> material)
+{
+
+}
+
 void MeshRenderer::OnDisplay()
 {
 

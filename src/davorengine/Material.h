@@ -8,7 +8,7 @@ private:
 	std::shared_ptr<rend::Texture> texture;
 
 public:
-	void onLoad(const std::string &path);
+	void onLoad(const char* path);
 
 
 };

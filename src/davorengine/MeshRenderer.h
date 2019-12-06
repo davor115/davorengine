@@ -9,7 +9,7 @@
 
 
 class Mesh;
-
+class Material;
 
 class MeshRenderer : public Component
 {
@@ -35,5 +35,6 @@ public:
 	//void LoadTexture(const char* path);
 
 	void setMesh(std::shared_ptr<Mesh> shape);
+	void setMaterial(std::shared_ptr<Material> material);
 
 };
