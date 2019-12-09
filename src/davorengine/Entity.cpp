@@ -11,7 +11,7 @@ void Entity::Update()
 
 void Entity::Display()
 {
-	std::cout << "Displaying entities" << std::endl;
+	//std::cout << "Displaying entities" << std::endl;
 	for (std::list<std::shared_ptr<Component>>::iterator i = components.begin(); i != components.end(); i++)
 	{
 		(*i)->OnDisplay(); 

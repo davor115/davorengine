@@ -11,7 +11,7 @@ private:
 	std::weak_ptr<Core> core;
 
 public:
-	virtual void onLoad(const std::string &_path)
+	virtual void onLoad(const char* _path)
 	{
 
 	}

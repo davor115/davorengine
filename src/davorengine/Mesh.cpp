@@ -2,7 +2,7 @@
 #include "Core.h"
 #include <fstream>
 
-void Mesh::onLoad(const std::string &path)
+void Mesh::onLoad(const char* path)
 {
 	std::shared_ptr<rend::Context> context = getCore()->getContext();
 //	shader = context->createShader();

@@ -23,7 +23,7 @@ private:
 	std::shared_ptr<rend::Shader> shader;
 	std::shared_ptr<rend::Buffer> buffer;
 	std::shared_ptr<Mesh> shape;
-	std::shared_ptr<rend::Texture> texture;
+	std::shared_ptr<Material> texture;
 
 
 public:

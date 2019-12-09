@@ -67,7 +67,7 @@ void Core::Start()
 	{
 		for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
 		{
-			std::cout << "Run number: " << *i << std::endl;
+			//std::cout << "Run number: " << *i << std::endl;
 			(*i)->Update();
 		}
 
@@ -78,7 +78,7 @@ void Core::Start()
 	
 		for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
 		{
-			std::cout << "Run number: " << *i << std::endl;
+			//std::cout << "Run number: " << *i << std::endl;
 			(*i)->Display();
 		}
 	

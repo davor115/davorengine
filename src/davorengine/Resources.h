@@ -11,7 +11,7 @@ private:
 	std::weak_ptr<Core> core;
 public:
 	template<typename T>
-	std::shared_ptr<T> load(std::string _path)
+	std::shared_ptr<T> load(const char* _path)
 	{
 		std::shared_ptr<T> rtn = std::make_shared<T>();
 		rtn->core = core;

@@ -11,5 +11,5 @@ private:
 //	std::shared_ptr<rend::Shader> shader;
 	
 public:
-	void onLoad(const std::string &path);
+	void onLoad(const char* path);
 };

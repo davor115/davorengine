@@ -1,4 +1,4 @@
-#define STB_IMAGE_IMPLEMENTATION
+
 #include "Engineincludes.h"
 #include <fstream>
 using namespace davorengine;
@@ -176,7 +176,8 @@ void MeshRenderer::setMesh(std::shared_ptr<Mesh> shape)
 
 void MeshRenderer::setMaterial(std::shared_ptr<Material> material)
 {
-
+	this->texture = material;
+	this->shape->mesh->setTexture("u_Texture", texture->texture);
 }
 
 void MeshRenderer::OnDisplay()
