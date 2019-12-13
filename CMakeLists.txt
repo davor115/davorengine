@@ -37,6 +37,7 @@ src/davorengine/Texture.h
 src/davorengine/Texture.cpp
 src/davorengine/Material.h
 src/davorengine/Material.cpp
+src/davorengine/EngineKeyboard.h
 )
 
 target_link_libraries(davorengine SDL2 rend OpenAL32)

@@ -14,6 +14,7 @@ class Environment;
 class Keyboard;
 class Camera;
 class Resources;
+class Keyboard;
 
 class Core
 {
@@ -38,6 +39,7 @@ public:
 	std::shared_ptr<Camera> getCurrentCamera();
 	std::shared_ptr<rend::Context> getContext();
 	std::shared_ptr<Resources> getResources();
+	std::shared_ptr<Keyboard> getKeyboard();
 	~Core();
 	
 };

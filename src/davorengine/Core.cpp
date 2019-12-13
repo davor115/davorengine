@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "Camera.h"
 #include "Resources.h"
+#include "Keyboard.h"
 std::shared_ptr<Core> Core::initialize()
 {
 
@@ -61,6 +62,11 @@ std::shared_ptr<Camera> Core::getCurrentCamera()
 	return currentCamera.lock();
 }
 
+std::shared_ptr<Keyboard> Core::getKeyboard()
+{
+	return keyboard;
+}
+
 void Core::Start()
 {
 	while(true)
@@ -81,9 +87,10 @@ void Core::Start()
 			//std::cout << "Run number: " << *i << std::endl;
 			(*i)->Display();
 		}
-	
+		keyboard->onInit();
 		// TODO: Move window to core
 		SDL_GL_SwapWindow(window);
+		
 	}
 }
 

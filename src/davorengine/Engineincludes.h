@@ -12,6 +12,7 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "Resources.h"
+#include "Keyboard.h"
 namespace davorengine
 {
 	using rend::Context;
