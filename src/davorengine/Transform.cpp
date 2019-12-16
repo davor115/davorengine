@@ -35,3 +35,8 @@ void Transform::setScale(glm::vec3 _s)
 {
 	scale = _s;
 }
+
+glm::vec3 Transform::getPosition()
+{
+	return position;
+}

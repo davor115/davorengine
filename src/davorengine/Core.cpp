@@ -20,7 +20,7 @@ std::shared_ptr<Core> Core::initialize()
 
 	rtn->resources = std::make_shared<Resources>();
 	rtn->resources->core = rtn->self;
-
+	rtn->keyboard = std::make_shared<Keyboard>(); // Set the keyboard first.
 	rtn->window = SDL_CreateWindow("DavorEngine",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
@@ -69,8 +69,7 @@ std::shared_ptr<Keyboard> Core::getKeyboard()
 
 void Core::Start()
 {
-	while(true)
-	{
+	
 		for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
 		{
 			//std::cout << "Run number: " << *i << std::endl;
@@ -81,17 +80,16 @@ void Core::Start()
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	
+
 		for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
 		{
 			//std::cout << "Run number: " << *i << std::endl;
 			(*i)->Display();
 		}
 		keyboard->onInit();
+	//	keyboard->ClearKeys();
 		// TODO: Move window to core
 		SDL_GL_SwapWindow(window);
-		
-	}
 }
 
 

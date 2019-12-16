@@ -15,4 +15,6 @@ public:
 	void setPosition(glm::vec3 _pos);
 	void setRotation(glm::vec3 _rot);
 	void setScale(glm::vec3 _s);
+	
+	glm::vec3 getPosition();
 };

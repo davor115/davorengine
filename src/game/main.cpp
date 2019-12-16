@@ -39,32 +39,43 @@ int main()
 //	gameObject->getComponent<MeshRenderer>()->LoadTexture("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\Whiskers_diffuse.png");
 
 //	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("D:\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
-	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("D:\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\graveyard\\graveyard.obj");
-	std::shared_ptr<Material> mat = core->getResources()->load<Material>("D:\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\graveyard\\graveyard.png");
+	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\graveyard\\graveyard.obj");
+	std::shared_ptr<Material> mat = core->getResources()->load<Material>("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\graveyard\\graveyard.png");
 	map->getComponent<MeshRenderer>()->setMesh(m);
 	map->getComponent<MeshRenderer>()->setMaterial(mat);
-
-	std::shared_ptr<Mesh> playerMesh = core->getResources()->load<Mesh>("D:\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
-	std::shared_ptr<Material> playerMaterial = core->getResources()->load<Material>("D:\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\Whiskers_diffuse.png");
+																		
+	std::shared_ptr<Mesh> playerMesh = core->getResources()->load<Mesh>("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
+	std::shared_ptr<Material> playerMaterial = core->getResources()->load<Material>("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\Whiskers_diffuse.png");
 
 	player->getComponent<MeshRenderer>()->setMesh(playerMesh);
 	player->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
-
-//	std::shared_ptr<Keyboard> myKeyboard = std::make_shared<Keyboard>();
-	
-	core->Start(); // Run updates loops, etc.
 	
 
-	if (core->getKeyboard()->getKey(davorengine_RIGHT) == true)
+	while (true)
 	{
-		std::cout << "Pressed some key" << std::endl;
+		core->Start(); // Run updates loops, etc.
+		if (core->getKeyboard()->getKeyDown(davorengine_DOWN) == true)
+		{
+			//std::cout << "Yea it found it." << std::endl;
+			player->getComponent<Transform>()->setPosition(glm::vec3(player->getComponent<Transform>()->getPosition().x + 0.05f, player->getComponent<Transform>()->getPosition().y, player->getComponent<Transform>()->getPosition().z));
+		}
+		if (core->getKeyboard()->getKeyDown(davorengine_UP) == true)
+		{
+			//std::cout << "Yea it found it." << std::endl;
+			player->getComponent<Transform>()->setPosition(glm::vec3(player->getComponent<Transform>()->getPosition().x - 0.05f, player->getComponent<Transform>()->getPosition().y, player->getComponent<Transform>()->getPosition().z));
+		}
+		if (core->getKeyboard()->getKeyDown(davorengine_LEFT) == true)
+		{
+			//std::cout << "Yea it found it." << std::endl;
+			player->getComponent<Transform>()->setPosition(glm::vec3(player->getComponent<Transform>()->getPosition().x, player->getComponent<Transform>()->getPosition().y, player->getComponent<Transform>()->getPosition().z + 0.05));
+		}
+		if (core->getKeyboard()->getKeyDown(davorengine_RIGHT) == true)
+		{
+			//std::cout << "Yea it found it." << std::endl;
+			player->getComponent<Transform>()->setPosition(glm::vec3(player->getComponent<Transform>()->getPosition().x, player->getComponent<Transform>()->getPosition().y, player->getComponent<Transform>()->getPosition().z - 0.05f));
+		}
+		core->getKeyboard()->ClearKeys();
 	}
-
-
-
-
-	
-
 
 	return 0;
 }
