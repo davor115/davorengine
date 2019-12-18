@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "Core.h"
+#include <rend/rend.h>
 #include <fstream>
 
 void Mesh::onLoad(const char* path)
@@ -12,6 +13,13 @@ void Mesh::onLoad(const char* path)
 	{
 		std::ifstream f;
 		f.open(path);
+
+		if(!f.is_open())
+		{
+			//TODO: Own Exception (not rend)
+			throw rend::Exception("Failed to open file");
+		}
+
 		std::string obj;
 		std::string line;
 

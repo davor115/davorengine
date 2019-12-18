@@ -27,17 +27,15 @@ void Keyboard::runKeyboard()
 
 bool Keyboard::getKey(int keyCode)
 {
-	if (event.type == SDL_KEYDOWN)
+	for (std::vector<int>::iterator i = keys.begin(); i != keys.end(); ++i)
 	{
-		if (event.key.keysym.sym == keyCode)
+		if(*i == keyCode)
 		{
-			keyCodes.push_back(event.key.keysym.sym);
-			//std::cout << "We pressed a key" << std::endl;
 			return true;
 		}
-		return false;
-		
 	}
+
+	return false;
 }
 
 bool Keyboard::getKeyDown(int keyCode)
@@ -49,16 +47,15 @@ bool Keyboard::getKeyDown(int keyCode)
 			//std::cout << "Key is on the list." << std::endl;
 			return true;
 		}
-		else
-		{
-			return false;
-		}
 	}
+
+	return false;
 }
 
 
 void Keyboard::onInit()
 {
+/*
 	bool quit = false;
 	
 	while (SDL_PollEvent(&event) != 0)
@@ -107,7 +104,7 @@ void Keyboard::onInit()
 
 		
 	}
-
+*/
 }
 
 void Keyboard::ClearKeys()

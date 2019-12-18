@@ -40,7 +40,11 @@ src/davorengine/Material.cpp
 src/davorengine/EngineKeyboard.h
 )
 
-target_link_libraries(davorengine SDL2 rend OpenAL32)
+if(MSVC)
+  target_link_libraries(davorengine SDL2 rend OpenAL32)
+else()
+  target_link_libraries(davorengine SDL2 rend openal)
+endif()
 
 add_library(rend
   src/rend/Exception.cpp

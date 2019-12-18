@@ -5,9 +5,22 @@
 
 using namespace davorengine;
 
+struct PlayerControl : public Component
+{
+  void OnTick()
+  {
+    if(getCore()->getKeyboard()->getKey(davorengine_UP))
+    {
+      std::cout << "Up!" << std::endl;
+    }
+  }
+};
+
 int main()
 {
 
+	//TODO: Why does it run so slow?
+	//TODO: Note that onInit only should call once when addComponent
 	std::cout << "Hello world!" << std::endl;
 
 	std::shared_ptr<Core> core = Core::initialize();
@@ -16,6 +29,7 @@ int main()
 	std::shared_ptr<Entity> MainCamera = core->addEntity();	
 	std::shared_ptr<Entity> map = core->addEntity();
 	std::shared_ptr<Entity> player = core->addEntity();
+	player->addComponent<PlayerControl>();
 
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>(); // Camera
 	MainCamera->getComponent<Transform>()->setPosition(glm::vec3(14, 15, 20));
@@ -33,27 +47,28 @@ int main()
 	player->getComponent<Transform>()->setPosition(glm::vec3(-16.0f, 3.0f, 5.0f));
 	
 
-
+	// TODO: Visual Studio runs from build directory... so add "../" i.e ../src/davor....
 	// I would like to do:
-//	gameObject->getComponent<MeshRenderer>()->LoadObject("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
-//	gameObject->getComponent<MeshRenderer>()->LoadTexture("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\Whiskers_diffuse.png");
+//	gameObject->getComponent<MeshRenderer>()->LoadObject("src/davorengine/share/rend/samples/curuthers/curuthers.obj");
+//	gameObject->getComponent<MeshRenderer>()->LoadTexture("src/davorengine/share/rend/samples/curuthers/Whiskers_diffuse.png");
 
-//	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("D:\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
-	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\graveyard\\graveyard.obj");
-	std::shared_ptr<Material> mat = core->getResources()->load<Material>("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\graveyard\\graveyard.png");
+//	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("src/davorengine/share/rend/samples/curuthers/curuthers.obj");
+	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("src/davorengine/share/rend/samples/graveyard/graveyard.obj");
+	std::shared_ptr<Material> mat = core->getResources()->load<Material>("src/davorengine/share/rend/samples/graveyard/graveyard.png");
 	map->getComponent<MeshRenderer>()->setMesh(m);
 	map->getComponent<MeshRenderer>()->setMaterial(mat);
 																		
-	std::shared_ptr<Mesh> playerMesh = core->getResources()->load<Mesh>("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\curuthers.obj");
-	std::shared_ptr<Material> playerMaterial = core->getResources()->load<Material>("C:\\Users\\Davor Larsen\\Desktop\\Github\\davorengine\\src\\davorengine\\share\\rend\\samples\\curuthers\\Whiskers_diffuse.png");
+	std::shared_ptr<Mesh> playerMesh = core->getResources()->load<Mesh>("src/davorengine/share/rend/samples/curuthers/curuthers.obj");
+	std::shared_ptr<Material> playerMaterial = core->getResources()->load<Material>("src/davorengine/share/rend/samples/curuthers/Whiskers_diffuse.png");
 
 	player->getComponent<MeshRenderer>()->setMesh(playerMesh);
 	player->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
 	
+	core->Start(); // Run updates loops, etc.
 
+/*
 	while (true)
 	{
-		core->Start(); // Run updates loops, etc.
 		if (core->getKeyboard()->getKeyDown(davorengine_DOWN) == true)
 		{
 			//std::cout << "Yea it found it." << std::endl;
@@ -76,6 +91,7 @@ int main()
 		}
 		core->getKeyboard()->ClearKeys();
 	}
+*/
 
 	return 0;
 }

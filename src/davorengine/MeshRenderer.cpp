@@ -182,7 +182,7 @@ void MeshRenderer::setMaterial(std::shared_ptr<Material> material)
 
 void MeshRenderer::OnDisplay()
 {
-
+/*
 	SDL_Event event = { 0 };
 
 	while (SDL_PollEvent(&event))
@@ -192,6 +192,7 @@ void MeshRenderer::OnDisplay()
 			throw std::exception();
 		}
 	}
+*/
 	// Create one in core.
 	std::shared_ptr<Context> context = getCore()->getContext();
 	shader = context->createShader();
