@@ -85,10 +85,13 @@ void Core::Start()
       {
 	// TODO: also push to pressed Keys
         keyboard->keys.push_back(event.key.keysym.sym);
+		keyboard->pressedKeys.push_back(event.key.keysym.sym);
       }
       else if(event.type == SDL_KEYUP)
       {
 	// TODO: also push to released Keys
+		keyboard->releasedKeys.push_back(event.key.keysym.sym);
+
         for(std::vector<int>::iterator i = keyboard->keys.begin(); i != keyboard->keys.end();)
         {
           if(*i == event.key.keysym.sym)
@@ -107,9 +110,11 @@ void Core::Start()
     {
       //std::cout << "Run number: " << *i << std::endl;
       (*i)->Update();
+	  
     }
-
     // TODO: Clear pressedKeys and releasedKeys
+	keyboard->pressedKeys.clear();
+	keyboard->releasedKeys.clear();
 
     // TODO: include GL
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);

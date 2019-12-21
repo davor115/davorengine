@@ -52,59 +52,18 @@ bool Keyboard::getKeyDown(int keyCode)
 	return false;
 }
 
-
-void Keyboard::onInit()
+bool Keyboard::getKeyUp(int keyCode)
 {
-/*
-	bool quit = false;
-	
-	while (SDL_PollEvent(&event) != 0)
+	for (std::vector<int>::iterator i = releasedKeys.begin(); i != releasedKeys.end(); ++i)
 	{
-		if (event.type == SDL_QUIT)
+		if (*i == keyCode) // If the number we pressed is on the list (we pressed it before..), the return true.
 		{
-			quit = true;
+			//std::cout << "Key is on the list." << std::endl;
+			return true;
 		}
-		//std::cout << "Keyboard onInit run" << std::endl;
-		// User input:
-		if (event.type == SDL_KEYDOWN)
-		{		
-			if (event.key.keysym.sym == SDLK_DOWN)
-			{
-				//std::cout << " Pressed KeyDown" << std::endl;
-				pressedKeys.push_back(event.key.keysym.sym);
-			}
-			if (event.key.keysym.sym == SDLK_UP)
-			{
-				//std::cout << " Pressed KeyDown" << std::endl;
-				pressedKeys.push_back(event.key.keysym.sym);
-			}
-			if (event.key.keysym.sym == SDLK_LEFT)
-			{
-				//std::cout << " Pressed KeyDown" << std::endl;
-				pressedKeys.push_back(event.key.keysym.sym);
-			}
-			if (event.key.keysym.sym == SDLK_RIGHT)
-			{
-				//std::cout << " Pressed KeyDown" << std::endl;
-				pressedKeys.push_back(event.key.keysym.sym);
-			}
-		}
-		else if (event.type == SDL_KEYUP)
-		{
-			if (event.key.keysym.sym == SDLK_RIGHT)
-			{
-				// We lifted right key
-				//std::cout << "Lifted right key" << std::endl;
-			}
-			if (event.key.keysym.sym == SDLK_DOWN)
-			{
-				//std::cout << "Lifted down key" << std::endl;
-			}
-		}
-
-		
 	}
-*/
+
+	return false;
 }
 
 void Keyboard::ClearKeys()

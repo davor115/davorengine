@@ -7,14 +7,33 @@ using namespace davorengine;
 
 struct PlayerControl : public Component
 {
-  void OnTick()
-  {
-    if(getCore()->getKeyboard()->getKey(davorengine_UP))
-    {
-      std::cout << "Up!" << std::endl;
-    }
-  }
+	std::shared_ptr<Entity> self;
+	void OnTick()
+	{
+		if (getKeyboard()->getKeyUp(davorengine_DOWN))
+		{
+			std::cout << "Up!" << std::endl;
+		}
+		if (getKeyboard()->getKey(davorengine_DOWN))
+		{
+			std::cout << "Pressed down once" << std::endl;
+			self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z + 0.05f));	
+		}
+		if (getKeyboard()->getKey(davorengine_UP))
+		{
+			self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z - 0.05f));
+		}
+		if (getKeyboard()->getKey(davorengine_LEFT))
+		{
+			self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));
+		}
+		if (getKeyboard()->getKey(davorengine_RIGHT))
+		{
+			self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x - 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));
+		}
+	}
 };
+
 
 int main()
 {
@@ -30,6 +49,7 @@ int main()
 	std::shared_ptr<Entity> map = core->addEntity();
 	std::shared_ptr<Entity> player = core->addEntity();
 	player->addComponent<PlayerControl>();
+	player->getComponent<PlayerControl>()->self = player;
 
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>(); // Camera
 	MainCamera->getComponent<Transform>()->setPosition(glm::vec3(14, 15, 20));
@@ -48,23 +68,22 @@ int main()
 	
 
 	// TODO: Visual Studio runs from build directory... so add "../" i.e ../src/davor....
-	// I would like to do:
-//	gameObject->getComponent<MeshRenderer>()->LoadObject("src/davorengine/share/rend/samples/curuthers/curuthers.obj");
-//	gameObject->getComponent<MeshRenderer>()->LoadTexture("src/davorengine/share/rend/samples/curuthers/Whiskers_diffuse.png");
 
-//	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("src/davorengine/share/rend/samples/curuthers/curuthers.obj");
-	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("src/davorengine/share/rend/samples/graveyard/graveyard.obj");
-	std::shared_ptr<Material> mat = core->getResources()->load<Material>("src/davorengine/share/rend/samples/graveyard/graveyard.png");
+	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/graveyard/graveyard.obj");
+	std::shared_ptr<Material> mat = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/graveyard/graveyard.png");
 	map->getComponent<MeshRenderer>()->setMesh(m);
 	map->getComponent<MeshRenderer>()->setMaterial(mat);
 																		
-	std::shared_ptr<Mesh> playerMesh = core->getResources()->load<Mesh>("src/davorengine/share/rend/samples/curuthers/curuthers.obj");
-	std::shared_ptr<Material> playerMaterial = core->getResources()->load<Material>("src/davorengine/share/rend/samples/curuthers/Whiskers_diffuse.png");
+	std::shared_ptr<Mesh> playerMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/curuthers/curuthers.obj");
+	std::shared_ptr<Material> playerMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/curuthers/Whiskers_diffuse.png");
 
 	player->getComponent<MeshRenderer>()->setMesh(playerMesh);
 	player->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
+
 	
 	core->Start(); // Run updates loops, etc.
+
+
 
 /*
 	while (true)

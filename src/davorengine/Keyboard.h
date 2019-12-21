@@ -17,7 +17,6 @@ private:
 
 public:
 	SDL_Event event;
-	void onInit();
 	bool getKey(int keyCode);
 	bool getKeyDown(int keyCode);
 	bool getKeyUp(int keyCode);
