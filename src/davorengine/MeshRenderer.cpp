@@ -216,10 +216,17 @@ void MeshRenderer::OnDisplay()
 	// View -> Camera transform inverse
 	// Model -> this. transform
 
-	shader->setUniform("in_Projection", getCore()->getCurrentCamera()->getProjection()); // This is not working..
-	shader->setUniform("in_View", getCore()->getCurrentCamera()->getView()); // Figure out how to get the camera then uncomment this line.
-	shader->setUniform("in_Model", getTransform()->getMat());
-	
+	shader->setUniform("in_Projection", getCore()->getCurrentCamera()->getProjection());
+	shader->setUniform("in_View", getCore()->getCurrentCamera()->getView()); 
+
+	if (rObjectName.length() < 1)
+	{
+		shader->setUniform("in_Model", getTransform()->getMat());
+	}
+	else
+	{
+		shader->setUniform("in_Model", getTransform()->getLocalMat());
+	}
 
 	shader->setMesh(shape->mesh);
 
@@ -228,3 +235,7 @@ void MeshRenderer::OnDisplay()
 //	SDL_GL_SwapWindow(window);
 }
 
+void MeshRenderer::setObjNameRend(std::string _s)
+{
+	rObjectName = _s;
+}

@@ -7,30 +7,38 @@ using namespace davorengine;
 
 struct PlayerControl : public Component
 {
+	int w = 640;
+	int h = 480;
 	std::shared_ptr<Entity> self;
 	void OnTick()
 	{
-		if (getKeyboard()->getKeyUp(davorengine_DOWN))
+		
+		if (getKeyboard()->getKeyUp(davorengine_UP))
 		{
 			std::cout << "Up!" << std::endl;
 		}
 		if (getKeyboard()->getKey(davorengine_DOWN))
 		{
-			std::cout << "Pressed down once" << std::endl;
-			self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z + 0.05f));	
+
+			//	self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));	
+			self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, -0.05f));
 		}
 		if (getKeyboard()->getKey(davorengine_UP))
 		{
-			self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z - 0.05f));
+			//	self->getComponent<Transform>()->Translate(glm::vec3(-0.05f, 0.0f, 0.0f));
+			std::cout << "Pressed down once" << std::endl;
+			self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, 0.05f));
 		}
 		if (getKeyboard()->getKey(davorengine_LEFT))
 		{
-			self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));
+			self->getComponent<Transform>()->Translate(glm::vec3(0.05f, 0.0f, 0.0f));
 		}
 		if (getKeyboard()->getKey(davorengine_RIGHT))
 		{
-			self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x - 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));
+			self->getComponent<Transform>()->Translate(glm::vec3(-0.05f, 0.0f, 0.0f));
 		}
+
+
 	}
 };
 
@@ -64,13 +72,15 @@ int main()
 	
 	std::weak_ptr<MeshRenderer> playerMeshRenderer = player->addComponent<MeshRenderer>();
 	std::weak_ptr<Transform> pTransform = player->addComponent<Transform>();
-	player->getComponent<Transform>()->setPosition(glm::vec3(-16.0f, 3.0f, 5.0f));
+	player->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 3.0f, 5.0f)); // -16, 3.0f, 5.0f;
+	player->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 4.2f, 0.0f));
 	
-
+	
 	// TODO: Visual Studio runs from build directory... so add "../" i.e ../src/davor....
 
 	std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/graveyard/graveyard.obj");
 	std::shared_ptr<Material> mat = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/graveyard/graveyard.png");
+
 	map->getComponent<MeshRenderer>()->setMesh(m);
 	map->getComponent<MeshRenderer>()->setMaterial(mat);
 																		
@@ -79,7 +89,7 @@ int main()
 
 	player->getComponent<MeshRenderer>()->setMesh(playerMesh);
 	player->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
-
+	player->getComponent<MeshRenderer>()->setObjNameRend("player"); // If the mesh renderer has a obj name it will use local coordinates. (First rotate then translate)
 	
 	core->Start(); // Run updates loops, etc.
 
