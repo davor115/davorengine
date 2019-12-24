@@ -66,6 +66,11 @@ glm::vec3 Transform::getRotation()
 	return rotation;
 }
 
+glm::vec3 Transform::getSize()
+{
+	return scale;
+}
+
 glm::vec3 Transform::Forward()
 {
 	glm::vec3 rtn = rotation * glm::vec3(-0.05f, 0.0f, 0.0f); // This doesn't work.. trying to allow the user to move an object forward in local coordinates.

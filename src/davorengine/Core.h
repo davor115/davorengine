@@ -15,11 +15,12 @@ class Keyboard;
 class Camera;
 class Resources;
 class Keyboard;
-
+class Collision;
 class Core
 {
 private:
 	friend class Camera;
+	friend class Collision;
 	std::shared_ptr<rend::Context> context;
 	std::weak_ptr<Core> self;	
 	std::weak_ptr<Camera> currentCamera;

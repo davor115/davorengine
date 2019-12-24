@@ -38,6 +38,8 @@ src/davorengine/Texture.cpp
 src/davorengine/Material.h
 src/davorengine/Material.cpp
 src/davorengine/EngineKeyboard.h
+src/davorengine/Collision.cpp
+src/davorengine/Collision.h
 )
 
 if(MSVC)

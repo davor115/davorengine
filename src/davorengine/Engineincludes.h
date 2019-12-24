@@ -13,6 +13,7 @@
 #include "Material.h"
 #include "Resources.h"
 #include "Keyboard.h"
+#include "Collision.h"
 namespace davorengine
 {
 	using rend::Context;
