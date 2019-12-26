@@ -37,7 +37,6 @@ public:
 		throw davorengine::Exception("Couldn't find the component");
 	}
 
-
 	template<typename T>
 	std::shared_ptr<T> addComponent()
 	{

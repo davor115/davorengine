@@ -24,6 +24,7 @@ private:
 	std::shared_ptr<rend::Context> context;
 	std::weak_ptr<Core> self;	
 	std::weak_ptr<Camera> currentCamera;
+	std::list<std::shared_ptr<Collision>> collidersInWorld;
 	std::shared_ptr<Resources> resources;
 	std::shared_ptr<Environment> environment;
 	//std::vector<std::shared_ptr<Entity>> entities;
@@ -41,6 +42,7 @@ public:
 	std::shared_ptr<rend::Context> getContext();
 	std::shared_ptr<Resources> getResources();
 	std::shared_ptr<Keyboard> getKeyboard();
+	std::list<std::shared_ptr<Collision>> getCollidersInWorld(); // List of all the objects with box colliders in the scene.
 	~Core();
 	
 };

@@ -41,6 +41,7 @@ struct PlayerControl : public Component
 		if (self->getComponent<Collision>()->isColliding(dummy->getComponent<Transform>()->getPosition(), dummy->getComponent<Transform>()->getSize()))
 		{
 			//self->getComponent<Transform>()->setPosition(self->getComponent<Collision>()->getCollisionResponse(dummy->getComponent<Transform>()->getPosition(), dummy->getComponent<Transform>()->getSize()));
+			std::cout << "We are colliding against something..." << std::endl;
 		}
 	}
 };
@@ -74,10 +75,11 @@ int main()
 
 	// Player:
 	player->addComponent<PlayerControl>();
-	
 	player->getComponent<PlayerControl>()->self = player;
 	player->getComponent<PlayerControl>()->dummy = enemy;
+	
 	std::weak_ptr<Collision> playerCollisionBox = player->addComponent<Collision>();
+//	player->getComponent<Collision>()->setSize(glm::vec3(5.0f, 5.0f, 5.0f));
 	std::weak_ptr<MeshRenderer> playerMeshRenderer = player->addComponent<MeshRenderer>();
 	std::weak_ptr<Transform> pTransform = player->addComponent<Transform>();
 	player->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 3.0f, 5.0f)); // -16, 3.0f, 5.0f;
@@ -85,10 +87,12 @@ int main()
 	
 	// Enemy:
 	std::weak_ptr<Transform> enemyTransform = enemy->addComponent<Transform>();
-//	std::weak_ptr<Collision> enemyCol = enemy->addComponent<Collision>();
+	std::weak_ptr<Collision> enemyCol = enemy->addComponent<Collision>();
+//	enemy->getComponent<Collision>()->setSize(glm::vec3(2.0f, 2.0f, 2.0f));
 	std::weak_ptr<MeshRenderer> enemyMesh = enemy->addComponent<MeshRenderer>();
 	enemy->getComponent<Transform>()->setPosition(glm::vec3(-4.0f, 3.0f, -2.0f));
 	enemy->getComponent<Transform>()->setRotation(glm::vec3(0.0f, -4.2f, 0.0f));
+	
 	
 	
 	// TODO: Visual Studio runs from build directory... so add "../" i.e ../src/davor....

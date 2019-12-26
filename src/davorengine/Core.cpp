@@ -62,6 +62,11 @@ std::shared_ptr<Camera> Core::getCurrentCamera()
   return currentCamera.lock();
 }
 
+std::list<std::shared_ptr<Collision>> Core::getCollidersInWorld()
+{
+	return collidersInWorld;
+}
+
 std::shared_ptr<Keyboard> Core::getKeyboard()
 {
   return keyboard;

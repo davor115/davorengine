@@ -7,6 +7,9 @@ void Collision::OnInit()
 {
 	size = glm::vec3(1.0f, 1.0f, 1.0f);
 	offset = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	getCore()->collidersInWorld.push_back(getEntity()->getComponent<Collision>()); // Add current collider into the list of all colliders.
+
 }
 
 void Collision::OnTick()
@@ -17,21 +20,18 @@ void Collision::OnTick()
 
 void Collision::CollisionChecker()
 {
-	for (std::list<std::shared_ptr<Entity>>::iterator it = getCore()->entities.begin(); it != getCore()->entities.end(); it++)
+	for (std::list<std::shared_ptr<Collision>>::iterator it = getCore()->collidersInWorld.begin(); it != getCore()->collidersInWorld.end(); it++)
 	{
-		if (*it == getEntity())
+		if (*it == getEntity()->getComponent<Collision>())
 		{
-			continue; // Avoid collision against itself.
+			continue; // Avoid collision against itself.			
 		}
 
-		glm::vec3 moveBack = getCollisionResponse((*it)->getComponent<Transform>()->getPosition(), (*it)->getComponent<Transform>()->getSize());
-
+		glm::vec3 moveBack = getCollisionResponse((*it)->getTransform()->getPosition(), (*it)->getTransform()->getSize());
 		getEntity()->getComponent<Transform>()->setPosition(moveBack);
+		
 
 	}
-
-
-
 }
 
 bool Collision::isColliding(glm::vec3 _position, glm::vec3 _size)
