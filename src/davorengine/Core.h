@@ -16,11 +16,13 @@ class Camera;
 class Resources;
 class Keyboard;
 class Collision;
+class GUI;
 class Core
 {
 private:
 	friend class Camera;
 	friend class Collision;
+	std::shared_ptr<GUI> Gui;
 	std::shared_ptr<rend::Context> context;
 	std::weak_ptr<Core> self;	
 	std::weak_ptr<Camera> currentCamera;
@@ -43,6 +45,7 @@ public:
 	std::shared_ptr<Resources> getResources();
 	std::shared_ptr<Keyboard> getKeyboard();
 	std::list<std::shared_ptr<Collision>> getCollidersInWorld(); // List of all the objects with box colliders in the scene.
+	std::shared_ptr<GUI> getGUI();
 	~Core();
 	
 };

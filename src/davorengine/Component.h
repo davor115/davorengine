@@ -28,6 +28,7 @@ public:
 	virtual void OnBegin();
 	virtual void OnTick();
 	virtual void OnDisplay();
+	virtual void OnGUI();
 
 
 };

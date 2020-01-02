@@ -61,6 +61,11 @@ void Transform::Translate(glm::vec3 _val)
 	position =  position + _val;
 }
 
+void Transform::Rotate(glm::vec3 _rotVal)
+{
+	rotation = rotation + _rotVal;
+}
+
 glm::vec3 Transform::getRotation()
 {
 	return rotation;

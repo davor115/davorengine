@@ -19,6 +19,7 @@ public:
 	void setScale(glm::vec3 _s);
 	
 	void Translate(glm::vec3 _val);
+	void Rotate(glm::vec3 _rotVal);
 	glm::vec3 Forward();
 
 	glm::vec3 getPosition();

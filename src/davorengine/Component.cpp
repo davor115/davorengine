@@ -29,6 +29,11 @@ void Component::OnDisplay()
 
 }
 
+void Component::OnGUI()
+{
+
+}
+
 std::shared_ptr<Transform> Component::getTransform()
 {
 	std::shared_ptr<Transform> rtn = getEntity()->getComponent<Transform>();

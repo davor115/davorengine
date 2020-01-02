@@ -5,6 +5,7 @@ class Material : public Resource
 {
 private:
 	friend class MeshRenderer;
+	friend class GUI;
 	std::shared_ptr<rend::Shader> shader;
 	std::shared_ptr<rend::Texture> texture;
 
