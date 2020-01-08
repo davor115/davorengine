@@ -142,17 +142,20 @@ int main()
 //	player->getComponent<MeshRenderer>()->setObjNameRend("player"); // If the mesh renderer has a obj name it will use local coordinates. (First rotate then translate)
 	
 	// Later found that using the other drawing method disables collisions since it's a "fake" draw.
-
+	
 	enemy->getComponent<MeshRenderer>()->setMesh(enemyMesh);
 	enemy->getComponent<MeshRenderer>()->setMaterial(enemyMaterial);
 //	enemy->getComponent<MeshRenderer>()->setObjNameRend("enemy"); // If the mesh renderer has a obj name it will use local coordinates. (First rotate then translate)
 
 	// GUI Stuff:
-//	std::weak_ptr<GUI> gui = myGUI->addComponent<GUI>();
+	
+	std::weak_ptr<GUI> gui = myGUI->addComponent<GUI>();
 //	std::weak_ptr<MeshRenderer> mGUI = myGUI->addComponent<MeshRenderer>();
-//	std::shared_ptr<Material> GUIText = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/curuthers/Whiskers_diffuse.png");
-//	myGUI->getComponent<GUI>()->setGUITexture(glm::vec4(0, 0, 0, 0), GUIText);
-//	myGUI->getComponent<MeshRenderer>()->setMaterial(GUIText);
+	std::shared_ptr<Material> GUIText = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
+	std::shared_ptr<Mesh> guiMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
+	myGUI->getComponent<GUI>()->setMesh(guiMesh);
+	myGUI->getComponent<GUI>()->setGUITexture(glm::vec4(0, 0, 400, 400), GUIText);
+
 
 	core->Start(); // Run updates loops, etc.
 

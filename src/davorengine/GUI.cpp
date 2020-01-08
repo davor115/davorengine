@@ -1,5 +1,6 @@
 #include "GUI.h"
 #include "Material.h"
+#include "Mesh.h"
 #include "Core.h"
 
 
@@ -29,7 +30,7 @@ const GLchar *src2 =
 "varying vec3 v_Normal;" \
 "void main()" \
 "{" \
-"  gl_FragColor = texture2D(u_Texture, v_TexCoord);" \
+"  gl_FragColor = texture2D(U_Texture, v_TexCoord);" \
 "  if(gl_FragColor.x == 9) gl_FragColor.x = v_Normal.x;" \
 "}" \
 "\n#endif\n"
@@ -43,6 +44,7 @@ void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
 	int sw = 640;
 	int sh = 480;
 	shader->setUniform("U_Projection", glm::ortho(0, sw, sh, 0));
+	
 
 	glm::mat4 mat(1.0f);
 
@@ -50,8 +52,15 @@ void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
 	mat = glm::scale(mat, glm::vec3(position.z, position.w, 1.0f));
 	shader->setUniform("U_Model", mat);
 
-	mesh->setTexture("u_Texture", texture->texture);
+	this->material = texture;
+	mesh->mesh->setTexture("U_Texture", this->material->texture);
 
-	//shader->setMesh(mesh);
+
+	shader->setMesh(mesh->mesh);
 	shader->render();
+}
+
+void GUI::setMesh(std::shared_ptr<Mesh> _set)
+{
+	this->mesh = _set;
 }

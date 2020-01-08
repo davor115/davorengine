@@ -7,6 +7,7 @@ class Mesh : public Resource
 {
 private:
 	friend class MeshRenderer;
+	friend class GUI;
 	std::shared_ptr<rend::Mesh> mesh;
 //	std::shared_ptr<rend::Shader> shader;
 	
