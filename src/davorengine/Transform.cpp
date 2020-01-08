@@ -78,6 +78,18 @@ glm::vec3 Transform::getSize()
 
 glm::vec3 Transform::Forward()
 {
-	glm::vec3 rtn = rotation * glm::vec3(-0.05f, 0.0f, 0.0f); // This doesn't work.. trying to allow the user to move an object forward in local coordinates.
-	return rtn;
+	
+	glm::mat4 mat = glm::mat4(1.0f);
+
+	mat = glm::rotate(mat, rotation.x, glm::vec3(1, 0, 0));
+	mat = glm::rotate(mat, rotation.y, glm::vec3(0, 1, 0));
+	mat = glm::rotate(mat, rotation.z, glm::vec3(0, 0, 1));
+
+	mat = glm::translate(mat, position);
+
+	mat = glm::scale(mat, scale);
+
+	return (mat * glm::vec4(0.0f,0.0f,0.05f, 0.0f));
+	//glm::vec3 rtn = rotation * glm::vec3(-0.05f, 0.0f, 0.0f); // This doesn't work.. trying to allow the user to move an object forward in local coordinates.
+	//return rtn;
 }

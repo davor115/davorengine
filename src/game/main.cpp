@@ -23,21 +23,22 @@ struct PlayerControl : public Component
 		{
 
 			//	self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));	
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.05f, 0.0f, 0.0f));
+			self->getComponent<Transform>()->Translate(glm::vec3(0.05f, 0.0f, 0.0f));
 		}
 		if (getKeyboard()->getKey(davorengine_UP))
 		{
 			//	self->getComponent<Transform>()->Translate(glm::vec3(-0.05f, 0.0f, 0.0f));
 			//std::cout << "Pressed UP once" << std::endl;
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(-0.05f, 0.0f, 0.0f));
+			//self->getComponent<Transform>()->Translate(glm::vec3(-0.05f, 0.0f, 0.0f));
+			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Forward());
 		}
 		if (getKeyboard()->getKey(davorengine_LEFT))
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, 0.05f));
+			self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, 0.05f));
 		}
 		if (getKeyboard()->getKey(davorengine_RIGHT))
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, -0.05f));
+			self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, -0.05f));
 			
 		}
 		if (getKeyboard()->getKey(davorengine_W))
@@ -154,7 +155,7 @@ int main()
 	std::shared_ptr<Material> GUIText = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
 	std::shared_ptr<Mesh> guiMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
 	myGUI->getComponent<GUI>()->setMesh(guiMesh);
-	myGUI->getComponent<GUI>()->setGUITexture(glm::vec4(0, 0, 400, 400), GUIText);
+	myGUI->getComponent<GUI>()->setGUITexture(glm::vec4(0, 0, 1, 1), GUIText);
 
 
 	core->Start(); // Run updates loops, etc.

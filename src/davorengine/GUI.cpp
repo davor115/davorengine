@@ -43,7 +43,7 @@ void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
 
 	int sw = 640;
 	int sh = 480;
-	shader->setUniform("U_Projection", glm::ortho(0, sw, sh, 0));
+	shader->setUniform("U_Projection", glm::ortho(0, sw, sh, 0, -1, 1));
 	
 
 	glm::mat4 mat(1.0f);
