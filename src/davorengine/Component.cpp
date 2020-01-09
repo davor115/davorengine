@@ -67,3 +67,9 @@ std::shared_ptr<Keyboard> Component::getKeyboard()
 	std::shared_ptr<Keyboard> rtn = getCore()->getKeyboard();
 	return rtn;
 }
+
+std::shared_ptr<Environment> Component::getEnvironment()
+{
+	std::shared_ptr<Environment> rtn = getCore()->getEnvironment();
+	return rtn;
+}

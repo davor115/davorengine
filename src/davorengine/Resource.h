@@ -13,7 +13,7 @@ private:
 public:
 	virtual void onLoad(const char* _path)
 	{
-
+		
 	}
 	std::shared_ptr<Core> getCore();
 

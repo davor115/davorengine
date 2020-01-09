@@ -21,6 +21,10 @@ public:
 	void Translate(glm::vec3 _val);
 	void Rotate(glm::vec3 _rotVal);
 	glm::vec3 Forward();
+	glm::vec3 Left();
+	glm::vec3 Right();
+	glm::vec3 Up();
+	glm::vec3 Down();
 
 	glm::vec3 getPosition();
 	glm::vec3 getRotation();

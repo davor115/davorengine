@@ -7,6 +7,5 @@ private:
 
 public:
 	float getDeltaTime();
-	void setDeltaTime(float _num);
 
 };

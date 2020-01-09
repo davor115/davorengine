@@ -12,6 +12,8 @@ struct PlayerControl : public Component
 	std::shared_ptr<Entity> theCamera;
 	std::shared_ptr<Entity> self;
 	std::shared_ptr<Entity> dummy;
+	std::shared_ptr<Entity> env;
+	
 	void OnTick()
 	{
 						
@@ -23,7 +25,8 @@ struct PlayerControl : public Component
 		{
 
 			//	self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));	
-			self->getComponent<Transform>()->Translate(glm::vec3(0.05f, 0.0f, 0.0f));
+			//self->getComponent<Transform>()->Translate(glm::vec3(0.05f, 0.0f, 0.0f));
+			self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward() * env->getCore()->getEnvironment()->getDeltaTime());
 		}
 		if (getKeyboard()->getKey(davorengine_UP))
 		{
@@ -34,34 +37,48 @@ struct PlayerControl : public Component
 		}
 		if (getKeyboard()->getKey(davorengine_LEFT))
 		{
-			self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, 0.05f));
+		//	self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, 0.05f));
+			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Left());
 		}
 		if (getKeyboard()->getKey(davorengine_RIGHT))
 		{
-			self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, -0.05f));
+			//self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, -0.05f));
+			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Right());
 			
 		}
 		if (getKeyboard()->getKey(davorengine_W))
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f));
+			//theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f));
+			theCamera->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Up());
 		}
 		if (getKeyboard()->getKey(davorengine_S))
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f));
+			//theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f));
+			theCamera->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Down());
 		}
 		if (getKeyboard()->getKey(davorengine_A))
 		{
-			theCamera->getComponent<Transform>()->Rotate(glm::vec3(0.0f, 0.01f, 0.0f));
+			//theCamera->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Left());
+		//	theCamera->getComponent<Transform>()->Rotate(glm::vec3(0.0f, 0.01f, 0.0f));
+			self->getComponent<Transform>()->Rotate(glm::vec3(0.0f, 0.01f, 0.0f));
 		}
 		if (getKeyboard()->getKey(davorengine_D))
 		{
-			theCamera->getComponent<Transform>()->Rotate(glm::vec3(0.0f, -0.01f, 0.0f));
+		//	theCamera->getComponent<Transform>()->Rotate(glm::vec3(0.0f, -0.01f, 0.0f));
+			self->getComponent<Transform>()->Rotate(glm::vec3(0.0f, -0.01f, 0.0f));
 		}
 		if (self->getComponent<Collision>()->isColliding(dummy->getComponent<Transform>()->getPosition(), dummy->getComponent<Transform>()->getSize()))
 		{
 			//self->getComponent<Transform>()->setPosition(self->getComponent<Collision>()->getCollisionResponse(dummy->getComponent<Transform>()->getPosition(), dummy->getComponent<Transform>()->getSize()));
 			std::cout << "We are colliding against something..." << std::endl;
 		}
+
+		theCamera->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 10.0f, self->getComponent<Transform>()->getPosition().y + 9.0f, self->getComponent<Transform>()->getPosition().z + 6.0f));
+	
+
+		std::cout << "Player Rotation (x,y,z): " << self->getComponent<Transform>()->getRotation().x << "/" << self->getComponent<Transform>()->getRotation().y << "/" << self->getComponent<Transform>()->getRotation().z << std::endl;
+		std::cout << "Camera Rotation (x,y,z): " << theCamera->getComponent<Transform>()->getRotation().x << "/" << theCamera->getComponent<Transform>()->getRotation().y << "/" << theCamera->getComponent<Transform>()->getRotation().z << std::endl;
+
 	}
 
 	void OnGUI()
@@ -86,6 +103,7 @@ int main()
 	std::shared_ptr<Entity> player = core->addEntity();
 	std::shared_ptr<Entity> enemy = core->addEntity();
 	std::shared_ptr<Entity> myGUI = core->addEntity();
+	std::shared_ptr<Entity> environment = core->addEntity();
 	
 	// Camera:
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>(); // Camera
@@ -94,7 +112,6 @@ int main()
 
 	// Map:
 	std::weak_ptr<MeshRenderer> mapMeshRenderer = map->addComponent<MeshRenderer>();
-	std::weak_ptr<Transform> trans = map->addComponent<Transform>();
 //	std::weak_ptr<Collision> mapCol = map->addComponent<Collision>();
 	map->getComponent<Transform>()->setPosition(glm::vec3(0, 0, -5)); // 0, 0, -5
 	map->getComponent<Transform>()->setRotation(glm::vec3(0, 45, 0)); // 0 , 45, 0
@@ -104,16 +121,15 @@ int main()
 	player->getComponent<PlayerControl>()->self = player;
 	player->getComponent<PlayerControl>()->dummy = enemy;
 	player->getComponent<PlayerControl>()->theCamera = MainCamera;
+	player->getComponent<PlayerControl>()->env = environment;
 	
 	std::weak_ptr<Collision> playerCollisionBox = player->addComponent<Collision>();
 //	player->getComponent<Collision>()->setSize(glm::vec3(5.0f, 5.0f, 5.0f));
 	std::weak_ptr<MeshRenderer> playerMeshRenderer = player->addComponent<MeshRenderer>();
-	std::weak_ptr<Transform> pTransform = player->addComponent<Transform>();
 	player->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 3.0f, 5.0f)); // -16, 3.0f, 5.0f; actually -> 0.0f, 3.0f, 5.0f;
-	player->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 4.2f, 0.0f));
+	player->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f)); // y = 4.2f
 	
 	// Enemy:
-	std::weak_ptr<Transform> enemyTransform = enemy->addComponent<Transform>();
 	std::weak_ptr<Collision> enemyCol = enemy->addComponent<Collision>();
 //	enemy->getComponent<Collision>()->setSize(glm::vec3(2.0f, 2.0f, 2.0f));
 	std::weak_ptr<MeshRenderer> enemyMeshRenderer = enemy->addComponent<MeshRenderer>();
@@ -144,8 +160,8 @@ int main()
 	
 	// Later found that using the other drawing method disables collisions since it's a "fake" draw.
 	
-	enemy->getComponent<MeshRenderer>()->setMesh(enemyMesh);
-	enemy->getComponent<MeshRenderer>()->setMaterial(enemyMaterial);
+	enemy->getComponent<MeshRenderer>()->setMesh(playerMesh);
+	enemy->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
 //	enemy->getComponent<MeshRenderer>()->setObjNameRend("enemy"); // If the mesh renderer has a obj name it will use local coordinates. (First rotate then translate)
 
 	// GUI Stuff:

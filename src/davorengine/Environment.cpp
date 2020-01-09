@@ -1,13 +1,19 @@
 #include "Environment.h"
-
-
+#include <SDL2/SDL.h>
 
 float Environment::getDeltaTime()
 {
-	return Environment::deltaTime;
-}
+	// Store this variable and initialize
+	float lastTime = SDL_GetTicks();
+	// In loop
+	float time = SDL_GetTicks();
+	float diff = time - lastTime;
+	deltaTime = diff / 1000.0f;
+	lastTime = time;
+	
 
-void Environment::setDeltaTime(float _num)
-{
-	Environment::deltaTime += _num;
+
+
+
+	return deltaTime;
 }

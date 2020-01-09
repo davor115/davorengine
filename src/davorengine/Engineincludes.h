@@ -15,6 +15,7 @@
 #include "Keyboard.h"
 #include "Collision.h"
 #include "GUI.h"
+#include "Environment.h"
 namespace davorengine
 {
 	using rend::Context;

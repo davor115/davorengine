@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Resources.h"
 #include "Keyboard.h"
+#include "Environment.h"
 std::shared_ptr<Core> Core::initialize()
 {
 
@@ -144,4 +145,10 @@ std::shared_ptr<rend::Context> Core::getContext()
 std::shared_ptr<Resources> Core::getResources()
 {
   return resources;
+}
+
+std::shared_ptr<Environment> Core::getEnvironment()
+{
+	environment = std::make_shared<Environment>();
+	return environment;
 }

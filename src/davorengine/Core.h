@@ -43,6 +43,7 @@ public:
 	std::shared_ptr<Camera> getCurrentCamera();
 	std::shared_ptr<rend::Context> getContext();
 	std::shared_ptr<Resources> getResources();
+	std::shared_ptr<Environment> getEnvironment();
 	std::shared_ptr<Keyboard> getKeyboard();
 	std::list<std::shared_ptr<Collision>> getCollidersInWorld(); // List of all the objects with box colliders in the scene.
 	std::shared_ptr<GUI> getGUI();
