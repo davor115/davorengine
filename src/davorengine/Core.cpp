@@ -39,7 +39,7 @@ std::shared_ptr<Core> Core::initialize()
   }
 
   rtn->context = rend::Context::initialize();
-  rtn->Gui = std::make_shared<GUI>(rtn);
+  rtn->Gui = std::make_shared<GUI>(rtn); // Am I passing core correctly?
 
   return rtn;
 }

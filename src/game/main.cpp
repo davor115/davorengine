@@ -15,11 +15,11 @@ struct PlayerControl : public Component
 	std::shared_ptr<Entity> env;
 	std::shared_ptr<Entity> theGUI;
 	std::shared_ptr<Material> theCameraTexture;
-
+	std::shared_ptr<Mesh> guiMesh;
 	void OnInit()
 	{
 		theCameraTexture = getCore()->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
-
+		//guiMesh = getCore()->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
 	}
 
 	void OnTick()
@@ -170,9 +170,11 @@ int main()
 	enemy->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
 
 	// GUI Stuff:
-	std::shared_ptr<GUI> gui = myGUI->addComponent<GUI>();
-	std::shared_ptr<Material> GUIText = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
-	std::shared_ptr<Mesh> guiMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
+	//std::shared_ptr<GUI> gui = myGUI->addComponent<GUI>();
+	//std::shared_ptr<Material> GUIText = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
+	
+	
+	
 	//myGUI->getComponent<GUI>()->setMesh(guiMesh);
 
 	//myGUI->getComponent<GUI>()->setGUITexture(glm::vec4(300, 150, 200, 200), GUIText);

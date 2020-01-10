@@ -16,7 +16,6 @@ private:
 
 	std::shared_ptr<Material> material;
 public:
-	GUI();
 	GUI(std::shared_ptr<Core> _core);
 	void setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture);
 	void setMesh(std::shared_ptr<Mesh> _set);

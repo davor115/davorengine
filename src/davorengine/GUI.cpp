@@ -36,10 +36,7 @@ const GLchar *src2 =
 "}" \
 "\n#endif\n"
 "";
-GUI::GUI()
-{
 
-}
 GUI::GUI(std::shared_ptr<Core> _core)
 {
 	buffer = _core->getContext()->createBuffer();
@@ -50,13 +47,17 @@ GUI::GUI(std::shared_ptr<Core> _core)
 	buffer->add(glm::vec2(1, 1));
 	buffer->add(glm::vec2(1, 0));
 	buffer->add(glm::vec2(0, 0));
+
+	//shape->mesh = _core->getContext()->createMesh();
 	shape->mesh->setBuffer("a_Position", buffer);
+	
 }
 
 
 void GUI::OnInit()
 {
 		//getCore()->Gui = getEntity()->getComponent<GUI>();
+		shape->mesh = getCore()->getContext()->createMesh();
 }
 
 void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
