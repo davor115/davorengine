@@ -47,6 +47,7 @@ public:
 	std::shared_ptr<Keyboard> getKeyboard();
 	std::list<std::shared_ptr<Collision>> getCollidersInWorld(); // List of all the objects with box colliders in the scene.
 	std::shared_ptr<GUI> getGUI();
+	
 	~Core();
 	
 };

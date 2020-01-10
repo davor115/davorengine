@@ -12,7 +12,6 @@ public:
 	void OnInit();
 
 	glm::mat4 getMat();
-	glm::mat4 Transform::getLocalMat();
 
 	void setPosition(glm::vec3 _pos);
 	void setRotation(glm::vec3 _rot);

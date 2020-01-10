@@ -21,7 +21,7 @@ public:
 	std::shared_ptr<Transform> getTransform();
 	void Update();
 	void Display();
-
+	void Gui();
 	template<typename T>
 	std::shared_ptr<T> getComponent()
 	{

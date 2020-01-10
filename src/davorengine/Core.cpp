@@ -5,6 +5,7 @@
 #include "Resources.h"
 #include "Keyboard.h"
 #include "Environment.h"
+#include "GUI.h"
 std::shared_ptr<Core> Core::initialize()
 {
 
@@ -22,6 +23,7 @@ std::shared_ptr<Core> Core::initialize()
   rtn->resources = std::make_shared<Resources>();
   rtn->resources->core = rtn->self;
   rtn->keyboard = std::make_shared<Keyboard>(); // Set the keyboard first.
+  
   rtn->window = SDL_CreateWindow("DavorEngine",
     SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
     WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
@@ -37,6 +39,7 @@ std::shared_ptr<Core> Core::initialize()
   }
 
   rtn->context = rend::Context::initialize();
+  rtn->Gui = std::make_shared<GUI>(rtn);
 
   return rtn;
 }
@@ -116,7 +119,7 @@ void Core::Start()
     {
       //std::cout << "Run number: " << *i << std::endl;
       (*i)->Update();
-	  
+	 // (*i)->getCore()->getGUI()->OnGUI();
     }
     // TODO: Clear pressedKeys and releasedKeys
 	keyboard->pressedKeys.clear();
@@ -131,6 +134,14 @@ void Core::Start()
       //std::cout << "Run number: " << *i << std::endl;
       (*i)->Display();
     }
+	glClear(GL_DEPTH_BUFFER_BIT);
+	for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
+	{
+		//std::cout << "Run number: " << *i << std::endl;
+		(*i)->Gui();
+	}
+
+	//Gui->OnGUI();
 
     SDL_GL_SwapWindow(window);
   }
@@ -151,4 +162,9 @@ std::shared_ptr<Environment> Core::getEnvironment()
 {
 	environment = std::make_shared<Environment>();
 	return environment;
+}
+
+std::shared_ptr<GUI> Core::getGUI()
+{
+	return Gui;
 }

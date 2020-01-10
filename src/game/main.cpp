@@ -13,7 +13,15 @@ struct PlayerControl : public Component
 	std::shared_ptr<Entity> self;
 	std::shared_ptr<Entity> dummy;
 	std::shared_ptr<Entity> env;
-	
+	std::shared_ptr<Entity> theGUI;
+	std::shared_ptr<Material> theCameraTexture;
+
+	void OnInit()
+	{
+		theCameraTexture = getCore()->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
+
+	}
+
 	void OnTick()
 	{
 						
@@ -26,7 +34,8 @@ struct PlayerControl : public Component
 
 			//	self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));	
 			//self->getComponent<Transform>()->Translate(glm::vec3(0.05f, 0.0f, 0.0f));
-			self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward() * env->getCore()->getEnvironment()->getDeltaTime());
+			//self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward() * env->getCore()->getEnvironment()->getDeltaTime());
+			self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward());
 		}
 		if (getKeyboard()->getKey(davorengine_UP))
 		{
@@ -76,16 +85,15 @@ struct PlayerControl : public Component
 		theCamera->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 10.0f, self->getComponent<Transform>()->getPosition().y + 9.0f, self->getComponent<Transform>()->getPosition().z + 6.0f));
 	
 
-		std::cout << "Player Rotation (x,y,z): " << self->getComponent<Transform>()->getRotation().x << "/" << self->getComponent<Transform>()->getRotation().y << "/" << self->getComponent<Transform>()->getRotation().z << std::endl;
-		std::cout << "Camera Rotation (x,y,z): " << theCamera->getComponent<Transform>()->getRotation().x << "/" << theCamera->getComponent<Transform>()->getRotation().y << "/" << theCamera->getComponent<Transform>()->getRotation().z << std::endl;
+	//	std::cout << "Player Rotation (x,y,z): " << self->getComponent<Transform>()->getRotation().x << "/" << self->getComponent<Transform>()->getRotation().y << "/" << self->getComponent<Transform>()->getRotation().z << std::endl;
+	//	std::cout << "Camera Rotation (x,y,z): " << theCamera->getComponent<Transform>()->getRotation().x << "/" << theCamera->getComponent<Transform>()->getRotation().y << "/" << theCamera->getComponent<Transform>()->getRotation().z << std::endl;
 
 	}
-
 	void OnGUI()
 	{
-		
+		//theCamera->getComponent<GUI>()->setGUITexture(glm::vec4(300, 150, 200, 200), theCameraTexture);
+		getCore()->getGUI()->setGUITexture(glm::vec4(0, 0, 200, 200), theCameraTexture);
 	}
-
 };
 
 
@@ -156,23 +164,22 @@ int main()
 
 	player->getComponent<MeshRenderer>()->setMesh(playerMesh);
 	player->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
-//	player->getComponent<MeshRenderer>()->setObjNameRend("player"); // If the mesh renderer has a obj name it will use local coordinates. (First rotate then translate)
-	
-	// Later found that using the other drawing method disables collisions since it's a "fake" draw.
+
 	
 	enemy->getComponent<MeshRenderer>()->setMesh(playerMesh);
 	enemy->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
-//	enemy->getComponent<MeshRenderer>()->setObjNameRend("enemy"); // If the mesh renderer has a obj name it will use local coordinates. (First rotate then translate)
 
 	// GUI Stuff:
-	
-	std::weak_ptr<GUI> gui = myGUI->addComponent<GUI>();
-//	std::weak_ptr<MeshRenderer> mGUI = myGUI->addComponent<MeshRenderer>();
+	std::shared_ptr<GUI> gui = myGUI->addComponent<GUI>();
 	std::shared_ptr<Material> GUIText = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
 	std::shared_ptr<Mesh> guiMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
-	myGUI->getComponent<GUI>()->setMesh(guiMesh);
-	myGUI->getComponent<GUI>()->setGUITexture(glm::vec4(0, 0, 1, 1), GUIText);
+	//myGUI->getComponent<GUI>()->setMesh(guiMesh);
 
+	//myGUI->getComponent<GUI>()->setGUITexture(glm::vec4(300, 150, 200, 200), GUIText);
+	
+	//player->getComponent<PlayerControl>()->theCamera = myGUI;
+	//player->getComponent<PlayerControl>()->theCameraTexture = GUIText;
+	
 
 	core->Start(); // Run updates loops, etc.
 

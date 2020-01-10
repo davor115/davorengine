@@ -219,14 +219,9 @@ void MeshRenderer::OnDisplay()
 	shader->setUniform("in_Projection", getCore()->getCurrentCamera()->getProjection());
 	shader->setUniform("in_View", getCore()->getCurrentCamera()->getView()); 
 
-	if (rObjectName.length() < 1)
-	{
-		shader->setUniform("in_Model", getTransform()->getMat());
-	}
-	else
-	{
-		shader->setUniform("in_Model", getTransform()->getLocalMat());
-	}
+
+	shader->setUniform("in_Model", getTransform()->getMat());
+
 
 	shader->setMesh(shape->mesh);
 

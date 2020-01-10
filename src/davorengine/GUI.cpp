@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include "Core.h"
 
+#include "Entity.h"
 
 const GLchar *src2 =
 "\n#ifdef VERTEX\n" \
@@ -35,15 +36,38 @@ const GLchar *src2 =
 "}" \
 "\n#endif\n"
 "";
+GUI::GUI()
+{
+
+}
+GUI::GUI(std::shared_ptr<Core> _core)
+{
+	buffer = _core->getContext()->createBuffer();
+	buffer->add(glm::vec2(0, 0));
+	buffer->add(glm::vec2(0, 1));
+	buffer->add(glm::vec2(1, 1));
+
+	buffer->add(glm::vec2(1, 1));
+	buffer->add(glm::vec2(1, 0));
+	buffer->add(glm::vec2(0, 0));
+	shape->mesh->setBuffer("a_Position", buffer);
+}
+
+
+void GUI::OnInit()
+{
+		//getCore()->Gui = getEntity()->getComponent<GUI>();
+}
+
 void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
 {
 	std::shared_ptr<rend::Context> context = getCore()->getContext();
 	shader = context->createShader();
 	shader->parse(src2);
 
-	int sw = 640;
-	int sh = 480;
-	shader->setUniform("U_Projection", glm::ortho(0, sw, sh, 0, -1, 1));
+	float sw = 640.0f;
+	float sh = 480.0f;
+	shader->setUniform("U_Projection", glm::ortho(0.0f, sw, sh, 0.0f, -1.0f, 1.0f));
 	
 
 	glm::mat4 mat(1.0f);
@@ -53,14 +77,14 @@ void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
 	shader->setUniform("U_Model", mat);
 
 	this->material = texture;
-	mesh->mesh->setTexture("U_Texture", this->material->texture);
+	shape->mesh->setTexture("U_Texture", this->material->texture);
 
 
-	shader->setMesh(mesh->mesh);
+	shader->setMesh(shape->mesh);
 	shader->render();
 }
 
 void GUI::setMesh(std::shared_ptr<Mesh> _set)
 {
-	this->mesh = _set;
+	this->shape = _set;
 }
