@@ -7,19 +7,21 @@ using namespace davorengine;
 
 struct PlayerControl : public Component
 {
+	bool isActive = false;
 	int w = 640;
 	int h = 480;
 	std::shared_ptr<Entity> theCamera;
 	std::shared_ptr<Entity> self;
 	std::shared_ptr<Entity> dummy;
 	std::shared_ptr<Entity> env;
-	std::shared_ptr<Entity> theGUI;
+	std::shared_ptr<Entity> platButton;
+
 	std::shared_ptr<Material> theCameraTexture;
 	std::shared_ptr<Mesh> guiMesh;
 	void OnInit()
 	{
 		theCameraTexture = getCore()->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
-		//guiMesh = getCore()->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
+		guiMesh = getCore()->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
 	}
 
 	void OnTick()
@@ -76,10 +78,25 @@ struct PlayerControl : public Component
 		//	theCamera->getComponent<Transform>()->Rotate(glm::vec3(0.0f, -0.01f, 0.0f));
 			self->getComponent<Transform>()->Rotate(glm::vec3(0.0f, -0.01f, 0.0f));
 		}
-		if (self->getComponent<Collision>()->isColliding(dummy->getComponent<Transform>()->getPosition(), dummy->getComponent<Transform>()->getSize()))
+		if (self->getComponent<Collision>()->isColliding(platButton->getComponent<Transform>()->getPosition(), platButton->getComponent<Transform>()->getSize() - glm::vec3(1.5f)))
 		{
 			//self->getComponent<Transform>()->setPosition(self->getComponent<Collision>()->getCollisionResponse(dummy->getComponent<Transform>()->getPosition(), dummy->getComponent<Transform>()->getSize()));
-			std::cout << "We are colliding against something..." << std::endl;
+			//std::cout << "We are colliding against something..." << std::endl;
+			if (platButton->getComponent<Transform>()->getPosition().y > 0.6f && isActive == false)
+			{
+				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Down());
+			}
+			
+		}
+		else
+		{
+			if (platButton->getComponent<Transform>()->getPosition().y < 1.2f && isActive == true)
+			{
+				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Up());
+				std::cout << "This runs?" << std::endl;
+			}
+			
+			
 		}
 
 		theCamera->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 10.0f, self->getComponent<Transform>()->getPosition().y + 9.0f, self->getComponent<Transform>()->getPosition().z + 6.0f));
@@ -91,8 +108,9 @@ struct PlayerControl : public Component
 	}
 	void OnGUI()
 	{
-		//theCamera->getComponent<GUI>()->setGUITexture(glm::vec4(300, 150, 200, 200), theCameraTexture);
-		getCore()->getGUI()->setGUITexture(glm::vec4(0, 0, 200, 200), theCameraTexture);
+		//getCore()->getGUI()->setMesh(guiMesh);
+		getCore()->getGUI()->setGUITexture(glm::vec4(0, 0, 100, 100), theCameraTexture);
+		
 	}
 };
 
@@ -110,8 +128,10 @@ int main()
 	std::shared_ptr<Entity> map = core->addEntity();
 	std::shared_ptr<Entity> player = core->addEntity();
 	std::shared_ptr<Entity> enemy = core->addEntity();
-	std::shared_ptr<Entity> myGUI = core->addEntity();
 	std::shared_ptr<Entity> environment = core->addEntity();
+	std::shared_ptr<Entity> platform_base = core->addEntity();
+	//std::shared_ptr<Entity> box = core->addEntity();
+	std::shared_ptr<Entity> platform_button = core->addEntity();
 	
 	// Camera:
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>(); // Camera
@@ -130,6 +150,7 @@ int main()
 	player->getComponent<PlayerControl>()->dummy = enemy;
 	player->getComponent<PlayerControl>()->theCamera = MainCamera;
 	player->getComponent<PlayerControl>()->env = environment;
+	player->getComponent<PlayerControl>()->platButton = platform_button;
 	
 	std::weak_ptr<Collision> playerCollisionBox = player->addComponent<Collision>();
 //	player->getComponent<Collision>()->setSize(glm::vec3(5.0f, 5.0f, 5.0f));
@@ -145,7 +166,23 @@ int main()
 //	enemy->getComponent<Transform>()->setRotation(glm::vec3(0.0f, -4.2f, 0.0f));
 	enemy->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	
-	
+	// Platform
+	std::weak_ptr<MeshRenderer> platformMeshRenderer = platform_base->addComponent<MeshRenderer>();
+	platform_base->getComponent<Transform>()->setPosition(glm::vec3(3.0f, 1.0f, -2.0f));
+	platform_base->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
+
+	// Box
+	//std::weak_ptr<MeshRenderer> boxMeshRenderer = box->addComponent<MeshRenderer>();
+	//std::weak_ptr<Collision> boxCollision = box->addComponent<Collision>();
+	//box->getComponent<Transform>()->setPosition(glm::vec3(2.0f, 1.0f, -6.0f));
+	//box->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	//box->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
+
+	// Platform Button:
+	std::weak_ptr<MeshRenderer> platform_buttonMeshRend = platform_button->addComponent<MeshRenderer>();
+	platform_button->getComponent<Transform>()->setPosition(glm::vec3(3.0f, 1.2f, -2.0f));
+	platform_button->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
+
 	
 	// TODO: Visual Studio runs from build directory... so add "../" i.e ../src/davor....
 
@@ -162,6 +199,17 @@ int main()
 	std::shared_ptr<Mesh> enemyMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
 	std::shared_ptr<Material> enemyMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
 
+	std::shared_ptr<Mesh> platformMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/platform/Base.obj");
+	std::shared_ptr<Material> platformMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/platform/BaseTexture.jpg");
+
+//	std::shared_ptr<Mesh> boxMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/box/box.obj");
+//	std::shared_ptr<Material> boxMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/box/box_diffuse_png.png");
+	
+
+	std::shared_ptr<Mesh> platform_buttonMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/platform/Base_Button.obj");
+	std::shared_ptr<Material> platform_buttonMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/platform/ButtonTexture.png");
+
+
 	player->getComponent<MeshRenderer>()->setMesh(playerMesh);
 	player->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
 
@@ -169,19 +217,14 @@ int main()
 	enemy->getComponent<MeshRenderer>()->setMesh(playerMesh);
 	enemy->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
 
-	// GUI Stuff:
-	//std::shared_ptr<GUI> gui = myGUI->addComponent<GUI>();
-	//std::shared_ptr<Material> GUIText = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
-	
-	
-	
-	//myGUI->getComponent<GUI>()->setMesh(guiMesh);
+	platform_base->getComponent<MeshRenderer>()->setMesh(platformMesh);
+	platform_base->getComponent<MeshRenderer>()->setMaterial(platformMaterial);
 
-	//myGUI->getComponent<GUI>()->setGUITexture(glm::vec4(300, 150, 200, 200), GUIText);
-	
-	//player->getComponent<PlayerControl>()->theCamera = myGUI;
-	//player->getComponent<PlayerControl>()->theCameraTexture = GUIText;
-	
+	platform_button->getComponent<MeshRenderer>()->setMesh(platform_buttonMesh);
+	platform_button->getComponent<MeshRenderer>()->setMaterial(platform_buttonMaterial);
+
+	/*box->getComponent<MeshRenderer>()->setMesh(boxMesh);
+	box->getComponent<MeshRenderer>()->setMaterial(boxMaterial);*/
 
 	core->Start(); // Run updates loops, etc.
 

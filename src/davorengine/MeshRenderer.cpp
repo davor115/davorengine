@@ -229,8 +229,3 @@ void MeshRenderer::OnDisplay()
 
 //	SDL_GL_SwapWindow(window);
 }
-
-void MeshRenderer::setObjNameRend(std::string _s)
-{
-	rObjectName = _s;
-}

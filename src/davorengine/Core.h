@@ -22,6 +22,7 @@ class Core
 private:
 	friend class Camera;
 	friend class Collision;
+	friend class GUI;
 	std::shared_ptr<GUI> Gui;
 	std::shared_ptr<rend::Context> context;
 	std::weak_ptr<Core> self;	

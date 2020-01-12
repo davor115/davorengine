@@ -14,7 +14,7 @@ private:
 public:
 	void OnTick();
 	void OnInit();
-	bool OnCollisionEnter(Collision other);
+	bool OnCollisionEnter(std::shared_ptr<Collision> other);
 	bool isColliding(glm::vec3 _position, glm::vec3 _size);
 	glm::vec3 getCollisionResponse(glm::vec3 _position, glm::vec3 _size);
 

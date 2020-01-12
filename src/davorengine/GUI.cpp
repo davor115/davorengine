@@ -39,6 +39,9 @@ const GLchar *src2 =
 
 GUI::GUI(std::shared_ptr<Core> _core)
 {
+	myGUI = _core->addEntity();
+	
+	
 	buffer = _core->getContext()->createBuffer();
 	buffer->add(glm::vec2(0, 0));
 	buffer->add(glm::vec2(0, 1));
@@ -47,24 +50,25 @@ GUI::GUI(std::shared_ptr<Core> _core)
 	buffer->add(glm::vec2(1, 1));
 	buffer->add(glm::vec2(1, 0));
 	buffer->add(glm::vec2(0, 0));
-
-	//shape->mesh = _core->getContext()->createMesh();
+	
+	shape = std::make_shared<Mesh>();
+	shape->mesh = _core->getContext()->createMesh();
 	shape->mesh->setBuffer("a_Position", buffer);
 	
-}
 
+}
 
 void GUI::OnInit()
 {
-		//getCore()->Gui = getEntity()->getComponent<GUI>();
-		shape->mesh = getCore()->getContext()->createMesh();
+	
 }
 
 void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
 {
-	std::shared_ptr<rend::Context> context = getCore()->getContext();
+	std::shared_ptr<rend::Context> context = myGUI->getCore()->getContext(); // Error here, getCore() fails because there is no Entity.
 	shader = context->createShader();
 	shader->parse(src2);
+	
 
 	float sw = 640.0f;
 	float sh = 480.0f;

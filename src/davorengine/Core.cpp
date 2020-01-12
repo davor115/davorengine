@@ -39,7 +39,7 @@ std::shared_ptr<Core> Core::initialize()
   }
 
   rtn->context = rend::Context::initialize();
-  rtn->Gui = std::make_shared<GUI>(rtn); // Am I passing core correctly?
+  rtn->Gui = std::make_shared<GUI>(rtn);
 
   return rtn;
 }
@@ -119,7 +119,6 @@ void Core::Start()
     {
       //std::cout << "Run number: " << *i << std::endl;
       (*i)->Update();
-	 // (*i)->getCore()->getGUI()->OnGUI();
     }
     // TODO: Clear pressedKeys and releasedKeys
 	keyboard->pressedKeys.clear();
