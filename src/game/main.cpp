@@ -8,6 +8,7 @@ using namespace davorengine;
 struct PlayerControl : public Component
 {
 	bool isActive = false;
+	bool pickup = false;
 	int w = 640;
 	int h = 480;
 	std::shared_ptr<Entity> theCamera;
@@ -15,6 +16,7 @@ struct PlayerControl : public Component
 	std::shared_ptr<Entity> dummy;
 	std::shared_ptr<Entity> env;
 	std::shared_ptr<Entity> platButton;
+	std::shared_ptr<Entity> theBox;
 
 	std::shared_ptr<Material> theCameraTexture;
 	std::shared_ptr<Mesh> guiMesh;
@@ -23,6 +25,48 @@ struct PlayerControl : public Component
 		theCameraTexture = getCore()->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
 		guiMesh = getCore()->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
 	}
+
+	void PlatForm_Button_Func()
+	{
+		if (self->getComponent<Collision>()->isColliding(platButton->getComponent<Transform>()->getPosition(), platButton->getComponent<Transform>()->getSize() + glm::vec3(-1.5f, -1.0f, -1.5f)))
+		{
+			//std::cout << "Colliding" << std::endl;
+			if (platButton->getComponent<Transform>()->getPosition().y > 0.6f && isActive == false)
+			{
+				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Down());
+			}
+			else if (platButton->getComponent<Transform>()->getPosition().y <= 0.6f)
+			{
+				isActive = true;
+			}
+		}
+		else
+		{
+			//std::cout << "Not colliding" << std::endl;
+			if (platButton->getComponent<Transform>()->getPosition().y < 1.2f && isActive == true)
+			{
+				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Up() ); // * getCore()->getEnvironment()->getDeltaTime() <- not fully working.
+			}
+			else if (platButton->getComponent<Transform>()->getPosition().y >= 1.2f)
+			{
+				isActive = false;
+			}
+		}
+	}
+
+	void MoveBox()
+	{
+		float distance = glm::distance(self->getComponent<Transform>()->getPosition(), theBox->getComponent<Transform>()->getPosition());
+		if (distance <= 5.0f) 
+		{
+			if (getKeyboard()->getKeyDown(davorengine_E))
+			{
+				pickup = true;
+			}
+		}
+		//std::cout << "We are at a distance of: " << distance << " from the box" << std::endl;
+	}
+
 
 	void OnTick()
 	{
@@ -34,77 +78,42 @@ struct PlayerControl : public Component
 		if (getKeyboard()->getKey(davorengine_DOWN))
 		{
 
-			//	self->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 0.05f, self->getComponent<Transform>()->getPosition().y, self->getComponent<Transform>()->getPosition().z));	
-			//self->getComponent<Transform>()->Translate(glm::vec3(0.05f, 0.0f, 0.0f));
 			//self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward() * env->getCore()->getEnvironment()->getDeltaTime());
 			self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward());
 		}
 		if (getKeyboard()->getKey(davorengine_UP))
 		{
-			//	self->getComponent<Transform>()->Translate(glm::vec3(-0.05f, 0.0f, 0.0f));
-			//std::cout << "Pressed UP once" << std::endl;
-			//self->getComponent<Transform>()->Translate(glm::vec3(-0.05f, 0.0f, 0.0f));
 			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Forward());
 		}
 		if (getKeyboard()->getKey(davorengine_LEFT))
 		{
-		//	self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, 0.05f));
 			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Left());
 		}
 		if (getKeyboard()->getKey(davorengine_RIGHT))
 		{
-			//self->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, -0.05f));
-			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Right());
-			
+			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Right());		
 		}
 		if (getKeyboard()->getKey(davorengine_W))
 		{
-			//theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f));
-			theCamera->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Up());
+			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamDirection() * 0.05f);
 		}
 		if (getKeyboard()->getKey(davorengine_S))
 		{
-			//theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f));
-			theCamera->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Down());
+			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamDirection() * 0.05f);
 		}
 		if (getKeyboard()->getKey(davorengine_A))
 		{
-			//theCamera->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Left());
-		//	theCamera->getComponent<Transform>()->Rotate(glm::vec3(0.0f, 0.01f, 0.0f));
-			self->getComponent<Transform>()->Rotate(glm::vec3(0.0f, 0.01f, 0.0f));
+			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamRight() * 0.05f);
 		}
 		if (getKeyboard()->getKey(davorengine_D))
 		{
-		//	theCamera->getComponent<Transform>()->Rotate(glm::vec3(0.0f, -0.01f, 0.0f));
-			self->getComponent<Transform>()->Rotate(glm::vec3(0.0f, -0.01f, 0.0f));
+			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamRight() * 0.05f);
 		}
-		if (self->getComponent<Collision>()->isColliding(platButton->getComponent<Transform>()->getPosition(), platButton->getComponent<Transform>()->getSize() - glm::vec3(1.5f)))
-		{
-			//self->getComponent<Transform>()->setPosition(self->getComponent<Collision>()->getCollisionResponse(dummy->getComponent<Transform>()->getPosition(), dummy->getComponent<Transform>()->getSize()));
-			//std::cout << "We are colliding against something..." << std::endl;
-			if (platButton->getComponent<Transform>()->getPosition().y > 0.6f && isActive == false)
-			{
-				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Down());
-			}
-			
-		}
-		else
-		{
-			if (platButton->getComponent<Transform>()->getPosition().y < 1.2f && isActive == true)
-			{
-				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Up());
-				std::cout << "This runs?" << std::endl;
-			}
-			
-			
-		}
+		
+		PlatForm_Button_Func(); // This function is in charge of activating the pressure plate when the player is on top.
+		MoveBox(); // This function is in charge of the interaction between the player and the box.
 
-		theCamera->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 10.0f, self->getComponent<Transform>()->getPosition().y + 9.0f, self->getComponent<Transform>()->getPosition().z + 6.0f));
-	
-
-	//	std::cout << "Player Rotation (x,y,z): " << self->getComponent<Transform>()->getRotation().x << "/" << self->getComponent<Transform>()->getRotation().y << "/" << self->getComponent<Transform>()->getRotation().z << std::endl;
-	//	std::cout << "Camera Rotation (x,y,z): " << theCamera->getComponent<Transform>()->getRotation().x << "/" << theCamera->getComponent<Transform>()->getRotation().y << "/" << theCamera->getComponent<Transform>()->getRotation().z << std::endl;
-
+	//	theCamera->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 10.0f, self->getComponent<Transform>()->getPosition().y + 9.0f, self->getComponent<Transform>()->getPosition().z + 6.0f));
 	}
 	void OnGUI()
 	{
@@ -130,13 +139,14 @@ int main()
 	std::shared_ptr<Entity> enemy = core->addEntity();
 	std::shared_ptr<Entity> environment = core->addEntity();
 	std::shared_ptr<Entity> platform_base = core->addEntity();
-	//std::shared_ptr<Entity> box = core->addEntity();
+	std::shared_ptr<Entity> box = core->addEntity();
 	std::shared_ptr<Entity> platform_button = core->addEntity();
+	std::shared_ptr<Entity> room = core->addEntity();
 	
 	// Camera:
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>(); // Camera
 	MainCamera->getComponent<Transform>()->setPosition(glm::vec3(14, 15, 20));
-	MainCamera->getComponent<Transform>()->setRotation(glm::vec3(-0.7f, 0.8f, 0.6f)); // y Left right, Z side   -> -0.7f, 0.8f, 0.6f;
+	MainCamera->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f)); // y Left right, Z side   -> -0.7f, 0.8f, 0.6f;
 
 	// Map:
 	std::weak_ptr<MeshRenderer> mapMeshRenderer = map->addComponent<MeshRenderer>();
@@ -151,6 +161,7 @@ int main()
 	player->getComponent<PlayerControl>()->theCamera = MainCamera;
 	player->getComponent<PlayerControl>()->env = environment;
 	player->getComponent<PlayerControl>()->platButton = platform_button;
+	player->getComponent<PlayerControl>()->theBox = box;
 	
 	std::weak_ptr<Collision> playerCollisionBox = player->addComponent<Collision>();
 //	player->getComponent<Collision>()->setSize(glm::vec3(5.0f, 5.0f, 5.0f));
@@ -172,17 +183,23 @@ int main()
 	platform_base->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
 
 	// Box
-	//std::weak_ptr<MeshRenderer> boxMeshRenderer = box->addComponent<MeshRenderer>();
-	//std::weak_ptr<Collision> boxCollision = box->addComponent<Collision>();
-	//box->getComponent<Transform>()->setPosition(glm::vec3(2.0f, 1.0f, -6.0f));
-	//box->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-	//box->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
+	std::weak_ptr<Collision> boxCollision = box->addComponent<Collision>();
+	std::weak_ptr<MeshRenderer> boxMeshRenderer = box->addComponent<MeshRenderer>();
+	box->getComponent<Transform>()->setPosition(glm::vec3(-6.0f, 1.0f, 10.0f));
+	box->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	box->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
 
 	// Platform Button:
 	std::weak_ptr<MeshRenderer> platform_buttonMeshRend = platform_button->addComponent<MeshRenderer>();
 	platform_button->getComponent<Transform>()->setPosition(glm::vec3(3.0f, 1.2f, -2.0f));
 	platform_button->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
 
+	// Room
+	std::weak_ptr<MeshRenderer> roomMeshRend = room->addComponent<MeshRenderer>();
+	std::shared_ptr<Collision> roomCollider = room->addComponent<Collision>();
+	room->getComponent<Transform>()->setPosition(glm::vec3(30.0f, 0.0f, 0.0f));
+	room->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	room->getComponent<Collision>()->setSize(glm::vec3(3.0f, 3.0f, 3.0f));
 	
 	// TODO: Visual Studio runs from build directory... so add "../" i.e ../src/davor....
 
@@ -202,12 +219,15 @@ int main()
 	std::shared_ptr<Mesh> platformMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/platform/Base.obj");
 	std::shared_ptr<Material> platformMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/platform/BaseTexture.jpg");
 
-//	std::shared_ptr<Mesh> boxMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/box/box.obj");
-//	std::shared_ptr<Material> boxMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/box/box_diffuse_png.png");
+	std::shared_ptr<Mesh> boxMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/box/box.obj");
+	std::shared_ptr<Material> boxMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/box/box_diffuse_png.png");
 	
 
 	std::shared_ptr<Mesh> platform_buttonMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/platform/Base_Button.obj");
 	std::shared_ptr<Material> platform_buttonMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/platform/ButtonTexture.png");
+
+	std::shared_ptr<Mesh> room_Mesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/Room/davor_room.obj");
+	std::shared_ptr<Material> room_Mat = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/Room/davor_room_baked.jpg");
 
 
 	player->getComponent<MeshRenderer>()->setMesh(playerMesh);
@@ -223,8 +243,12 @@ int main()
 	platform_button->getComponent<MeshRenderer>()->setMesh(platform_buttonMesh);
 	platform_button->getComponent<MeshRenderer>()->setMaterial(platform_buttonMaterial);
 
-	/*box->getComponent<MeshRenderer>()->setMesh(boxMesh);
-	box->getComponent<MeshRenderer>()->setMaterial(boxMaterial);*/
+	box->getComponent<MeshRenderer>()->setMesh(boxMesh);
+	box->getComponent<MeshRenderer>()->setMaterial(boxMaterial);
+
+	room->getComponent<MeshRenderer>()->setMesh(room_Mesh);
+	room->getComponent<MeshRenderer>()->setMaterial(room_Mat);
+	
 
 	core->Start(); // Run updates loops, etc.
 

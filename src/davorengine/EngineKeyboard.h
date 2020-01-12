@@ -6,3 +6,4 @@
 #define davorengine_S SDLK_s
 #define davorengine_A SDLK_a
 #define davorengine_D SDLK_d
+#define davorengine_E SDLK_e

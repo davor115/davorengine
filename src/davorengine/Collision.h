@@ -11,6 +11,8 @@ private:
 	glm::vec3 position;
 	glm::vec3 offset; // If you don't want to have the box collider in the center of the object, add an offset.
 
+
+
 public:
 	void OnTick();
 	void OnInit();
@@ -22,7 +24,6 @@ public:
 
 	void setSize(glm::vec3 _size);
 	void setOffset(glm::vec3 _offset);
-
 
 
 };

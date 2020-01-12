@@ -23,6 +23,7 @@ std::shared_ptr<Core> Core::initialize()
   rtn->resources = std::make_shared<Resources>();
   rtn->resources->core = rtn->self;
   rtn->keyboard = std::make_shared<Keyboard>(); // Set the keyboard first.
+  rtn->environment = std::make_shared<Environment>();
   
   rtn->window = SDL_CreateWindow("DavorEngine",
     SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -40,7 +41,7 @@ std::shared_ptr<Core> Core::initialize()
 
   rtn->context = rend::Context::initialize();
   rtn->Gui = std::make_shared<GUI>(rtn);
-
+  rtn->environment->lastTime = SDL_GetTicks();
   return rtn;
 }
 
@@ -114,7 +115,6 @@ void Core::Start()
         }
       }
     }
-
     for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
     {
       //std::cout << "Run number: " << *i << std::endl;
@@ -143,6 +143,7 @@ void Core::Start()
 	//Gui->OnGUI();
 
     SDL_GL_SwapWindow(window);
+
   }
 }
 
@@ -159,7 +160,7 @@ std::shared_ptr<Resources> Core::getResources()
 
 std::shared_ptr<Environment> Core::getEnvironment()
 {
-	environment = std::make_shared<Environment>();
+	
 	return environment;
 }
 

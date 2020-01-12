@@ -5,8 +5,8 @@
 #include <list>
 void Collision::OnInit()
 {
-	size = glm::vec3(1.0f, 1.0f, 1.0f);
-	offset = glm::vec3(0.0f, 0.0f, 0.0f);
+	size = getEntity()->getComponent<Transform>()->getSize();
+	offset = glm::vec3(0.0f);
 
 	getCore()->collidersInWorld.push_back(getEntity()->getComponent<Collision>()); // Add current collider into the list of all colliders.
 
@@ -14,7 +14,7 @@ void Collision::OnInit()
 
 void Collision::OnTick()
 {
-	position = getTransform()->getPosition() + offset; // Save the current position.
+	position = getTransform()->getPosition(); // Save the current position.
 	CollisionChecker();
 }
 

@@ -5,8 +5,8 @@
 #include <SDL2/SDL.h>
 #include <rend/rend.h>
 
-#define WINDOW_WIDTH 640  // Change these to actual variables later...
-#define WINDOW_HEIGHT 480
+#define WINDOW_WIDTH 1024  // Change these to actual variables later... 640, 480
+#define WINDOW_HEIGHT 768
 
 
 class Entity;
