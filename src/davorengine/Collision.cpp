@@ -5,7 +5,7 @@
 #include <list>
 void Collision::OnInit()
 {
-	size = getEntity()->getComponent<Transform>()->getSize();
+	size = glm::vec3(1.0f);
 	offset = glm::vec3(0.0f);
 
 	getCore()->collidersInWorld.push_back(getEntity()->getComponent<Collision>()); // Add current collider into the list of all colliders.
@@ -20,6 +20,7 @@ void Collision::OnTick()
 
 void Collision::CollisionChecker()
 {
+	
 	for (std::list<std::shared_ptr<Collision>>::iterator it = getCore()->collidersInWorld.begin(); it != getCore()->collidersInWorld.end(); it++)
 	{
 		if (*it == getEntity()->getComponent<Collision>())
@@ -27,7 +28,7 @@ void Collision::CollisionChecker()
 			continue; // Avoid collision against itself.			
 		}
 
-		glm::vec3 moveBack = getCollisionResponse((*it)->getTransform()->getPosition(), (*it)->getTransform()->getSize());
+		glm::vec3 moveBack = getCollisionResponse((*it)->getEntity()->getComponent<Collision>()->position, (*it)->getEntity()->getComponent<Collision>()->size);
 		getEntity()->getComponent<Transform>()->setPosition(moveBack);
 		
 
@@ -36,38 +37,6 @@ void Collision::CollisionChecker()
 
 bool Collision::isColliding(glm::vec3 _position, glm::vec3 _size)
 {
-	// AABB -> Top left position -> Position
-	//		-> Bottom right-> Position + size.
-	/*
-	glm::vec3 topLeft = position;
-	glm::vec3 bottomRight = position + size;
-	bool itCollidesX = false;
-	bool itCollidesY = false;
-
-	if (bottomRight.x >= _position.x)
-	{
-		if (_position.x + _size.x >= topLeft.x)
-		{
-			itCollidesX = true;
-		}
-	}
-
-	if (bottomRight.y >= _position.y)
-	{
-		if (_position.y + _size.y >= topLeft.y)
-		{
-			itCollidesY = true;
-		}
-	}
-	if (itCollidesX && itCollidesY)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}*/
-
 	if (position.x > _position.x) // a right of b
 	{
 		if (position.x - size.x > _position.x + _size.x) // left edge of a greater than right edge of b (not colliding)
@@ -157,4 +126,9 @@ void Collision::setOffset(glm::vec3 _offset)
 void Collision::setSize(glm::vec3 _size)
 {
 	size = _size;
+}
+
+void Collision::setBoxColliderPosition(glm::vec3 _pos)
+{
+	position = _pos;
 }

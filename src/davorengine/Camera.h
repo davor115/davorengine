@@ -30,5 +30,4 @@ public:
 
 	glm::vec3 getCamDirection() { return cam_direction; }
 	glm::vec3 getCamRight() { return cam_right; }
-
 };

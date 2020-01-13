@@ -41,7 +41,7 @@ void Camera::OnTick()
 	_cameraAngleX += mouseSpeed * (posx - oldMousePosition.x + diff_x);
 	_cameraAngleY += mouseSpeed * (posy - oldMousePosition.y + diff_y);
 	oldMousePosition = glm::vec2(posx, posy);
-	//getEntity()->getComponent<Transform>()->Translate(glm::vec3(oldMousePosition, getEntity()->getComponent<Transform>()->getPosition().z));
+	
 
 	
 
@@ -51,9 +51,6 @@ void Camera::OnTick()
 
 	cam_direction = direction;
 	cam_right = right;
-
-	//std::cout << "Y coordinate: " << camPos.y + direction.y << std::endl;
-	
 	
 
 	// the matrices used to see the models are changed.

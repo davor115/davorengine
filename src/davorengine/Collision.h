@@ -24,6 +24,6 @@ public:
 
 	void setSize(glm::vec3 _size);
 	void setOffset(glm::vec3 _offset);
-
+	void setBoxColliderPosition(glm::vec3 _pos);
 
 };
