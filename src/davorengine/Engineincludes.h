@@ -16,11 +16,11 @@
 #include "Collision.h"
 #include "GUI.h"
 #include "Environment.h"
+
 namespace davorengine
 {
 	using rend::Context;
 	using rend::vec3;
 }
-
 
 #endif

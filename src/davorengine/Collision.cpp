@@ -14,7 +14,7 @@ void Collision::OnInit()
 
 void Collision::OnTick()
 {
-	position = getTransform()->getPosition(); // Save the current position.
+	position = getTransform()->getPosition(); // Save the current position. for some reason using  + offset doesn't work. I have to set the position myself using the setCollisionPosition.
 	CollisionChecker();
 }
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include "davorengine/Audio.h"
 #include "davorengine/Engineincludes.h"
 #include "davorengine/EngineKeyboard.h"
 
@@ -82,11 +83,11 @@ struct PlayerControl : public Component
 	{
 		if (theCamera->getComponent<Transform>()->getPosition().y > 3.0f)
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f) * 0.1f);
+			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f) * 0.5f);
 		}
 		else
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f) * 0.1f);
+			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f) * 0.5f);
 		}
 	}
 
@@ -118,19 +119,19 @@ struct PlayerControl : public Component
 		}
 		if (getKeyboard()->getKey(davorengine_W))
 		{
-			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamDirection() * 0.005f);
+			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamDirection() * 0.05f);
 		}
 		if (getKeyboard()->getKey(davorengine_S))
 		{
-			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamDirection() * 0.005f);
+			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamDirection() * 0.05f);
 		}
 		if (getKeyboard()->getKey(davorengine_A))
 		{
-			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamRight() * 0.005f);
+			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamRight() * 0.05f);
 		}
 		if (getKeyboard()->getKey(davorengine_D))
 		{
-			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamRight() * 0.005f);
+			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamRight() * 0.05f);
 		}
 		
 		PlatForm_Button_Func(); // This function is in charge of activating the pressure plate when the player is on top.
@@ -153,7 +154,7 @@ struct PlayerControl : public Component
 int main()
 {
 
-	//TODO: Why does it run so slow?
+	//TODO: Why does it run so slow? -> I was getting the context every frame in the mesh renderer.
 	//TODO: Note that onInit only should call once when addComponent
 	std::cout << "Hello world!" << std::endl;
 
@@ -174,6 +175,7 @@ int main()
 	std::weak_ptr<Collision> camColl = MainCamera->addComponent<Collision>();
 	MainCamera->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f)); // 14, 15, 20
 	MainCamera->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f)); // y Left right, Z side   -> -0.7f, 0.8f, 0.6f;
+//	MainCamera->getComponent<Collision>()->setOffset(glm::vec3(0.0f, -3.0f, 0.0f));
 	MainCamera->getComponent<Collision>()->setBoxColliderPosition(MainCamera->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 3.0f, 0.0f));
 	MainCamera->getComponent<Collision>()->setSize(glm::vec3(1.0f, 3.0f, 1.0f));
 
@@ -229,7 +231,7 @@ int main()
 
 	// Room
 	std::weak_ptr<MeshRenderer> roomMeshRend = room->addComponent<MeshRenderer>();
-	//std::shared_ptr<Collision> roomCollider = room->addComponent<Collision>();
+	std::shared_ptr<Audio> roomAudio = room->addComponent<Audio>();
 	room->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	room->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	room->getComponent<Transform>()->setScale(glm::vec3(3.0f));

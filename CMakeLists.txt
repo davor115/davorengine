@@ -42,6 +42,10 @@ src/davorengine/Collision.cpp
 src/davorengine/Collision.h
 src/davorengine/GUI.h
 src/davorengine/GUI.cpp
+src/davorengine/Gravity.h
+src/davorengine/Gravity.cpp
+src/davorengine/Audio.h
+src/davorengine/Audio.cpp
 )
 
 if(MSVC)
