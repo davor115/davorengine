@@ -8,20 +8,14 @@ Environment::Environment()
 	currentTime = 0;
 }
 
-float Environment::getDeltaTime()
+void Environment::UpdateEnvironment()
 {
-	// Store this variable and initialize
 	currentTime = SDL_GetTicks();
 	deltaTime = (float)(currentTime - lastTime) / 1000.0f;
 	lastTime = currentTime;
+}
 
-	//// In loop
-	//if (environment->deltaTime < (1.0f / 60.0f))
-	//{
-		//SDL_Delay((unsigned int)(((1.0f / 60.0f) - environment->deltaTime)*1000.0f));
-	//}
-
-
-
+float Environment::getDeltaTime()
+{
 	return deltaTime;
 }

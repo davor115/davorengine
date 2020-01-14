@@ -10,7 +10,7 @@ private:
 	glm::vec3 size;
 	glm::vec3 position;
 	glm::vec3 offset; // If you don't want to have the box collider in the center of the object, add an offset.
-
+	bool unmovable;
 
 
 public:
@@ -25,5 +25,5 @@ public:
 	void setSize(glm::vec3 _size);
 	void setOffset(glm::vec3 _offset);
 	void setBoxColliderPosition(glm::vec3 _pos);
-
+	void setUnmovable(bool _v) { unmovable = _v; }
 };

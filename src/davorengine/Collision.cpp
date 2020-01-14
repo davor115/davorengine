@@ -5,9 +5,9 @@
 #include <list>
 void Collision::OnInit()
 {
-	size = glm::vec3(1.0f);
+	size = getTransform()->getSize();
 	offset = glm::vec3(0.0f);
-
+	unmovable = true;
 	getCore()->collidersInWorld.push_back(getEntity()->getComponent<Collision>()); // Add current collider into the list of all colliders.
 
 }
@@ -27,9 +27,11 @@ void Collision::CollisionChecker()
 		{
 			continue; // Avoid collision against itself.			
 		}
-
-		glm::vec3 moveBack = getCollisionResponse((*it)->getEntity()->getComponent<Collision>()->position, (*it)->getEntity()->getComponent<Collision>()->size);
-		getEntity()->getComponent<Transform>()->setPosition(moveBack);
+		if (!unmovable)
+		{
+			glm::vec3 moveBack = getCollisionResponse((*it)->getEntity()->getComponent<Collision>()->position, (*it)->getEntity()->getComponent<Collision>()->size);
+			getEntity()->getComponent<Transform>()->setPosition(moveBack);
+		}
 		
 
 	}

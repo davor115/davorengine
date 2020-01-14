@@ -9,6 +9,7 @@ class Mesh;
 class GUI : public Component
 {
 private:
+	std::shared_ptr<rend::Context> context;
 	std::shared_ptr<Entity> myGUI; // Check if this is the right way of doing it..
 	std::shared_ptr<Mesh> shape;
 	glm::mat4 projection;

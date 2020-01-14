@@ -11,5 +11,6 @@ private:
 public:
 	Environment();
 	float getDeltaTime();
+	void UpdateEnvironment();
 	
 };

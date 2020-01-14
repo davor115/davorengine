@@ -6,6 +6,7 @@
 #include "Keyboard.h"
 #include "Environment.h"
 #include "GUI.h"
+#include "Audio.h"
 std::shared_ptr<Core> Core::initialize()
 {
 
@@ -115,11 +116,34 @@ void Core::Start()
         }
       }
     }
+	// Update environment
+	environment->UpdateEnvironment();
+
     for (std::list<std::shared_ptr<Entity>>::iterator i = entities.begin(); i != entities.end(); i++)
     {
       //std::cout << "Run number: " << *i << std::endl;
       (*i)->Update();
     }
+
+	// if bool toRemove audio, loop through components and remove the audio.
+	for (std::list<std::shared_ptr<Entity>>::iterator it = entities.begin(); it != entities.end();	it++)
+	{
+		
+		for (auto i = (*it)->components.begin(); i != (*it)->components.end();)
+		{
+			std::shared_ptr<Audio> rtn = std::dynamic_pointer_cast<Audio>(*i);
+			if (rtn)
+			{
+				i = (*it)->components.erase(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
+	}
+
+
     // TODO: Clear pressedKeys and releasedKeys
 	keyboard->pressedKeys.clear();
 	keyboard->releasedKeys.clear();

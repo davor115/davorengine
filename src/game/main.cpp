@@ -83,11 +83,11 @@ struct PlayerControl : public Component
 	{
 		if (theCamera->getComponent<Transform>()->getPosition().y > 3.0f)
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f) * 0.5f);
+			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f) * getCore()->getEnvironment()->getDeltaTime() * 50.0f);
 		}
 		else
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f) * 0.5f);
+			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f) * getCore()->getEnvironment()->getDeltaTime() * 50.0f);
 		}
 	}
 
@@ -119,19 +119,19 @@ struct PlayerControl : public Component
 		}
 		if (getKeyboard()->getKey(davorengine_W))
 		{
-			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamDirection() * 0.05f);
+			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamDirection() * getCore()->getEnvironment()->getDeltaTime() * 2.0f);
 		}
 		if (getKeyboard()->getKey(davorengine_S))
 		{
-			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamDirection() * 0.05f);
+			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamDirection() * getCore()->getEnvironment()->getDeltaTime() * 2.0f);
 		}
 		if (getKeyboard()->getKey(davorengine_A))
 		{
-			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamRight() * 0.05f);
+			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamRight() * getCore()->getEnvironment()->getDeltaTime() * 2.0f);
 		}
 		if (getKeyboard()->getKey(davorengine_D))
 		{
-			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamRight() * 0.05f);
+			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamRight() * getCore()->getEnvironment()->getDeltaTime() * 2.0f);
 		}
 		
 		PlatForm_Button_Func(); // This function is in charge of activating the pressure plate when the player is on top.
@@ -169,6 +169,9 @@ int main()
 	std::shared_ptr<Entity> platform_button = core->addEntity();
 	std::shared_ptr<Entity> room = core->addEntity();
 	std::shared_ptr<Entity> doorR = core->addEntity();
+	std::shared_ptr<Entity> SoundSource = core->addEntity();
+
+	//std::shared_ptr<Audio> audioclip = SoundSource->addComponent<Audio>();
 	
 	// Camera:
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>(); // Camera
@@ -176,8 +179,9 @@ int main()
 	MainCamera->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f)); // 14, 15, 20
 	MainCamera->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f)); // y Left right, Z side   -> -0.7f, 0.8f, 0.6f;
 //	MainCamera->getComponent<Collision>()->setOffset(glm::vec3(0.0f, -3.0f, 0.0f));
-	MainCamera->getComponent<Collision>()->setBoxColliderPosition(MainCamera->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 3.0f, 0.0f));
+	//MainCamera->getComponent<Collision>()->setBoxColliderPosition(MainCamera->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 3.0f, 0.0f));
 	MainCamera->getComponent<Collision>()->setSize(glm::vec3(1.0f, 3.0f, 1.0f));
+	MainCamera->getComponent<Collision>()->setUnmovable(false);
 
 	// Map:
 	/*
@@ -224,14 +228,13 @@ int main()
 
 	// Platform Button:
 	std::weak_ptr<MeshRenderer> platform_buttonMeshRend = platform_button->addComponent<MeshRenderer>();
-	//std::weak_ptr<Collision> platform_buttonColl = platform_button->addComponent<Collision>();
+	std::weak_ptr<Collision> platform_buttonColl = platform_button->addComponent<Collision>();
 	platform_button->getComponent<Transform>()->setPosition(glm::vec3(30.0f, 0.2f, -2.0f));
 	platform_button->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
-	//platform_button->getComponent<Collision>()->setSize(glm::vec3(0.5f, 0.2f, 0.5f));
+	platform_button->getComponent<Collision>()->setSize(glm::vec3(0.5f, 0.2f, 0.5f));
 
 	// Room
 	std::weak_ptr<MeshRenderer> roomMeshRend = room->addComponent<MeshRenderer>();
-	std::shared_ptr<Audio> roomAudio = room->addComponent<Audio>();
 	room->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	room->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	room->getComponent<Transform>()->setScale(glm::vec3(3.0f));

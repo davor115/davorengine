@@ -9,30 +9,26 @@ const GLchar *src2 =
 "\n#ifdef VERTEX\n" \
 "attribute vec3 a_Position;" \
 "attribute vec2 a_TexCoord;" \
-"attribute vec3 a_Normal;" \
 "" \
 "uniform mat4 U_Projection;" \
 "uniform mat4 U_Model;" \
 "" \
 "varying vec2 v_TexCoord;" \
-"varying vec3 v_Normal;" \
 "" \
 "void main()" \
 "{" \
 "  gl_Position = U_Projection * U_Model * vec4(a_Position, 1.0);" \
-"  v_TexCoord = a_TexCoord;" \
-"  v_Normal = a_Normal;" \
+"  v_TexCoord.y = a_TexCoord.y*-1;" \
+"  v_TexCoord.x = a_TexCoord.x;" \
 "}" \
 "" \
 "\n#endif\n" \
 "\n#ifdef FRAGMENT\n" \
 "uniform sampler2D U_Texture;" \
 "varying vec2 v_TexCoord;" \
-"varying vec3 v_Normal;" \
 "void main()" \
 "{" \
 "  gl_FragColor = texture2D(U_Texture, v_TexCoord);" \
-"  if(gl_FragColor.x == 9) gl_FragColor.x = v_Normal.x;" \
 "}" \
 "\n#endif\n"
 "";
@@ -40,7 +36,7 @@ const GLchar *src2 =
 GUI::GUI(std::shared_ptr<Core> _core)
 {
 	myGUI = _core->addEntity();
-	
+
 	
 	buffer = _core->getContext()->createBuffer();
 	buffer->add(glm::vec2(0, 0));
@@ -54,6 +50,7 @@ GUI::GUI(std::shared_ptr<Core> _core)
 	shape = std::make_shared<Mesh>();
 	shape->mesh = _core->getContext()->createMesh();
 	shape->mesh->setBuffer("a_Position", buffer);
+	shape->mesh->setBuffer("a_TexCoord", buffer);
 	
 
 }
@@ -65,7 +62,7 @@ void GUI::OnInit()
 
 void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
 {
-	std::shared_ptr<rend::Context> context = myGUI->getCore()->getContext(); // Error here, getCore() fails because there is no Entity.
+	context = myGUI->getCore()->getContext(); // Error here, getCore() fails because there is no Entity.
 	shader = context->createShader();
 	shader->parse(src2);
 	

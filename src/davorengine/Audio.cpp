@@ -1,15 +1,22 @@
 #include "Audio.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
 
+#include "stb_vorbis.h"
+#include <exception>
 void Audio::OnInit()
 {
-
+	onDestroy = false;
 	/*
   * Initialize OpenAL audio system
   */
 
   // Open up the OpenAL device
-	ALCdevice* device = alcOpenDevice(NULL);
+	device = alcOpenDevice(NULL);
 
 	if (device == NULL)
 	{
@@ -17,7 +24,7 @@ void Audio::OnInit()
 	}
 
 	// Create audio context
-	ALCcontext* context = alcCreateContext(device, NULL);
+	context = alcCreateContext(device, NULL);
 
 	if (context == NULL)
 	{
@@ -39,11 +46,11 @@ void Audio::OnInit()
 	/*
 	 * Create OpenAL sound buffer
 	 */
-	ALuint bufferId = 0;
+	bufferId = 0;
 	alGenBuffers(1, &bufferId);
 
 	ALenum format = 0;
-	ALsizei freq = 0;
+	freq = 0;
 	std::vector<char> bufferData;
 	LoadAudio("dixie_horn.ogg", bufferData, format, freq); // Change the string for a variable.
 
@@ -59,26 +66,12 @@ void Audio::OnInit()
 	alSource3f(sourceId, AL_POSITION, 0.0f, 0.0f, 0.0f);
 	alSourcei(sourceId, AL_BUFFER, bufferId);
 	alSourcePlay(sourceId);
-
-	
-
-	/*
-	 * Clean up OpenAL data.
-	 *
-	 * Note: Do not free the buffer before the source using it has been freed.
-	 *       Use a std::shared_ptr to hold onto you sound buffer class from source class.
-	 *
-	 * Note: Make sure current context has been set to NULL before deleting context.
-	 *       Make sure context destroyed before closing device.
-	 */
-	alDeleteSources(1, &sourceId);
-	alDeleteBuffers(1, &bufferId);
-	alcMakeContextCurrent(NULL);
-	alcDestroyContext(context);
-	alcCloseDevice(device);
 }
 
-
+bool Audio::getDestroy()
+{
+	return onDestroy;
+}
 void Audio::OnTick()
 {
 	/*
@@ -87,14 +80,15 @@ void Audio::OnTick()
 	 * Note: You will generally want to check within your onTick functions
 	 *       and get the SoundSource component to remove itself when complete.
 	 */
-	while (true)
-	{
+	//while (true)
+	//{
 		ALint state = 0;
 		alGetSourcei(sourceId, AL_SOURCE_STATE, &state);
 
 		if (state == AL_STOPPED)
 		{
-			break;
+		//	break;
+			onDestroy = true;
 		}
 
 #ifdef _WIN32
@@ -102,7 +96,7 @@ void Audio::OnTick()
 #else
 		sleep(1);
 #endif
-	}
+	//}
 }
 
 
@@ -145,4 +139,24 @@ void Audio::LoadAudio(const std::string& fileName, std::vector<char>& buffer,ALe
 	// Clean up the read data
 	free(output);
 
+}
+
+
+Audio::~Audio()
+{
+
+	/*
+	 * Clean up OpenAL data.
+	 *
+	 * Note: Do not free the buffer before the source using it has been freed.
+	 *       Use a std::shared_ptr to hold onto you sound buffer class from source class.
+	 *
+	 * Note: Make sure current context has been set to NULL before deleting context.
+	 *       Make sure context destroyed before closing device.
+	 */
+	alDeleteSources(1, &sourceId);
+	alDeleteBuffers(1, &bufferId);
+	alcMakeContextCurrent(NULL);
+	alcDestroyContext(context);
+	alcCloseDevice(device);
 }
