@@ -140,8 +140,6 @@ void Core::Start()
 		(*i)->Gui();
 	}
 
-	//Gui->OnGUI();
-
     SDL_GL_SwapWindow(window);
 
   }

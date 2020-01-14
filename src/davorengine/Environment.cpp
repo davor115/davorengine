@@ -18,9 +18,8 @@ float Environment::getDeltaTime()
 	//// In loop
 	//if (environment->deltaTime < (1.0f / 60.0f))
 	//{
-	//	SDL_Delay((unsigned int)(((1.0f / 60.0f) - environment->deltaTime)*1000.0f));
+		//SDL_Delay((unsigned int)(((1.0f / 60.0f) - environment->deltaTime)*1000.0f));
 	//}
-	//environment->lastTime = environment->currentTime;
 
 
 

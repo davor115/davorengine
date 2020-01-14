@@ -30,7 +30,7 @@ private:
 public:
 	SDL_Window *window;
 	MeshRenderer();
-	//void OnInit();
+	void OnInit();
 	void OnDisplay();
 	//void LoadObject(const char* path);
 	//void LoadTexture(const char* path);

@@ -180,27 +180,18 @@ void MeshRenderer::setMaterial(std::shared_ptr<Material> material)
 	this->shape->mesh->setTexture("u_Texture", texture->texture);
 }
 
-void MeshRenderer::OnDisplay()
+void MeshRenderer::OnInit()
 {
-/*
-	SDL_Event event = { 0 };
-
-	while (SDL_PollEvent(&event))
-	{
-		if (event.type == SDL_QUIT)
-		{
-			throw std::exception();
-		}
-	}
-*/
 	// Create one in core.
 	std::shared_ptr<Context> context = getCore()->getContext();
 	shader = context->createShader();
 	shader->parse(src);
 
+}
+
+void MeshRenderer::OnDisplay()
+{
 	
-
-
 	// TODO: Move SDL_Window to Core::initialize -> Problem, since Core is static and Start is not, how do I use window variable in both? -> Fixed.
 	// TODO: Add Sound init to Core::initialize
 	// TODO: Move clear to core -> Done 
