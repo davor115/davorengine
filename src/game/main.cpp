@@ -271,7 +271,10 @@ int main()
 
 	std::shared_ptr<Mesh> doorR_Mesh = core->getResources()->load<Mesh>("../src/Models/Tom/DoorR3.obj");
 	std::shared_ptr<Mesh> doorL_Mesh = core->getResources()->load<Mesh>("../src/Models/Tom/DoorL3.obj");
-	std::shared_ptr<Material> doorR_Material = core->getResources()->load<Material>("../src/Models/Room/davor_room_baked.jpg");
+	std::shared_ptr<Material> doorR1_Material = core->getResources()->load<Material>("../src/Models/Room/davor_room_baked.jpg");
+	std::shared_ptr<Material> doorR2_Material = core->getResources()->load<Material>("../src/Models/Room/davor_room_baked.jpg");
+	std::shared_ptr<Material> doorL1_Material = core->getResources()->load<Material>("../src/Models/Room/davor_room_baked.jpg");
+	std::shared_ptr<Material> doorL2_Material = core->getResources()->load<Material>("../src/Models/Room/davor_room_baked.jpg");
 
 	platform_base->getComponent<MeshRenderer>()->setMesh(platformMesh);
 	platform_base->getComponent<MeshRenderer>()->setMaterial(platformMaterial);
@@ -286,17 +289,17 @@ int main()
 	room->getComponent<MeshRenderer>()->setMaterial(room_Mat);
 	
 	doorR1->getComponent<MeshRenderer>()->setMesh(doorR_Mesh);
-	doorR1->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
+	doorR1->getComponent<MeshRenderer>()->setMaterial(doorR1_Material);
 
 	doorR2->getComponent<MeshRenderer>()->setMesh(doorR_Mesh);
-	doorR2->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
+	doorR2->getComponent<MeshRenderer>()->setMaterial(doorR2_Material);
 
 	
 	doorL1->getComponent<MeshRenderer>()->setMesh(doorL_Mesh);
-	doorL1->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
+	doorL1->getComponent<MeshRenderer>()->setMaterial(doorL1_Material);
 	
 	doorL2->getComponent<MeshRenderer>()->setMesh(doorL_Mesh);
-	doorL2->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
+	doorL2->getComponent<MeshRenderer>()->setMaterial(doorL2_Material);
 
 	core->Start(); // Run updates loops, etc.
 

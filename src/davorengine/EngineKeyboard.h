@@ -1,3 +1,9 @@
+
+	/**
+	* \brief My defined keyboard definitions to replace the SDLK.
+	*/
+
+
 #define davorengine_UP SDLK_UP
 #define davorengine_DOWN SDLK_DOWN
 #define davorengine_LEFT SDLK_LEFT

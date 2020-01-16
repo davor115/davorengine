@@ -75,9 +75,7 @@ glm::vec3 Transform::Forward()
 
 	mat = glm::scale(mat, scale);
 
-	return (mat * glm::vec4(0.0f,0.0f,0.05f, 0.0f));
-	//glm::vec3 rtn = rotation * glm::vec3(-0.05f, 0.0f, 0.0f); // This doesn't work.. trying to allow the user to move an object forward in local coordinates.
-	//return rtn;
+	return (mat * glm::vec4(0.0f,0.0f,1.0f, 0.0f));
 }
 
 glm::vec3 Transform::Left()
@@ -93,7 +91,7 @@ glm::vec3 Transform::Left()
 
 	mat = glm::scale(mat, scale);
 
-	return (mat * glm::vec4(0.05f, 0.0f, 0.0f, 0.0f));
+	return (mat * glm::vec4(1.0f, 0.0f, 0.0f, 0.0f));
 }
 
 glm::vec3 Transform::Right()
@@ -109,7 +107,7 @@ glm::vec3 Transform::Right()
 
 	mat = glm::scale(mat, scale);
 
-	return (mat * glm::vec4(-0.05f, 0.0f, 0.0f, 0.0f));
+	return (mat * glm::vec4(-1.0f, 0.0f, 0.0f, 0.0f));
 }
 
 glm::vec3 Transform::Up()
@@ -125,7 +123,7 @@ glm::vec3 Transform::Up()
 
 	mat = glm::scale(mat, scale);
 
-	return (mat * glm::vec4(0.0f, 0.05f, 0.0f, 0.0f));
+	return (mat * glm::vec4(0.0f, 1.0f, 0.0f, 0.0f));
 }
 
 glm::vec3 Transform::Down()
@@ -141,5 +139,5 @@ glm::vec3 Transform::Down()
 
 	mat = glm::scale(mat, scale);
 
-	return (mat * glm::vec4(0.0f, -0.05f, 0.0f, 0.0f));
+	return (mat * glm::vec4(0.0f, -1.0f, 0.0f, 0.0f));
 }

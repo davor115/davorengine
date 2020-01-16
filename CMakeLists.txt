@@ -33,8 +33,6 @@ src/davorengine/Resource.cpp
 src/davorengine/Resource.h
 src/davorengine/Mesh.h
 src/davorengine/Mesh.cpp
-src/davorengine/Texture.h
-src/davorengine/Texture.cpp
 src/davorengine/Material.h
 src/davorengine/Material.cpp
 src/davorengine/EngineKeyboard.h
@@ -42,8 +40,6 @@ src/davorengine/Collision.cpp
 src/davorengine/Collision.h
 src/davorengine/GUI.h
 src/davorengine/GUI.cpp
-src/davorengine/Gravity.h
-src/davorengine/Gravity.cpp
 src/davorengine/Audio.h
 src/davorengine/Audio.cpp
 )

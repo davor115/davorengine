@@ -6,7 +6,7 @@
 
 std::shared_ptr<Entity> Component::getEntity()
 {
-	return entity.lock(); // makes the weak_ptr into a shared_ptr
+	return entity.lock(); ///< makes the weak_ptr into a shared_ptr
 }
 
 void Component::OnInit()
@@ -57,8 +57,6 @@ std::shared_ptr<Camera> Component::getCamera()
 std::shared_ptr<Resources> Component::getResources()
 {
 	std::shared_ptr<Resources> rtn = getEntity()->getCore()->getResources(); 
-//	return rtn;
-//	std::shared_ptr<Resources> rtn = 
 	return rtn;
 }
 

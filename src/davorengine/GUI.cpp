@@ -62,7 +62,7 @@ void GUI::OnInit()
 
 void GUI::setGUITexture(glm::vec4 position, std::shared_ptr<Material> texture)
 {
-	context = myGUI->getCore()->getContext(); // Error here, getCore() fails because there is no Entity.
+	context = myGUI->getCore()->getContext();
 	shader = context->createShader();
 	shader->parse(src2);
 	

@@ -22,12 +22,12 @@ private:
 	glm::vec3 cam_right;
 
 public:
-	glm::mat4 getView();
-	glm::mat4 getProjection();
-	void OnInit();
-	void OnTick();
+	glm::mat4 getView(); ///< Returns the camera's viewing matrix
+	glm::mat4 getProjection(); ///< Creates and returns the camera's projection matrix. This sets the near and far planes, fov, and scale (4:3, 16:9, 16:10) based on the screen's resolution.
+	void OnInit(); ///< A function that runs once the component is added. This function is used to initialize the variables.
+	void OnTick(); ///< OnTick runs the code every frame.
 
 
-	glm::vec3 getCamDirection() { return cam_direction; }
-	glm::vec3 getCamRight() { return cam_right; }
+	glm::vec3 getCamDirection(); ///< Returns the camera's direction, used for the translation in the forward and backwards direction.
+	glm::vec3 getCamRight(); ///< Returns the camera's right direction, used for the translation in the right and left direction.
 };

@@ -65,9 +65,3 @@ bool Keyboard::getKeyUp(int keyCode)
 
 	return false;
 }
-
-void Keyboard::ClearKeys()
-{
-	releasedKeys.clear();
-	pressedKeys.clear();
-}

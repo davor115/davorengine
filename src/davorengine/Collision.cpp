@@ -6,16 +6,15 @@
 void Collision::OnInit()
 {
 	size = getTransform()->getSize();
-	offset = glm::vec3(0.0f);
 	unmovable = true;
-	getCore()->collidersInWorld.push_back(getEntity()->getComponent<Collision>()); // Add current collider into the list of all colliders.
+	getCore()->collidersInWorld.push_back(getEntity()->getComponent<Collision>()); ///< Add current collider into the list of all colliders.
 
 }
 
 void Collision::OnTick()
 {
-	position = getTransform()->getPosition(); // Save the current position. for some reason using  + offset doesn't work. I have to set the position myself using the setCollisionPosition.
-	CollisionChecker();
+	position = getTransform()->getPosition(); ///< Save the current position.
+	CollisionChecker(); ///< Check for collision against all entities with a box collider component attatched.
 }
 
 void Collision::CollisionChecker()
@@ -119,11 +118,11 @@ glm::vec3 Collision::getCollisionResponse(glm::vec3 _position, glm::vec3 _size)
 	return position;
 }
 
-
-void Collision::setOffset(glm::vec3 _offset)
-{
-	offset = _offset;
-}
+//
+//void Collision::setOffset(glm::vec3 _offset)
+//{
+//	offset = _offset;
+//}
 
 void Collision::setSize(glm::vec3 _size)
 {
@@ -133,4 +132,9 @@ void Collision::setSize(glm::vec3 _size)
 void Collision::setBoxColliderPosition(glm::vec3 _pos)
 {
 	position = _pos;
+}
+
+void Collision::setUnmovable(bool _v) 
+{ 
+	unmovable = _v; 
 }

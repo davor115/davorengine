@@ -15,7 +15,6 @@ class MeshRenderer : public Component
 {
 
 private:
-	std::string rObjectName;
 	GLuint programId;
 	GLuint positionsVboId;
 	GLuint colorsVboId;
@@ -26,15 +25,19 @@ private:
 	std::shared_ptr<Mesh> shape;
 	std::shared_ptr<Material> texture;
 
-
 public:
 	SDL_Window *window;
-	MeshRenderer();
+	/**
+	* \brief Initializes the Mesh Renderer Class
+	*
+	* Gets the current Context from Core, a shader is created and the vertex & fragment shader parsed into it.
+	*/
 	void OnInit();
+	/**
+	* \brief On every frame, applies the matrices onto the entities in the world.
+	*/
 	void OnDisplay();
-	//void LoadObject(const char* path);
-	//void LoadTexture(const char* path);
-	void setMesh(std::shared_ptr<Mesh> shape);
-	void setMaterial(std::shared_ptr<Material> material);
+	void setMesh(std::shared_ptr<Mesh> shape); ///< Sets the Mesh
+	void setMaterial(std::shared_ptr<Material> material); ///< Sets the Material
 
 };

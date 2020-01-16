@@ -53,3 +53,13 @@ void Camera::OnTick()
 
 	
 }
+
+glm::vec3 Camera::getCamDirection()
+{
+	return cam_direction;
+}
+
+glm::vec3 Camera::getCamRight()
+{
+	return cam_right;
+}

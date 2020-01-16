@@ -6,8 +6,6 @@
 void Mesh::onLoad(const char* path)
 {
 	std::shared_ptr<rend::Context> context = getCore()->getContext();
-//	shader = context->createShader();
-//	shader->parse(src);
 
 	mesh = context->createMesh();
 	{

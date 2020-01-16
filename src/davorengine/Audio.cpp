@@ -15,8 +15,8 @@ void Audio::OnInit()
 {
 	onDestroy = false;
 	/*
-  * Initialize OpenAL audio system
-  */
+	* Initialize OpenAL audio system
+	*/
 
   // Open up the OpenAL device
 	device = alcOpenDevice(NULL);
@@ -56,9 +56,7 @@ void Audio::OnInit()
 	//LoadAudio("../src/thehorn/dixie_horn.ogg"); // Change the string for a variable.
 
 
-	/*
-	 * Create OpenAL sound source
-	 */
+	
 	
 }
 
@@ -71,12 +69,10 @@ void Audio::OnTick()
 	/*
 	 * Wait for sound to finish
 	 *
-	 * Note: You will generally want to check within your onTick functions
-	 *       and get the SoundSource component to remove itself when complete.
+	 * Once the sound is finished, the component gets removed from the entity.
+	 *       
 	 */
-	//while (true)
-	//{
-
+	
 	glm::vec3 pos = getTransform()->getPosition();
 	std::shared_ptr<Camera> camera = getCore()->getCurrentCamera();
 	glm::vec4 res = camera->getView() * glm::vec4(pos, 1.0f);
@@ -97,13 +93,14 @@ void Audio::OnTick()
 #else
 		sleep(1);
 #endif
-	//}
 }
 
 
 void Audio::LoadAudio(const std::string& fileName)
 {
-
+	/*
+	 * Create OpenAL sound source
+	 */
 	ALenum format = 0;
 	freq = 0;
 	std::vector<char> bufferData;

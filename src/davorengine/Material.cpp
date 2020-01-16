@@ -37,7 +37,4 @@ void Material::onLoad(const char* path)
 		stbi_image_free(data);
 	}
 
-	//shape->setTexture("u_Texture", texture);
-
-
 }

@@ -3,6 +3,9 @@
 
 namespace davorengine
 {
+	/**
+	* Exception handling
+	*/
 
 struct Exception : public std::exception
 {
