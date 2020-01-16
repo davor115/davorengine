@@ -13,8 +13,6 @@ struct PlayerControl : public Component
 	int w = 640;
 	int h = 480;
 	std::shared_ptr<Entity> theCamera;
-	std::shared_ptr<Entity> self;
-	std::shared_ptr<Entity> dummy;
 	std::shared_ptr<Entity> platButton;
 	std::shared_ptr<Entity> theBox;
 
@@ -22,8 +20,8 @@ struct PlayerControl : public Component
 	std::shared_ptr<Mesh> guiMesh;
 	void OnInit()
 	{
-		theCameraTexture = getCore()->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
-		guiMesh = getCore()->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
+		theCameraTexture = getCore()->getResources()->load<Material>("../src/Models/davormodel/pollo.png");
+		guiMesh = getCore()->getResources()->load<Mesh>("../src/Models/davormodel/Davor_Bird_Sprite.obj");
 	}
 
 	void PlatForm_Button_Func()
@@ -103,19 +101,19 @@ struct PlayerControl : public Component
 		{
 
 			//self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward());
-			self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward());
+			//self->getComponent<Transform>()->Translate(-self->getComponent<Transform>()->Forward());
 		}
 		if (getKeyboard()->getKey(davorengine_UP))
 		{
-			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Forward());
+			//self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Forward());
 		}
 		if (getKeyboard()->getKey(davorengine_LEFT))
 		{
-			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Left());
+			//self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Left());
 		}
 		if (getKeyboard()->getKey(davorengine_RIGHT))
 		{
-			self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Right());		
+			//self->getComponent<Transform>()->Translate(self->getComponent<Transform>()->Right());		
 		}
 		if (getKeyboard()->getKey(davorengine_W))
 		{
@@ -161,14 +159,16 @@ int main()
 	std::shared_ptr<Core> core = Core::initialize();
 
 	std::shared_ptr<Entity> MainCamera = core->addEntity();
-	std::shared_ptr<Entity> map = core->addEntity();
 	std::shared_ptr<Entity> player = core->addEntity();
-	std::shared_ptr<Entity> enemy = core->addEntity();
+
 	std::shared_ptr<Entity> platform_base = core->addEntity();
 	std::shared_ptr<Entity> box = core->addEntity();
 	std::shared_ptr<Entity> platform_button = core->addEntity();
 	std::shared_ptr<Entity> room = core->addEntity();
-	std::shared_ptr<Entity> doorR = core->addEntity();
+	std::shared_ptr<Entity> doorR1 = core->addEntity();
+	std::shared_ptr<Entity> doorR2 = core->addEntity();
+	std::shared_ptr<Entity> doorL1 = core->addEntity();
+	std::shared_ptr<Entity> doorL2 = core->addEntity();
 	std::shared_ptr<Entity> SoundSource = core->addEntity();
 
 	//std::shared_ptr<Audio> audioclip = SoundSource->addComponent<Audio>();
@@ -183,33 +183,12 @@ int main()
 	MainCamera->getComponent<Collision>()->setSize(glm::vec3(1.0f, 3.0f, 1.0f));
 	MainCamera->getComponent<Collision>()->setUnmovable(false);
 
-	// Map:
-	/*
-	std::weak_ptr<MeshRenderer> mapMeshRenderer = map->addComponent<MeshRenderer>();
-//	std::weak_ptr<Collision> mapCol = map->addComponent<Collision>();
-	map->getComponent<Transform>()->setPosition(glm::vec3(0, 0, -5)); // 0, 0, -5
-	map->getComponent<Transform>()->setRotation(glm::vec3(0, 45, 0)); // 0 , 45, 0
-	*/
+	
 	// Player:
 	player->addComponent<PlayerControl>();
-	player->getComponent<PlayerControl>()->self = player;
-	player->getComponent<PlayerControl>()->dummy = enemy;
 	player->getComponent<PlayerControl>()->theCamera = MainCamera;
 	player->getComponent<PlayerControl>()->platButton = platform_button;
 	player->getComponent<PlayerControl>()->theBox = box;
-	
-	/*
-	std::weak_ptr<Collision> playerCollisionBox = player->addComponent<Collision>();
-	std::weak_ptr<MeshRenderer> playerMeshRenderer = player->addComponent<MeshRenderer>();
-	player->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 3.0f, 5.0f)); // -16, 3.0f, 5.0f; actually -> 0.0f, 3.0f, 5.0f;
-	player->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f)); // y = 4.2f
-	*/
-	
-	// Enemy:
-	/*std::weak_ptr<Collision> enemyCol = enemy->addComponent<Collision>();
-	std::weak_ptr<MeshRenderer> enemyMeshRenderer = enemy->addComponent<MeshRenderer>();
-	enemy->getComponent<Transform>()->setPosition(glm::vec3(-4.0f, 3.0f, -2.0f)); // -4.0f, 3.0f, -2.0f;
-	enemy->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));*/
 	
 	// Platform
 	std::weak_ptr<Collision> platformColl = platform_base->addComponent<Collision>();
@@ -239,48 +218,57 @@ int main()
 	room->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	room->getComponent<Transform>()->setScale(glm::vec3(3.0f));
 
-	// Door Right
-	std::weak_ptr<MeshRenderer> doorRMesh = doorR->addComponent<MeshRenderer>();
-	doorR->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-	doorR->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
-	doorR->getComponent<Transform>()->setScale(glm::vec3(3.0f));
-		
+	// Door Right 1
+	std::weak_ptr<MeshRenderer> doorRMesh = doorR1->addComponent<MeshRenderer>();
+	//std::weak_ptr<Collision> doorRColl = doorR1->addComponent<Collision>();
+	doorR1->getComponent<Transform>()->setPosition(glm::vec3(-23.2f, 5.0f, -2.7f));
+	doorR1->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	doorR1->getComponent<Transform>()->setScale(glm::vec3(3.0f));
+	//doorR1->getComponent<Collision>()->setSize(glm::vec3(3.0f));
 
-	//std::shared_ptr<Mesh> m = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/graveyard/graveyard.obj");
-	//std::shared_ptr<Material> mat = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/graveyard/graveyard.png");
+	// Door Right 2
+	std::weak_ptr<MeshRenderer> doorRMesh2 = doorR2->addComponent<MeshRenderer>();
+	std::weak_ptr<Collision> doorR2Coll = doorR2->addComponent<Collision>();
+	doorR2->getComponent<Transform>()->setPosition(glm::vec3(22.7f, 5.0f, -2.7f));
+	doorR2->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	doorR2->getComponent<Transform>()->setScale(glm::vec3(3.0f));
+	//doorR2->getComponent<Collision>()->setBoxColliderPosition(doorR2->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 3.0f, 0.0f));
+	doorR2->getComponent<Collision>()->setSize(glm::vec3(3.0f));
 
-	//map->getComponent<MeshRenderer>()->setMesh(m);
-	//map->getComponent<MeshRenderer>()->setMaterial(mat);
-																		
-	//std::shared_ptr<Mesh> playerMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/curuthers/curuthers.obj");
-	//std::shared_ptr<Material> playerMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/curuthers/Whiskers_diffuse.png");
+	// Door Left 1
+	std::weak_ptr<MeshRenderer> doorLMesh = doorL1->addComponent<MeshRenderer>();
+	//std::weak_ptr<Collision> doorL1Coll = doorL1->addComponent<Collision>();
+	doorL1->getComponent<Transform>()->setPosition(glm::vec3(22.7f, 5.0f, 2.7f));
+	doorL1->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	doorL1->getComponent<Transform>()->setScale(glm::vec3(3.0f));
+	//doorL1->getComponent<Collision>()->setSize(glm::vec3(3.0f));
 
+	// Door Left 2
+	std::weak_ptr<MeshRenderer> doorLMesh2 = doorL2->addComponent<MeshRenderer>();
+	//std::weak_ptr<Collision> doorL2Coll = doorL2->addComponent<Collision>();
+	doorL2->getComponent<Transform>()->setPosition(glm::vec3(-23.2f, 5.0f, 2.7f));
+	doorL2->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	doorL2->getComponent<Transform>()->setScale(glm::vec3(3.0f));
+	//doorL2->getComponent<Collision>()->setSize(glm::vec3(3.0f));
+	//doorL2->getComponent<Collision>()->setBoxColliderPosition(doorL2->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 2.0f, 0.0f));
 
-//	std::shared_ptr<Mesh> enemyMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/davormodel/Davor_Bird_Sprite.obj");
-//	std::shared_ptr<Material> enemyMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/davormodel/pollo.png");
+			
+	std::shared_ptr<Mesh> platformMesh = core->getResources()->load<Mesh>("../src/Models/platform/Base.obj");
+	std::shared_ptr<Material> platformMaterial = core->getResources()->load<Material>("../src/Models/platform/BaseTexture.jpg");
 
-	std::shared_ptr<Mesh> platformMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/platform/Base.obj");
-	std::shared_ptr<Material> platformMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/platform/BaseTexture.jpg");
-
-	std::shared_ptr<Mesh> boxMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/box/box.obj");
-	std::shared_ptr<Material> boxMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/box/box_diffuse_png.png");
+	std::shared_ptr<Mesh> boxMesh = core->getResources()->load<Mesh>("../src/Models/box/box.obj");
+	std::shared_ptr<Material> boxMaterial = core->getResources()->load<Material>("../src/Models/box/box_diffuse_png.png");
 	
 
-	std::shared_ptr<Mesh> platform_buttonMesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/platform/Base_Button.obj");
-	std::shared_ptr<Material> platform_buttonMaterial = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/platform/ButtonTexture.png");
+	std::shared_ptr<Mesh> platform_buttonMesh = core->getResources()->load<Mesh>("../src/Models/platform/Base_Button.obj");
+	std::shared_ptr<Material> platform_buttonMaterial = core->getResources()->load<Material>("../src/Models/platform/ButtonTexture.png");
 
-	std::shared_ptr<Mesh> room_Mesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/Tom/davor_room3.obj");
-	std::shared_ptr<Material> room_Mat = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/Room/davor_room_baked.jpg");
+	std::shared_ptr<Mesh> room_Mesh = core->getResources()->load<Mesh>("../src/Models/Tom/davor_room3.obj");
+	std::shared_ptr<Material> room_Mat = core->getResources()->load<Material>("../src/Models/Room/davor_room_baked.jpg");
 
-	std::shared_ptr<Mesh> doorR_Mesh = core->getResources()->load<Mesh>("../src/davorengine/share/rend/samples/Tom/DoorR3.obj");
-	std::shared_ptr<Material> doorR_Material = core->getResources()->load<Material>("../src/davorengine/share/rend/samples/Room/davor_room_baked.jpg");
-
-	//player->getComponent<MeshRenderer>()->setMesh(playerMesh);
-	//player->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
-
-	
-	//enemy->getComponent<MeshRenderer>()->setMesh(playerMesh);
-	//enemy->getComponent<MeshRenderer>()->setMaterial(playerMaterial);
+	std::shared_ptr<Mesh> doorR_Mesh = core->getResources()->load<Mesh>("../src/Models/Tom/DoorR3.obj");
+	std::shared_ptr<Mesh> doorL_Mesh = core->getResources()->load<Mesh>("../src/Models/Tom/DoorL3.obj");
+	std::shared_ptr<Material> doorR_Material = core->getResources()->load<Material>("../src/Models/Room/davor_room_baked.jpg");
 
 	platform_base->getComponent<MeshRenderer>()->setMesh(platformMesh);
 	platform_base->getComponent<MeshRenderer>()->setMaterial(platformMaterial);
@@ -294,8 +282,18 @@ int main()
 	room->getComponent<MeshRenderer>()->setMesh(room_Mesh);
 	room->getComponent<MeshRenderer>()->setMaterial(room_Mat);
 	
-	doorR->getComponent<MeshRenderer>()->setMesh(doorR_Mesh);
-	doorR->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
+	doorR1->getComponent<MeshRenderer>()->setMesh(doorR_Mesh);
+	doorR1->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
+
+	doorR2->getComponent<MeshRenderer>()->setMesh(doorR_Mesh);
+	doorR2->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
+
+	
+	doorL1->getComponent<MeshRenderer>()->setMesh(doorL_Mesh);
+	doorL1->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
+	
+	doorL2->getComponent<MeshRenderer>()->setMesh(doorL_Mesh);
+	doorL2->getComponent<MeshRenderer>()->setMaterial(doorR_Material);
 
 	core->Start(); // Run updates loops, etc.
 

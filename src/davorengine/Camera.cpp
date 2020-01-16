@@ -15,7 +15,7 @@ void Camera::OnInit()
 
 glm::mat4 Camera::getView()
 {
-	glm::mat4 rtn = getTransform()->getMat();
+	//glm::mat4 rtn = getTransform()->getMat();
 	return _viewMatrix;
 }
 glm::mat4 Camera::getProjection()
@@ -41,9 +41,6 @@ void Camera::OnTick()
 	_cameraAngleX += mouseSpeed * (posx - oldMousePosition.x + diff_x);
 	_cameraAngleY += mouseSpeed * (posy - oldMousePosition.y + diff_y);
 	oldMousePosition = glm::vec2(posx, posy);
-	
-
-	
 
 	glm::vec3 direction(cos(_cameraAngleY) * sin(_cameraAngleX), sin(_cameraAngleY), cos(_cameraAngleY) * cos(_cameraAngleX));
 	glm::vec3 right = glm::vec3(sin(_cameraAngleX - 3.14f / 2.0f), 0, cos(_cameraAngleX - 3.14f / 2.0f));
@@ -52,9 +49,6 @@ void Camera::OnTick()
 	cam_direction = direction;
 	cam_right = right;
 	
-
-	// the matrices used to see the models are changed.
-	//_projMatrix = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 10000.0f);
 	_viewMatrix = glm::lookAt(camPos, camPos + direction, up);
 
 	

@@ -52,7 +52,11 @@ Core::~Core()
   SDL_DestroyWindow(window);
   SDL_Quit();
 }
-
+/*! \brief Adds an entity to the entity List.
+ *
+ * Makes a new shared pointer of the Entity class, saves it onto the entities list, then it initializes the self variable inside entity to itself,
+ * it also gives a copy of Core to the Entity and lastly, it adds a component of transform.
+*/
 std::shared_ptr<Entity> Core::addEntity()
 {
   std::shared_ptr<Entity> entity = std::make_shared<Entity>();

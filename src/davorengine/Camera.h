@@ -8,15 +8,15 @@
 class Camera : public Component
 {
 private:
-	std::weak_ptr<Camera> self;
+	std::weak_ptr<Camera> self;  ///< Saves a pointer to reference itself.
 
-	glm::mat4 _viewMatrix;
+	glm::mat4 _viewMatrix;  ///< The view matrix for the camera.
 	int posx, posy;
-	glm::vec3 camPos;
+	glm::vec3 camPos;  ///< The position of the camera in the world.
 	glm::vec2 oldMousePosition;
 	float _cameraAngleY;
 	float _cameraAngleX;
-	float mouseSpeed;
+	float mouseSpeed;  ///< Mouse sensitivity.
 
 	glm::vec3 cam_direction;
 	glm::vec3 cam_right;
