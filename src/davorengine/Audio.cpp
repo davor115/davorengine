@@ -1,4 +1,7 @@
 #include "Audio.h"
+#include "Core.h"
+#include "Camera.h"
+#include "Transform.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -49,23 +52,14 @@ void Audio::OnInit()
 	bufferId = 0;
 	alGenBuffers(1, &bufferId);
 
-	ALenum format = 0;
-	freq = 0;
-	std::vector<char> bufferData;
-	LoadAudio("dixie_horn.ogg", bufferData, format, freq); // Change the string for a variable.
 
-	alBufferData(bufferId, format, &bufferData.at(0),
-		static_cast<ALsizei>(bufferData.size()), freq);
+	//LoadAudio("../src/thehorn/dixie_horn.ogg"); // Change the string for a variable.
+
 
 	/*
 	 * Create OpenAL sound source
 	 */
-	sourceId = 0;
-	alGenSources(1, &sourceId);
-
-	alSource3f(sourceId, AL_POSITION, 0.0f, 0.0f, 0.0f);
-	alSourcei(sourceId, AL_BUFFER, bufferId);
-	alSourcePlay(sourceId);
+	
 }
 
 bool Audio::getDestroy()
@@ -82,6 +76,13 @@ void Audio::OnTick()
 	 */
 	//while (true)
 	//{
+
+	glm::vec3 pos = getTransform()->getPosition();
+	std::shared_ptr<Camera> camera = getCore()->getCurrentCamera();
+	glm::vec4 res = camera->getView() * glm::vec4(pos, 1.0f);
+
+	alSource3f(sourceId, AL_POSITION, res.x, res.y, res.z);
+
 		ALint state = 0;
 		alGetSourcei(sourceId, AL_SOURCE_STATE, &state);
 
@@ -100,8 +101,13 @@ void Audio::OnTick()
 }
 
 
-void Audio::LoadAudio(const std::string& fileName, std::vector<char>& buffer,ALenum &format, ALsizei &freq)
+void Audio::LoadAudio(const std::string& fileName)
 {
+
+	ALenum format = 0;
+	freq = 0;
+	std::vector<char> bufferData;
+
 	int channels = 0;
 	int sampleRate = 0;
 	short* output = NULL;
@@ -124,20 +130,32 @@ void Audio::LoadAudio(const std::string& fileName, std::vector<char>& buffer,ALe
 	}
 	else
 	{
-		format = AL_FORMAT_STEREO16;
+		//format = AL_FORMAT_STEREO16;
 
 		// Force format to be mono (Useful for positional audio)
-		// format = AL_FORMAT_MONO16;
-		// freq *= 2;
+		 format = AL_FORMAT_MONO16;
+		 freq *= 2;
 	}
 
 	// Allocate enough space based on short (two chars) multipled by the number of
 	// channels and length of clip
-	buffer.resize(sizeof(*output) * channels * samples);
-	memcpy(&buffer.at(0), output, buffer.size());
+	bufferData.resize(sizeof(*output) * channels * samples);
+	memcpy(&bufferData.at(0), output, bufferData.size());
+
+
+
+	alBufferData(bufferId, format, &bufferData.at(0),
+		static_cast<ALsizei>(bufferData.size()), freq);
 
 	// Clean up the read data
 	free(output);
+
+	sourceId = 0;
+	alGenSources(1, &sourceId);
+
+
+	alSourcei(sourceId, AL_BUFFER, bufferId);
+	alSourcePlay(sourceId);
 
 }
 

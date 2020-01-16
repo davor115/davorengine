@@ -171,7 +171,7 @@ int main()
 	std::shared_ptr<Entity> doorL2 = core->addEntity();
 	std::shared_ptr<Entity> SoundSource = core->addEntity();
 
-	//std::shared_ptr<Audio> audioclip = SoundSource->addComponent<Audio>();
+	
 	
 	// Camera:
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>(); // Camera
@@ -251,6 +251,9 @@ int main()
 	doorL2->getComponent<Transform>()->setScale(glm::vec3(3.0f));
 	//doorL2->getComponent<Collision>()->setSize(glm::vec3(3.0f));
 	//doorL2->getComponent<Collision>()->setBoxColliderPosition(doorL2->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 2.0f, 0.0f));
+
+	std::shared_ptr<Audio> audioclip = box->addComponent<Audio>();
+	box->getComponent<Audio>()->LoadAudio("../src/thehorn/dixie_horn.ogg");
 
 			
 	std::shared_ptr<Mesh> platformMesh = core->getResources()->load<Mesh>("../src/Models/platform/Base.obj");

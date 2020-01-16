@@ -22,8 +22,7 @@ public:
 	~Audio();
 	void OnInit();
 	void OnTick();
-	void LoadAudio(const std::string& fileName, std::vector<char>& buffer,
-		ALenum &format, ALsizei &freq);
+	void LoadAudio(const std::string& fileName);
 	bool getDestroy();
 };
 
