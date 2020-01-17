@@ -68,9 +68,7 @@ else()
 endif()
 
 add_executable(game
- src/game/Game.cpp
  src/game/main.cpp
- src/game/TriangleRenderer2.cpp
 )
 
 target_link_libraries(game davorengine)
