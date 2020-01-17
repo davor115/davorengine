@@ -26,14 +26,14 @@ struct PlayerControl : public Component
 
 	void PlatForm_Button_Func()
 	{
-		if (theBox->getComponent<Collision>()->isColliding(platButton->getComponent<Transform>()->getPosition(), platButton->getComponent<Transform>()->getSize() + glm::vec3(-1.5f, -1.0f, -1.5f)))
+		if (theBox->getComponent<Collision>()->isColliding(platButton->getComponent<Transform>()->getPosition(), platButton->getComponent<Transform>()->getSize() + glm::vec3(-1.5f, -2.0f, -1.5f)))
 		{
 			//std::cout << "Colliding" << std::endl;
-			if (platButton->getComponent<Transform>()->getPosition().y > 0.10f && isActive == false) // 0.2 <- Max height at start.
+			if (platButton->getComponent<Transform>()->getPosition().y > 0.15f && isActive == false) // 0.2 <- Max height at start.
 			{
-				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Down());
+				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Down() * getCore()->getEnvironment()->getDeltaTime() * 45.0f);
 			}
-			else if (platButton->getComponent<Transform>()->getPosition().y <= 0.10f)
+			else if (platButton->getComponent<Transform>()->getPosition().y <= 0.15f)
 			{
 				isActive = true;
 			}
@@ -41,11 +41,11 @@ struct PlayerControl : public Component
 		else
 		{
 			//std::cout << "Not colliding" << std::endl;
-			if (platButton->getComponent<Transform>()->getPosition().y < 0.2f && isActive == true)
+			if (platButton->getComponent<Transform>()->getPosition().y < 0.18f && isActive == true)
 			{
-				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Up() ); // * getCore()->getEnvironment()->getDeltaTime() <- not fully working.
+				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Up() * getCore()->getEnvironment()->getDeltaTime() * 45.0f); // * getCore()->getEnvironment()->getDeltaTime() <- not fully working.
 			}
-			else if (platButton->getComponent<Transform>()->getPosition().y >= 0.2f)
+			else if (platButton->getComponent<Transform>()->getPosition().y >= 0.18f)
 			{
 				isActive = false;
 			}
@@ -66,11 +66,11 @@ struct PlayerControl : public Component
 
 		if (pickup)
 		{
-			theBox->getComponent<Transform>()->setPosition(theCamera->getComponent<Transform>()->getPosition() + glm::vec3(5.0f, 0.0f, 0.0f));
+			theBox->getComponent<Transform>()->setPosition(theCamera->getComponent<Transform>()->getPosition() + glm::vec3(-5.0f, 0.0f, 0.0f));
 		}
 		else if (!pickup && theBox->getComponent<Transform>()->getPosition().y > 0.0f)
 		{
-			theBox->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f));
+			theBox->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f) * getCore()->getEnvironment()->getDeltaTime() * 50.0f);
 		}
 
 
@@ -117,19 +117,19 @@ struct PlayerControl : public Component
 		}
 		if (getKeyboard()->getKey(davorengine_W))
 		{
-			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamDirection() * getCore()->getEnvironment()->getDeltaTime() * 2.0f);
+			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamDirection() * getCore()->getEnvironment()->getDeltaTime() * 4.0f);
 		}
 		if (getKeyboard()->getKey(davorengine_S))
 		{
-			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamDirection() * getCore()->getEnvironment()->getDeltaTime() * 2.0f);
+			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamDirection() * getCore()->getEnvironment()->getDeltaTime() * 4.0f);
 		}
 		if (getKeyboard()->getKey(davorengine_A))
 		{
-			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamRight() * getCore()->getEnvironment()->getDeltaTime() * 2.0f);
+			theCamera->getComponent<Transform>()->Translate(-theCamera->getComponent<Camera>()->getCamRight() * getCore()->getEnvironment()->getDeltaTime() * 4.0f);
 		}
 		if (getKeyboard()->getKey(davorengine_D))
 		{
-			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamRight() * getCore()->getEnvironment()->getDeltaTime() * 2.0f);
+			theCamera->getComponent<Transform>()->Translate(theCamera->getComponent<Camera>()->getCamRight() * getCore()->getEnvironment()->getDeltaTime() * 4.0f);
 		}
 		
 		PlatForm_Button_Func(); // This function is in charge of activating the pressure plate when the player is on top.
@@ -176,7 +176,7 @@ int main()
 	// Camera:
 	std::weak_ptr<Camera> cam = MainCamera->addComponent<Camera>(); // Camera
 	std::weak_ptr<Collision> camColl = MainCamera->addComponent<Collision>();
-	MainCamera->getComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f)); // 14, 15, 20
+	MainCamera->getComponent<Transform>()->setPosition(glm::vec3(45.0f, 0.0f, 0.0f)); // 14, 15, 20
 	MainCamera->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f)); // y Left right, Z side   -> -0.7f, 0.8f, 0.6f;
 //	MainCamera->getComponent<Collision>()->setOffset(glm::vec3(0.0f, -3.0f, 0.0f));
 	//MainCamera->getComponent<Collision>()->setBoxColliderPosition(MainCamera->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 3.0f, 0.0f));
@@ -193,14 +193,14 @@ int main()
 	// Platform
 	std::weak_ptr<Collision> platformColl = platform_base->addComponent<Collision>();
 	std::weak_ptr<MeshRenderer> platformMeshRenderer = platform_base->addComponent<MeshRenderer>();
-	platform_base->getComponent<Transform>()->setPosition(glm::vec3(30.0f, 0.0f, -2.0f));
+	platform_base->getComponent<Transform>()->setPosition(glm::vec3(35.0f, 0.0f, -2.0f));
 	platform_base->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
 	platform_base->getComponent<Collision>()->setSize(glm::vec3(3.0f, 0.5f, 3.0f));
 
 	// Box
 	std::weak_ptr<Collision> boxCollision = box->addComponent<Collision>();
 	std::weak_ptr<MeshRenderer> boxMeshRenderer = box->addComponent<MeshRenderer>();
-	box->getComponent<Transform>()->setPosition(glm::vec3(25.0f, 0.0f, 10.0f));
+	box->getComponent<Transform>()->setPosition(glm::vec3(40.0f, 0.0f, 10.0f));
 	box->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	box->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
 	box->getComponent<Collision>()->setSize(glm::vec3(1.0f, 0.5f, 1.0f));
@@ -208,7 +208,7 @@ int main()
 	// Platform Button:
 	std::weak_ptr<MeshRenderer> platform_buttonMeshRend = platform_button->addComponent<MeshRenderer>();
 	std::weak_ptr<Collision> platform_buttonColl = platform_button->addComponent<Collision>();
-	platform_button->getComponent<Transform>()->setPosition(glm::vec3(30.0f, 0.2f, -2.0f));
+	platform_button->getComponent<Transform>()->setPosition(glm::vec3(35.0f, 0.2f, -2.0f));
 	platform_button->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
 	platform_button->getComponent<Collision>()->setSize(glm::vec3(0.5f, 0.2f, 0.5f));
 
@@ -232,28 +232,24 @@ int main()
 	doorR2->getComponent<Transform>()->setPosition(glm::vec3(22.7f, 5.0f, -2.7f));
 	doorR2->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	doorR2->getComponent<Transform>()->setScale(glm::vec3(3.0f));
-	//doorR2->getComponent<Collision>()->setBoxColliderPosition(doorR2->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 3.0f, 0.0f));
 	doorR2->getComponent<Collision>()->setSize(glm::vec3(3.0f));
 
 	// Door Left 1
 	std::weak_ptr<MeshRenderer> doorLMesh = doorL1->addComponent<MeshRenderer>();
-	//std::weak_ptr<Collision> doorL1Coll = doorL1->addComponent<Collision>();
+	std::weak_ptr<Collision> doorL1Coll = doorL1->addComponent<Collision>();
 	doorL1->getComponent<Transform>()->setPosition(glm::vec3(22.7f, 5.0f, 2.7f));
 	doorL1->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	doorL1->getComponent<Transform>()->setScale(glm::vec3(3.0f));
-	//doorL1->getComponent<Collision>()->setSize(glm::vec3(3.0f));
 
 	// Door Left 2
 	std::weak_ptr<MeshRenderer> doorLMesh2 = doorL2->addComponent<MeshRenderer>();
-	//std::weak_ptr<Collision> doorL2Coll = doorL2->addComponent<Collision>();
+	std::weak_ptr<Collision> doorL2Coll = doorL2->addComponent<Collision>();
 	doorL2->getComponent<Transform>()->setPosition(glm::vec3(-23.2f, 5.0f, 2.7f));
 	doorL2->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	doorL2->getComponent<Transform>()->setScale(glm::vec3(3.0f));
-	//doorL2->getComponent<Collision>()->setSize(glm::vec3(3.0f));
-	//doorL2->getComponent<Collision>()->setBoxColliderPosition(doorL2->getComponent<Transform>()->getPosition() - glm::vec3(0.0f, 2.0f, 0.0f));
 
 	std::shared_ptr<Audio> audioclip = box->addComponent<Audio>();
-	box->getComponent<Audio>()->LoadAudio("../src/thehorn/dixie_horn.ogg");
+	box->getComponent<Audio>()->LoadAudio("../src/sounds/The National - Exile Vilify.ogg");
 
 			
 	std::shared_ptr<Mesh> platformMesh = core->getResources()->load<Mesh>("../src/Models/platform/Base.obj");

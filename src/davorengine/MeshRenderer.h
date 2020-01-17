@@ -7,6 +7,9 @@
 #include <rend/stb_image.h>
 #include <string>
 
+	/**
+	* \brief MeshRenderer Display, Fragment Shader, Vertex Shader...
+	*/
 
 class Mesh;
 class Material;

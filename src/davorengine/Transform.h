@@ -1,6 +1,11 @@
 
 #include "Component.h"
 #include <glm/glm.hpp>
+
+	/**
+	* \brief Transformations
+	*/
+
 class Transform : public Component
 {
 private:

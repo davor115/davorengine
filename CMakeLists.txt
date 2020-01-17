@@ -25,7 +25,6 @@ src/davorengine/Transform.h
 src/davorengine/Transform.cpp
 src/davorengine/MeshRenderer.h
 src/davorengine/MeshRenderer.cpp
-src/davorengine/stb_vorbis.h
 src/davorengine/Engineincludes.h
 src/davorengine/Resources.cpp
 src/davorengine/Resources.h
@@ -60,6 +59,7 @@ add_library(rend
   src/rend/Mesh.cpp
   src/rend/Util.cpp
   src/rend/stb_image.h
+ src/rend/stb_vorbis.h
 )
 if(MSVC)
   target_link_libraries(rend glew32 opengl32)

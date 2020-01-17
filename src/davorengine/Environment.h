@@ -1,4 +1,6 @@
-
+	/**
+	* \brief Calculate deltaTime
+	*/
 class Environment
 {
 private:

@@ -5,6 +5,10 @@
 #include <SDL2/SDL.h>
 #include <rend/rend.h>
 
+	/**
+	* \brief This class represents the Camera features
+	*/
+
 class Camera : public Component
 {
 private:

@@ -6,6 +6,10 @@
 class Material;
 class Mesh;
 
+	/**
+	* \brief GUI, GUI Set Texture..
+	*/
+
 class GUI : public Component
 {
 private:

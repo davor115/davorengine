@@ -7,6 +7,10 @@
 
 #include <vector>
 
+	/**
+	* \brief Audio Features
+	*/
+
 class Audio : public Component
 {
 private:

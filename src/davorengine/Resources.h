@@ -3,6 +3,10 @@
 
 class Core;
 class Resource;
+	/**
+	* \brief Loading Resources
+	*/
+
 class Resources
 {
 private:

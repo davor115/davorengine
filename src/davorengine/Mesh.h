@@ -3,6 +3,10 @@
 
 #include <rend/rend.h>
 
+	/**
+	* \brief Loading Mesh
+	*/
+
 class Mesh : public Resource
 {
 private:

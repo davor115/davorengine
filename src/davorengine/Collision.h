@@ -2,9 +2,9 @@
 #include "Component.h"
 
 #include "glm/glm.hpp"
-/**
-* Check for collisions.
-*/
+	/**
+	* \brief Detect Collisions
+	*/
 
 class Collision : public Component
 {

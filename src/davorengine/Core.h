@@ -41,7 +41,6 @@ public:
 	*/
 	static std::shared_ptr<Core> initialize(); 
 	void Start();
-	void Stop();
 	/**
 	* \brief Adds an entity.
 	*

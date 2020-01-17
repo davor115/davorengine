@@ -9,7 +9,7 @@
 #include <unistd.h>
 #endif
 
-#include "stb_vorbis.h"
+#include <rend/stb_vorbis.h>
 #include <exception>
 void Audio::OnInit()
 {
@@ -127,11 +127,11 @@ void Audio::LoadAudio(const std::string& fileName)
 	}
 	else
 	{
-		//format = AL_FORMAT_STEREO16;
+		format = AL_FORMAT_STEREO16;
 
 		// Force format to be mono (Useful for positional audio)
-		 format = AL_FORMAT_MONO16;
-		 freq *= 2;
+		 //format = AL_FORMAT_MONO16;
+		 //freq *= 2;
 	}
 
 	// Allocate enough space based on short (two chars) multipled by the number of

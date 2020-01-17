@@ -7,6 +7,10 @@ class Core;
 class Component;
 class Transform;
 
+	/**
+	* \brief Entity Display, Update, Components...
+	*/
+
 class Entity
 {
 private:

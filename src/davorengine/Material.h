@@ -1,6 +1,10 @@
 
 #include "Resource.h"
 
+	/**
+	* \brief Loading Materials
+	*/
+
 class Material : public Resource
 {
 private:
