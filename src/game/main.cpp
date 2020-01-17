@@ -9,12 +9,15 @@ using namespace davorengine;
 struct PlayerControl : public Component
 {
 	bool isActive = false;
+	bool firstPick = false;
 	bool pickup = false;
 	int w = 640;
 	int h = 480;
 	std::shared_ptr<Entity> theCamera;
 	std::shared_ptr<Entity> platButton;
 	std::shared_ptr<Entity> theBox;
+	std::shared_ptr<Entity> doorRight;
+	std::shared_ptr<Entity> doorLeft;
 
 	std::shared_ptr<Material> theCameraTexture;
 	std::shared_ptr<Mesh> guiMesh;
@@ -31,11 +34,12 @@ struct PlayerControl : public Component
 			//std::cout << "Colliding" << std::endl;
 			if (platButton->getComponent<Transform>()->getPosition().y > 0.15f && isActive == false) // 0.2 <- Max height at start.
 			{
-				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Down() * getCore()->getEnvironment()->getDeltaTime() * 45.0f);
+				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Down() * getCore()->getEnvironment()->getDeltaTime() * 50.0f);
 			}
 			else if (platButton->getComponent<Transform>()->getPosition().y <= 0.15f)
 			{
 				isActive = true;
+				firstPick = true;
 			}
 		}
 		else
@@ -43,7 +47,7 @@ struct PlayerControl : public Component
 			//std::cout << "Not colliding" << std::endl;
 			if (platButton->getComponent<Transform>()->getPosition().y < 0.18f && isActive == true)
 			{
-				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Up() * getCore()->getEnvironment()->getDeltaTime() * 45.0f); // * getCore()->getEnvironment()->getDeltaTime() <- not fully working.
+				platButton->getComponent<Transform>()->Translate(platButton->getComponent<Transform>()->Up() * getCore()->getEnvironment()->getDeltaTime() * 50.0f); // * getCore()->getEnvironment()->getDeltaTime() <- not fully working.
 			}
 			else if (platButton->getComponent<Transform>()->getPosition().y >= 0.18f)
 			{
@@ -51,7 +55,7 @@ struct PlayerControl : public Component
 			}
 		}
 	}
-
+	
 	void MoveBox()
 	{
 		float distance = glm::distance(theCamera->getComponent<Transform>()->getPosition(), theBox->getComponent<Transform>()->getPosition());
@@ -81,11 +85,42 @@ struct PlayerControl : public Component
 	{
 		if (theCamera->getComponent<Transform>()->getPosition().y > 3.0f)
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f) * getCore()->getEnvironment()->getDeltaTime() * 50.0f);
+			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, -0.05f, 0.0f) * getCore()->getEnvironment()->getDeltaTime() * 60.0f);
 		}
 		else
 		{
-			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f) * getCore()->getEnvironment()->getDeltaTime() * 50.0f);
+			theCamera->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.05f, 0.0f) * getCore()->getEnvironment()->getDeltaTime() * 60.0f);
+		}
+	}
+
+	void MoveDoors()
+	{
+		if (isActive)
+		{
+			//std::cout << "Door Right 1 pos Z: " << doorRight->getComponent<Transform>()->getPosition().z << std::endl;
+			if (doorRight->getComponent<Transform>()->getPosition().z >= -5.2f)
+			{
+				doorRight->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, -1.0f) * getCore()->getEnvironment()->getDeltaTime());
+			}
+			if (doorLeft->getComponent<Transform>()->getPosition().z <= 5.2f)
+			{
+				doorLeft->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, 1.0f) * getCore()->getEnvironment()->getDeltaTime());
+			}
+		}
+		else
+		{
+			if (firstPick)
+			{
+				//std::cout << "Door Right 2 pos Z: " << doorRight->getComponent<Transform>()->getPosition().z << std::endl;
+				if (doorRight->getComponent<Transform>()->getPosition().z >= -5.3f && doorRight->getComponent<Transform>()->getPosition().z <= -2.7f)
+				{
+					doorRight->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, 1.0f) * getCore()->getEnvironment()->getDeltaTime());
+				}
+				if (doorLeft->getComponent<Transform>()->getPosition().z <= 5.3f && doorLeft->getComponent<Transform>()->getPosition().z >= 2.7f)
+				{
+					doorLeft->getComponent<Transform>()->Translate(glm::vec3(0.0f, 0.0f, -1.0f) * getCore()->getEnvironment()->getDeltaTime());
+				}
+			}
 		}
 	}
 
@@ -135,7 +170,7 @@ struct PlayerControl : public Component
 		PlatForm_Button_Func(); // This function is in charge of activating the pressure plate when the player is on top.
 		MoveBox(); // This function is in charge of the interaction between the player and the box.
 		FakeGravity();
-
+		MoveDoors();
 		
 
 	//	theCamera->getComponent<Transform>()->setPosition(glm::vec3(self->getComponent<Transform>()->getPosition().x + 10.0f, self->getComponent<Transform>()->getPosition().y + 9.0f, self->getComponent<Transform>()->getPosition().z + 6.0f));
@@ -189,6 +224,8 @@ int main()
 	player->getComponent<PlayerControl>()->theCamera = MainCamera;
 	player->getComponent<PlayerControl>()->platButton = platform_button;
 	player->getComponent<PlayerControl>()->theBox = box;
+	player->getComponent<PlayerControl>()->doorRight = doorR2;
+	player->getComponent<PlayerControl>()->doorLeft = doorL1;
 	
 	// Platform
 	std::weak_ptr<Collision> platformColl = platform_base->addComponent<Collision>();
@@ -204,6 +241,7 @@ int main()
 	box->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	box->getComponent<Transform>()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
 	box->getComponent<Collision>()->setSize(glm::vec3(1.0f, 0.5f, 1.0f));
+	box->getComponent<Collision>()->setUnmovable(false);
 
 	// Platform Button:
 	std::weak_ptr<MeshRenderer> platform_buttonMeshRend = platform_button->addComponent<MeshRenderer>();
@@ -221,7 +259,7 @@ int main()
 	// Door Right 1
 	std::weak_ptr<MeshRenderer> doorRMesh = doorR1->addComponent<MeshRenderer>();
 	//std::weak_ptr<Collision> doorRColl = doorR1->addComponent<Collision>();
-	doorR1->getComponent<Transform>()->setPosition(glm::vec3(-23.2f, 5.0f, -2.7f));
+	doorR1->getComponent<Transform>()->setPosition(glm::vec3(-23.2f, 5.2f, -2.7f));
 	doorR1->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	doorR1->getComponent<Transform>()->setScale(glm::vec3(3.0f));
 	//doorR1->getComponent<Collision>()->setSize(glm::vec3(3.0f));
@@ -244,9 +282,10 @@ int main()
 	// Door Left 2
 	std::weak_ptr<MeshRenderer> doorLMesh2 = doorL2->addComponent<MeshRenderer>();
 	std::weak_ptr<Collision> doorL2Coll = doorL2->addComponent<Collision>();
-	doorL2->getComponent<Transform>()->setPosition(glm::vec3(-23.2f, 5.0f, 2.7f));
+	doorL2->getComponent<Transform>()->setPosition(glm::vec3(-23.2f, 5.2f, 2.7f));
 	doorL2->getComponent<Transform>()->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	doorL2->getComponent<Transform>()->setScale(glm::vec3(3.0f));
+	doorL2->getComponent<Collision>()->setSize(glm::vec3(3.0f));
 
 	std::shared_ptr<Audio> audioclip = box->addComponent<Audio>();
 	box->getComponent<Audio>()->LoadAudio("../src/sounds/The National - Exile Vilify.ogg");
